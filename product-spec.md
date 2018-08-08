@@ -50,6 +50,14 @@ The users of the API project are developers.
 
 The API project will start with a miniminally viable product, leveraging the skillsets that the project developers already know. This will ensure that something of value is created as quickly as possible without getting mired down in creating the prefect solution.
 
+All code/project information shall be hosted on the [API Project Github](https://github.com/SCODEMeetup/API).
+
+## Communication
+
+Informal communciation shall be accomplished on the slack channel, #scode-api on the TechLife Columbus slack workspace.
+
+## Meetings
+
 ## Timeline
 
 Useable Product and Technical Specifications are to be completed by 14 August.
