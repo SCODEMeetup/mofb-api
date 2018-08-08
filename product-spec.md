@@ -4,11 +4,11 @@
 
 Team Members:
 
-Vijay Yadav (Developer)
-Mihir Amin (Developer)
-David Pickering (Subject Matter Expert)
-Mark Mollenkopf (Subject Matter Expert)
-Ben Rodgers
+- Vijay Yadav (Developer)
+- Mihir Amin (Developer)
+- David Pickering (Subject Matter Expert)
+- Mark Mollenkopf (Subject Matter Expert)
+- Ben Rodgers
 
 ## Overview
 
