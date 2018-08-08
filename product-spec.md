@@ -1,6 +1,6 @@
 # Product Specification - API Project
 
-### Prepared by: Ben Hoff
+Prepared by: Ben Hoff
 
 Team Members:
 
