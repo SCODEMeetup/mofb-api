@@ -54,7 +54,7 @@ All code/project information shall be hosted on the [API Project Github](https:/
 
 ## Communication
 
-Informal communciation shall be accomplished on the slack channel, #scode-api on the TechLife Columbus slack workspace.
+Informal communciation shall be accomplished on the slack channel, `#scode-api` on the TechLife Columbus slack workspace.
 
 ## Meetings
 
