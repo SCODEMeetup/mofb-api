@@ -1,0 +1,12 @@
+
+.settings
+.vscode
+
+*/logs
+**/.classpath
+**/bin
+**/build
+
+node_modules
+yarn-error.log
+.history/
