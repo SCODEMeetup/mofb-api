@@ -5,10 +5,11 @@
 2. Or using [command line](https://nodejs.org/en/download/package-manager/)
 
 ## Build / Run
-2. Start server using
+1. Start server using
 ```bash
 $ npm run start
 ```
+2. Server runs at localhost:3000, access http://localhost:3000/pantries  
 
 ## Tech Stack
 1. Node.js
