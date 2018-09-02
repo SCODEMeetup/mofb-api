@@ -5,11 +5,18 @@
 2. Or using [command line](https://nodejs.org/en/download/package-manager/)
 
 ## Build / Run
-1. Start server using
+1. Run `npm i` to install all node modules
+2. Start server using
 ```bash
 $ npm run start
 ```
-2. Server runs at localhost:3000, access http://localhost:3000/pantries  
+3. Server runs at localhost:3000, access http://localhost:3000/pantries  
+
+## Docker build
+1. Run `npm i` to install all node modules
+2. Run `docker-compose build` to build the image
+3. Run `docker-compose up` to start image
+4. Server runs at localhost:3000, access via http://localhost:3000/pantries
 
 ## Tech Stack
 1. Node.js
