@@ -24,8 +24,8 @@ Food pantries service customers based on zip code. If you are from a certain zip
 
 1. The API project shall provide a method to query all Food Pantry information out.
 2. The API project shall provide a method to query food pantries by zip code that they serve.
-3. THe API project shall provide a method to find out the hours food pantries are open.
-4. THe API project shall provide a method to find out the address of food pantries.
+3. The API project shall provide a method to find out the hours food pantries are open.
+4. The API project shall provide a method to find out the address of food pantries.
 5. The API project shall create documentation showing how to get access to the data in the following programing languages:
 
 - Python
