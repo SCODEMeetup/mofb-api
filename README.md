@@ -13,7 +13,10 @@
 ```bash
 $ npm run start
 ```
-3. Server runs at localhost:3000, access http://localhost:3000/pantries  
+3. Server runs at localhost:3000, 
+   1. Bring all pantries - http://localhost:3000/pantries
+   2. Limit to certain number - http://localhost:3000/pantries/1
+   3. Limit to a zip code - 
 
 ## Docker build
 1. Run `npm i` to install all node modules
@@ -26,6 +29,6 @@ $ npm run start
 2. Mongodb
 
 ## Tools
-1. [VSCode]()
-2. [Postman]()
+1. [VSCode](https://code.visualstudio.com/)
+2. [Postman](https://www.getpostman.com/)
 
