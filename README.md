@@ -1,5 +1,8 @@
 # Mid Ohio Food bank API
 
+## Product Description and requirements
+[Requirements](https://github.com/SCODEMeetup/mofb-api/blob/master/product-spec.md)
+
 ## Pre-requisites
 1. Install Node.js from [installer](https://nodejs.org/en/)
 2. Or using [command line](https://nodejs.org/en/download/package-manager/)
