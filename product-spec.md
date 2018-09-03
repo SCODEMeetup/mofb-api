@@ -4,8 +4,9 @@ Prepared by: Ben Hoff
 
 Team Members:
 
+- Mihir Amin (Developer, https://github.com/mihiramin89)
 - Vijay Yadav (Developer)
-- Mihir Amin (Developer)
+- Arnab Tarafdar (Developer)
 - David Pickering (Subject Matter Expert)
 - Mark Mollenkopf (Subject Matter Expert)
 - Ben Rodgers
