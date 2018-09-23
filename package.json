@@ -20,7 +20,7 @@
     },
     "homepage": "https://github.com/SCODEMeetup/mofb-api#readme",
     "devDependencies": {
-        "nodemon": "^1.18.3"
+        "nodemon": "^1.18.4"
     },
     "dependencies": {
         "express": "^4.16.3",
