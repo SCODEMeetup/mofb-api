@@ -32,3 +32,6 @@ $ npm run start
 1. [VSCode](https://code.visualstudio.com/)
 2. [Postman](https://www.getpostman.com/)
 
+## Environment
+GCP (google cloud platform)
+1. Pantries - https://hotspots-1527564656239.appspot.com/pantries
