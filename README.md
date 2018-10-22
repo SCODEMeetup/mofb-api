@@ -27,6 +27,7 @@ NOTES:
 2. Run `docker-compose build` to build the image
 3. Run `docker-compose up` to start image
 4. Server runs at localhost:3000, access via http://localhost:3000/pantries
+5. To access the swagger documentation navigate to http://localhost:3000/api-docs
 
 ## Tech Stack
 1. Node.js
@@ -34,7 +35,10 @@ NOTES:
 
 ## Tools
 1. [VSCode](https://code.visualstudio.com/)
-2. [Postman](https://www.getpostman.com/)
+
+## Adding a new endpoint
+1. Create the endpoint in server.js
+2. Create the swagger documentation (see swagger.yaml file)
 
 ## Environment
 GCP (google cloud platform)

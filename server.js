@@ -2,8 +2,13 @@ var express = require('express'),
     app = express(),
     port = process.env.PORT || 3000;
 const request = require('request');
+const swaggerUi = require('swagger-ui-express');
+const YAML = require('yamljs');
+const swaggerDocument = YAML.load('./swagger.yaml');
 const host = 'https://ckan.smartcolumbusos.com/';
 const resourceId = '570a8e02-fb0e-4cee-895b-3b32bd740650';
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // NOTE: query returns max of 100. to get next 100 we need to do the following query
 // '/api/action/datastore_search?offset=100&resource_id=570a8e02-fb0e-4cee-895b-3b32bd740650'
