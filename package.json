@@ -2,8 +2,9 @@
     "name": "mofb-api",
     "version": "1.0.0",
     "description": "RESTful MOFB API",
-    "main": "index.js",
+    "main": "server.js",
     "scripts": {
+        "start": "nodemon server.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
@@ -19,6 +20,23 @@
         "url": "https://github.com/SCODEMeetup/mofb-api/issues"
     },
     "homepage": "https://github.com/SCODEMeetup/mofb-api#readme",
+    "nodemonConfig": {
+        "restartable": "rs",
+        "verbose": true,
+        "ignore": [
+            ".git",
+            "node_modules/**/node_modules",
+            "Postman Collection/"
+        ],
+        "watch": [
+            "server.js",
+            "api/"
+        ],
+        "env": {
+            "NODE_ENV": "development"
+        },
+        "ext": "js,json"
+    },
     "devDependencies": {
         "nodemon": "^1.18.4"
     },
