@@ -75,11 +75,18 @@ app.get('/pantries/:zipCode', function(req, res) {
 });
 
 app.get('/query/pantries', function(req, res) {
-    let uri = `${queryHost}sql=SELECT*FROM"570a8e02-fb0e-4cee-895b-3b32bd740650"`;
     const currentlyActive = req.query.currentlyActive;
+    const limit = req.query.limit;
+
+    let uri = `${queryHost}sql=SELECT*FROM"570a8e02-fb0e-4cee-895b-3b32bd740650"`;
     if (currentlyActive && currentlyActive === 'true') {
         uri = `${queryHost}sql=SELECT*FROM"570a8e02-fb0e-4cee-895b-3b32bd740650"WHERE"ACTIVE_FLAG"='Y'`;
     }
+
+    if (limit) {
+        uri = `${uri}LIMIT'${limit}'`;
+    }
+
     const options = {
         body: {},
         headers: {

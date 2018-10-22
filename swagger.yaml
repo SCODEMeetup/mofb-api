@@ -85,6 +85,14 @@ paths:
           required: false
           description: 'only return the active pantries'
           type: boolean
+        - name: limit
+          in: query
+          required: false
+          description: 'set a limit to how many results are returned'
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
       responses: 
         '200':
           description: 'Successfully queries the smart city datasets and returns the results'
