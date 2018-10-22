@@ -76,17 +76,25 @@ app.get('/pantries/:zipCode', function(req, res) {
 
 app.get('/query/pantries', function(req, res) {
     const currentlyActive = req.query.currentlyActive;
+    const showAccessible = req.query.handicapAccessible;
     const limit = req.query.limit;
 
     let uri = `${queryHost}sql=SELECT*FROM"570a8e02-fb0e-4cee-895b-3b32bd740650"`;
-    if (currentlyActive && currentlyActive === 'true') {
-        uri = `${queryHost}sql=SELECT*FROM"570a8e02-fb0e-4cee-895b-3b32bd740650"WHERE"ACTIVE_FLAG"='Y'`;
+    if (currentlyActive) {
+        const queryActive = currentlyActive === 'true';
+        uri = `${uri}WHERE"ACTIVE_FLAG"=${queryActive ? "'Y'" : "'N'"}`;
+    }
+
+    if (showAccessible) {
+        const queryAccessible = showAccessible === 'true';
+        uri = `${uri}${currentlyActive ? 'AND' : 'WHERE'}"HANDICAP_ACCESS"=${queryAccessible ? "'Y'" : "'N'"}`
     }
 
     if (limit) {
         uri = `${uri}LIMIT'${limit}'`;
     }
 
+    console.log(uri);
     const options = {
         body: {},
         headers: {
