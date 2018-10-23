@@ -85,6 +85,11 @@ paths:
           required: false
           description: 'only return the active pantries'
           type: boolean
+        - name: handicapAccessible
+          in: query
+          required: false
+          description: 'only return the pantries that are handicap accessible'
+          type: boolean
         - name: limit
           in: query
           required: false
