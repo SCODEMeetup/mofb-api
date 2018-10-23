@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   title: 'Mid Ohio Food Bank RESTful API'
   description: ''
-  version: '0.0.1'
+  version: '0.0.2'
   contact:
     name: 'Report an Issue'
     url: 'https://github.com/SCODEMeetup/mofb-api/issues'
@@ -73,6 +73,30 @@ paths:
       responses: 
         '200':
           description: 'Successfully queries the smart city datasets and returns the results'
+  /query/pantries:
+    get:
+      tags:
+        - 'Query'
+      summary: 'returns a list of pantries'
+      description: 'This returns the entire list of pantries. There is no pagination'
+      parameters:
+        - name: currentlyActive
+          in: query
+          required: false
+          description: 'only return the active pantries'
+          type: boolean
+        - name: limit
+          in: query
+          required: false
+          description: 'set a limit to how many results are returned'
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses: 
+        '200':
+          description: 'Successfully queries the smart city datasets and returns the results'
+  
 externalDocs:
   description: 'Find out more about the API'
   url: 'https://github.com/SCODEMeetup/mofb-api'
