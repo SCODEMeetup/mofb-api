@@ -43,4 +43,5 @@ NOTES:
 
 ## Environment
 GCP (google cloud platform)
-1. Pantries - https://hotspots-1527564656239.appspot.com/pantries
+1. Pantries - https://mofb-api.appspot.com/pantries
+2. Swagger documentation - https://mofb-api.appspot.com/api-docs/
