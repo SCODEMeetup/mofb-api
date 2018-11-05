@@ -1,6 +1,7 @@
 
 .settings
 .vscode
+.idea
 
 */logs
 **/.classpath

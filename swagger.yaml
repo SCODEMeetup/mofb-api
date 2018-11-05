@@ -6,10 +6,11 @@ info:
   contact:
     name: 'Report an Issue'
     url: 'https://github.com/SCODEMeetup/mofb-api/issues'
-host: 'localhost:3000'
 servers:
   - url: 'http://localhost:3000'
     description: 'running locally'
+  - url: 'https://mofb-api.appspot.com'
+    description: 'Production server'  
 basePath: '/'
 paths:
   /pantries:
