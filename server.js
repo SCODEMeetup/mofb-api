@@ -7,6 +7,7 @@ const YAML = require('yamljs');
 const swaggerDocument = YAML.load('./swagger.yaml');
 const host = 'https://ckan.smartcolumbusos.com/';
 const resourceId = '570a8e02-fb0e-4cee-895b-3b32bd740650';
+const queryHost = 'https://ckan.smartcolumbusos.com/api/3/action/datastore_search_sql?'
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
@@ -68,6 +69,47 @@ app.get('/pantries/:zipCode', function(req, res) {
         if (error) {
             console.log('error:', error); // Print the error if one occurred
         }
+        // console.log('body:', body);
+        res.send(body.result.records);
+    });
+});
+
+app.get('/query/pantries', function(req, res) {
+    const currentlyActive = req.query.currentlyActive;
+    const showAccessible = req.query.handicapAccessible;
+    const limit = req.query.limit;
+
+    let uri = `${queryHost}sql=SELECT*FROM"570a8e02-fb0e-4cee-895b-3b32bd740650"`;
+    if (currentlyActive) {
+        const queryActive = currentlyActive === 'true';
+        uri = `${uri}WHERE"ACTIVE_FLAG"=${queryActive ? "'Y'" : "'N'"}`;
+    }
+
+    if (showAccessible) {
+        const queryAccessible = showAccessible === 'true';
+        uri = `${uri}${currentlyActive ? 'AND' : 'WHERE'}"HANDICAP_ACCESS"=${queryAccessible ? "'Y'" : "'N'"}`
+    }
+
+    if (limit) {
+        uri = `${uri}LIMIT'${limit}'`;
+    }
+
+    console.log(uri);
+    const options = {
+        body: {},
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        json: true,
+        method: 'GET',
+        uri,
+    };
+    request(options, function(error, response, body) {
+        console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+        if (error) {
+            console.log('error:', error); // Print the error if one occurred
+        }
+
         // console.log('body:', body);
         res.send(body.result.records);
     });

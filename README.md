@@ -27,7 +27,8 @@ NOTES:
 2. Run `docker-compose build` to build the image
 3. Run `docker-compose up` to start image
 4. Server runs at localhost:3000, access via http://localhost:3000/pantries
-5. To access the swagger documentation navigate to http://localhost:3000/api-docs
+5. To access the swagger documentation navigate to http://localhost:3000/api-docs or http://{env}/api-docs/
+
 
 ## Tech Stack
 1. Node.js
@@ -42,4 +43,5 @@ NOTES:
 
 ## Environment
 GCP (google cloud platform)
-1. Pantries - https://hotspots-1527564656239.appspot.com/pantries
+1. Pantries - https://mofb-api.appspot.com/pantries
+2. Swagger documentation - https://mofb-api.appspot.com/api-docs/
