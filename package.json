@@ -1,51 +1,54 @@
 {
-    "name": "mofb-api",
-    "version": "1.0.0",
-    "description": "RESTful MOFB API",
-    "main": "server.js",
-    "scripts": {
-        "start": "nodemon server.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/SCODEMeetup/mofb-api.git"
-    },
-    "keywords": [
-        "RESTful"
+  "name": "mofb-api",
+  "version": "1.0.0",
+  "description": "RESTful MOFB API",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "mocha --timeout 10000 --exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SCODEMeetup/mofb-api.git"
+  },
+  "keywords": [
+    "RESTful"
+  ],
+  "author": "SCODE-API",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SCODEMeetup/mofb-api/issues"
+  },
+  "homepage": "https://github.com/SCODEMeetup/mofb-api#readme",
+  "nodemonConfig": {
+    "restartable": "rs",
+    "verbose": true,
+    "ignore": [
+      ".git",
+      "node_modules/**/node_modules",
+      "Postman Collection/"
     ],
-    "author": "SCODE-API",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/SCODEMeetup/mofb-api/issues"
+    "watch": [
+      "server.js",
+      "api/",
+      "swagger.yaml"
+    ],
+    "env": {
+      "NODE_ENV": "development"
     },
-    "homepage": "https://github.com/SCODEMeetup/mofb-api#readme",
-    "nodemonConfig": {
-        "restartable": "rs",
-        "verbose": true,
-        "ignore": [
-            ".git",
-            "node_modules/**/node_modules",
-            "Postman Collection/"
-        ],
-        "watch": [
-            "server.js",
-            "api/",
-            "swagger.yaml"
-        ],
-        "env": {
-            "NODE_ENV": "development"
-        },
-        "ext": "js,json"
-    },
-    "devDependencies": {
-        "nodemon": "^1.18.4"
-    },
-    "dependencies": {
-        "express": "^4.16.3",
-        "request": "^2.88.0",
-        "swagger-ui-express": "^4.0.1",
-        "yamljs": "^0.3.0",
-        "nodemon": "^1.18.4"
-    }
+    "ext": "js,json"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.4"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "request": "^2.88.0",
+    "swagger-ui-express": "^4.0.1",
+    "yamljs": "^0.3.0",
+    "nodemon": "^1.18.4"
+  }
 }

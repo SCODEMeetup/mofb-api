@@ -13,3 +13,5 @@ app.use('/api/v1/pantries', pantryRouter);
 app.listen(port);
 
 console.log('Mid Ohio Food Bank RESTful API server started on: ' + port);
+
+module.exports = app;
