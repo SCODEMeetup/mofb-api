@@ -19,14 +19,14 @@ NOTES:
 ° All queries default limit to 100. If you want more results returned than that, you must pass in the limit query parameter.
 ° All queries support grabbing the next page of data. Just pass in the query parameter pageNumber=#
  ```
-   1. Bring all pantries - http://localhost:3000/pantries
-   2. Limit to a zip code - http://localhost:3000/pantries/43215
+   1. Bring all pantries - http://localhost:3000/api/v1/pantries
+   2. Limit to a zip code - http://localhost:3000/api/v1/pantries/43215
 
 ## Docker build
 1. Run `npm i` to install all node modules
 2. Run `docker-compose build` to build the image
 3. Run `docker-compose up` to start image
-4. Server runs at localhost:3000, access via http://localhost:3000/pantries
+4. Server runs at localhost:3000, access via http://localhost:3000/api/v1/pantries
 5. To access the swagger documentation navigate to http://localhost:3000/api-docs or http://{env}/api-docs/
 
 
@@ -38,8 +38,9 @@ NOTES:
 1. [VSCode](https://code.visualstudio.com/)
 
 ## Adding a new endpoint
-1. Create the endpoint in server.js
-2. Create the swagger documentation (see swagger.yaml file)
+1. Create the endpoint in router file
+2. If necessary, import the router file in server.js
+3. Create the swagger documentation (see swagger.yaml file)
 
 ## Environment
 GCP (google cloud platform)
