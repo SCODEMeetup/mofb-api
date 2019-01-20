@@ -11,7 +11,7 @@ servers:
     description: 'running locally'
   - url: 'https://mofb-api.appspot.com'
     description: 'Production server'  
-basePath: '/'
+basePath: '/api/v1'
 paths:
   /pantries:
     get:
