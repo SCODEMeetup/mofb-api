@@ -60,9 +60,9 @@ https://ckan.smartcolumbusos.com/dataset/food-pantry-and-user-data/resource/2a91
 such as hours of operation:
 https://ckan.smartcolumbusos.com/dataset/b0390b58-35c9-45e8-8a2d-d2472b20d65f/resource/ec24773c-7cff-4589-9e2f-bcdeb5cdfd48/download/service_location.csv
 5. Images
-    1. [Services aka Taxonomies with subcategories as graph](/extra/services-taxanomy-hierarchy.png)
-    2. [Services aka Taxonomies with subcategories as table](/extra/services-hierarchy-table.png)
-    3. [Agency and Services relation](/extra/agency-services-relation.png)
+    1. ![Services aka Taxonomies with subcategories as graph](/extra/services-taxanomy-hierarchy.png)
+    2. ![Services aka Taxonomies with subcategories as table](/extra/services-hierarchy-table.png)
+    3. ![Agency and Services relation](/extra/agency-services-relation.png)
 
 6. Queries
     1. Generating services hierarchy with its categories
