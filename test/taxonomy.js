@@ -6,13 +6,14 @@ let chaiHttp = require('chai-http');
 let server = require('../server');
 
 let should = chai.should();
+let expect = chai.expect;
 
 chai.use(chaiHttp);
 
-describe('Pantries', () => {
-    it('should GET pantries limit 100', (done) => {
+describe('Taxonomy', () => {
+    it('should GET taxonomies limit 100', (done) => {
         chai.request(server)
-            .get('/api/v1/pantries')
+            .get('/api/v1/taxonomy')
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('array');
@@ -21,24 +22,26 @@ describe('Pantries', () => {
             });
     });
 
-    it('should GET pantries with limit of 5', (done) => {
+    it('should GET taxonomy with ID 10', (done) => {
         chai.request(server)
-            .get('/api/v1/pantries?limit=5')
+            .get('/api/v1/taxonomy/10')
             .end((err, res) => {
                 res.should.have.status(200);
-                res.body.should.be.a('array');
-                res.body.length.should.be.eql(5);
+                const tax = res.body[0];
+                tax.TAXON_ID.should.be.eql('10');
                 done();
             });
     });
 
-    it('should GET pantries by zip code', (done) => {
+    it('should GET taxonomy with under basic needs category', (done) => {
         chai.request(server)
-            .get('/api/v1/pantries/43228?limit=1')
+            .get('/api/v1/taxonomy/basic-needs')
             .end((err, res) => {
                 res.should.have.status(200);
-                const pantry = res.body[0];
-                pantry.ZIP.should.be.eql(43228);
+                res.body.should.be.a('array');
+                res.body.forEach(tax => {
+                    expect(tax.TAXONOMY_CODE).to.match(/^B.*$/);
+                });
                 done();
             });
     });

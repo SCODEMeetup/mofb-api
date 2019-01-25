@@ -1,28 +1,28 @@
-swagger: '2.0'
+swagger: "2.0"
 info:
-  title: 'Mid Ohio Food Bank RESTful API'
-  description: ''
-  version: '0.0.2'
+  title: "Mid Ohio Food Bank RESTful API"
+  description: ""
+  version: "0.0.2"
   contact:
-    name: 'Report an Issue'
-    url: 'https://github.com/SCODEMeetup/mofb-api/issues'
+    name: "Report an Issue"
+    url: "https://github.com/SCODEMeetup/mofb-api/issues"
 servers:
-  - url: 'http://localhost:3000'
-    description: 'running locally'
-  - url: 'https://mofb-api.appspot.com'
-    description: 'Production server'  
-basePath: '/api/v1'
+  - url: "http://localhost:3000"
+    description: "running locally"
+  - url: "https://mofb-api.appspot.com"
+    description: "Production server"
+basePath: "/api/v1"
 paths:
   /pantries:
     get:
       tags:
-        - 'Pantries'
-      summary: 'returns a list of pantries'
+        - "Pantries"
+      summary: "returns a list of pantries"
       parameters:
         - name: limit
           in: query
           required: false
-          description: 'The maximum number of results returned'
+          description: "The maximum number of results returned"
           schema:
             type: integer
             format: int64
@@ -31,32 +31,32 @@ paths:
         - name: pageNumber
           in: query
           required: false
-          description: 'The page number of the data to be returned'
+          description: "The page number of the data to be returned"
           schema:
             type: integer
             format: int64
             minimum: 1
             default: 1
-      responses: 
-        '200':
-          description: 'Successfully queries the smart city datasets and returns the results'
+      responses:
+        "200":
+          description: "Successfully queries the smart city datasets and returns the results"
   /pantries/{zipCode}:
     get:
       tags:
-        - 'Pantries'
-      summary: 'returns a list of pantries within that zipcode'
+        - "Pantries"
+      summary: "returns a list of pantries within that zipcode"
       parameters:
         - name: zipCode
           in: path
           required: true
-          description: 'The zip code for food pantry search area'
+          description: "The zip code for food pantry search area"
           schemea:
             type: integer
             format: int64
         - name: limit
           in: query
           required: false
-          description: 'The maximum number of results returned'
+          description: "The maximum number of results returned"
           schema:
             type: integer
             format: int64
@@ -65,44 +65,96 @@ paths:
         - name: pageNumber
           in: query
           required: false
-          description: 'The page number of the data to be returned'
+          description: "The page number of the data to be returned"
           schema:
             type: integer
             format: int64
             minimum: 1
             default: 1
-      responses: 
-        '200':
-          description: 'Successfully queries the smart city datasets and returns the results'
+      responses:
+        "200":
+          description: "Successfully queries the smart city datasets and returns the results"
   /query/pantries:
     get:
       tags:
-        - 'Query'
-      summary: 'returns a list of pantries'
-      description: 'This returns the entire list of pantries. There is no pagination'
+        - "Query"
+      summary: "returns a list of pantries"
+      description: "This returns the entire list of pantries. There is no pagination"
       parameters:
         - name: currentlyActive
           in: query
           required: false
-          description: 'only return the active pantries'
+          description: "only return the active pantries"
           type: boolean
         - name: handicapAccessible
           in: query
           required: false
-          description: 'only return the pantries that are handicap accessible'
+          description: "only return the pantries that are handicap accessible"
           type: boolean
         - name: limit
           in: query
           required: false
-          description: 'set a limit to how many results are returned'
+          description: "set a limit to how many results are returned"
           schema:
             type: integer
             format: int64
             minimum: 1
-      responses: 
-        '200':
-          description: 'Successfully queries the smart city datasets and returns the results'
-  
+      responses:
+        "200":
+          description: "Successfully queries the smart city datasets and returns the results"
+  /taxonomy:
+    get:
+      tags:
+        - "Taxonomy"
+      summary: "Returns a list of Service Categories (taxonomies)"
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          description: "The maximum number of results returned"
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+            default: 100
+        - name: pageNumber
+          in: query
+          required: false
+          description: "The page number of the data to be returned"
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+            default: 1
+      responses:
+        "200":
+          description: "Successfully queries the smart city datasets and returns the results"
+  /taxonomy/{id}:
+    get:
+      tags:
+        - "Taxonomy"
+      summary: "Returns Taxonomy record for the given ID"
+      parameters:
+        - name: ID
+          in: path
+          required: true
+          description: "The ID of the taxonomy to return"
+          schemea:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: "Successfully queries the smart city datasets and returns the results"
+  /taxonomy/basic-needs:
+    get:
+      tags:
+        - "Taxonomy"
+      summary: 'Returns a list of service categories under the "Basic Needs" category'
+      description: "This returns the entire list of basic needs categories. There is no pagination"
+      responses:
+        "200":
+          description: "Successfully queries the smart city datasets and returns the results"
+
 externalDocs:
-  description: 'Find out more about the API'
-  url: 'https://github.com/SCODEMeetup/mofb-api'
+  description: "Find out more about the API"
+  url: "https://github.com/SCODEMeetup/mofb-api"
