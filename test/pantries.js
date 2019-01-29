@@ -1,11 +1,13 @@
-process.env.NODE_ENV = 'test';
-process.env.PORT = 3001;
+const config = require('../config');
 
-let chai = require('chai');
-let chaiHttp = require('chai-http');
-let server = require('../server');
+process.env.NODE_ENV = config.test_env;
+process.env.PORT = config.test_port;
 
-let should = chai.should();
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const server = require('../server');
+
+const should = chai.should();
 
 chai.use(chaiHttp);
 

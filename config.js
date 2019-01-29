@@ -1,4 +1,6 @@
 const config = {
+    test_env: "test",
+    test_port: 3001,
     development: {
         host: "https://ckan.smartcolumbusos.com/",
         pantry_resource: "570a8e02-fb0e-4cee-895b-3b32bd740650",

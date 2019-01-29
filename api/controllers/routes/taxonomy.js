@@ -12,7 +12,7 @@ const uri = `${host}/api/3/action/datastore_search_sql?sql=SELECT * from "${reso
 
 app.get("/", function (req, res) {
     const level = req.query.level;
-    let levelQuery = ` WHERE "TAXONOMY_LEVEL" = ${level}`;
+    const levelQuery = ` WHERE "TAXONOMY_LEVEL" = ${level}`;
 
     requestUtils.sendRequest(queryUtils.getQueryString(req, level ? uri + levelQuery : uri), res);
 });
