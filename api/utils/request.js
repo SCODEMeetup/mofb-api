@@ -1,6 +1,10 @@
 const request = require("request");
 
 module.exports = {
+    /**
+     * Gets paging params from request or sets defaults if not present
+     * @param req Request
+     */
     getPagingParams: function (req) {
         const limit = req.query.limit || 100;
         const pageNumber = req.query.pageNumber || 1;
@@ -11,17 +15,11 @@ module.exports = {
             limit
         }
     },
-    getRequestUri: function (req, uri, params) {
-        const {
-            offset,
-            limit
-        } = this.getPagingParams(req);
-        let requestUri = uri + `&offset=${offset}&limit=${limit}`;
-        if (params) {
-            requestUri = `${requestUri}&${params}`;
-        }
-        return requestUri;
-    },
+    /**
+     * Handle request
+     * @param uri URI for request
+     * @param res Response
+     */
     sendRequest: function (uri, res) {
         const options = {
             body: {},

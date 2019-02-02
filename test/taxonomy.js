@@ -48,4 +48,17 @@ describe('Taxonomy', () => {
                 done();
             });
     });
+
+    it('should GET taxonomy subcategories for given category ID', (done) => {
+        chai.request(server)
+            .get(`${url}/10/children`)
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('array');
+                res.body.forEach(tax => {
+                    expect(tax.TAXON_ID_SUBCAT_OF).to.eq('10');
+                });
+                done();
+            });
+    });
 });

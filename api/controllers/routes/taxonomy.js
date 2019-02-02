@@ -3,25 +3,43 @@ const app = express();
 const requestUtils = require("../../utils/request");
 const queryUtils = require("../../utils/query");
 const constants = require("../../constants");
-
 const config = require("../../../config")[constants.getEnv()];
+
 const host = config.host;
 const resourceId = config.taxonomy_resource;
-const uri = `${host}/api/3/action/datastore_search_sql?sql=SELECT * FROM "${resourceId}"`;
+const tableName = "taxonomy";
 
+const uri = `${host}/api/3/action/datastore_search_sql?sql=SELECT * FROM "${resourceId}" ${tableName} `;
+
+/**
+ * Get Request for all taxonomy
+ */
 app.get("/", function (req, res) {
     const level = req.query.level;
-    const levelQuery = ` WHERE "TAXONOMY_LEVEL" = ${level}`;
+    const levelQuery = `"TAXONOMY_LEVEL" = ${level}`;
 
-    requestUtils.sendRequest(queryUtils.getQueryString(req, level ? uri + levelQuery : uri), res);
+    requestUtils.sendRequest(queryUtils.getQueryString(req, uri, level ? levelQuery : null, tableName), res);
 });
 
+/**
+ * Get Request for Basic Needs taxonomy
+ */
 app.get("/basic-needs", function (_req, res) {
-    requestUtils.sendRequest(uri + 'WHERE "TAXONOMY_CODE" LIKE N\'B%\'', res);
+    requestUtils.sendRequest(uri + queryUtils.setDefaultFilters('"TAXONOMY_CODE" LIKE N\'B%\'',tableName), res);
 });
 
+/**
+ * Get Request for Taxonomy by ID
+ */
 app.get("/:id", function (req, res) {
-    requestUtils.sendRequest(uri + `WHERE "TAXON_ID" = ${req.params.id}`, res);
+    requestUtils.sendRequest(uri + queryUtils.setDefaultFilters(`"TAXON_ID" = ${req.params.id}`,tableName), res);
+});
+
+/**
+ * Get Request for Taxonomy Subcategories by ID
+ */
+app.get("/:id/children", function (req, res) {
+    requestUtils.sendRequest(uri + queryUtils.setDefaultFilters(`"TAXON_ID_SUBCAT_OF" = ${req.params.id}`,tableName), res);
 });
 
 module.exports = app;
