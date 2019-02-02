@@ -3,9 +3,7 @@ const app = express();
 const requestUtils = require("../../utils/request");
 const constants = require("../../constants");
 
-const env = process.env.NODE_ENV || constants.development;
-
-const config = require("../../../config")[env];
+const config = require("../../../config")[constants.getEnv()];
 const host = config.host;
 const resourceId = config.pantry_resource;
 const uri = `${host}/api/action/datastore_search?resource_id=${resourceId}`;

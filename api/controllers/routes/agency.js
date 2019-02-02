@@ -4,9 +4,7 @@ const requestUtils = require("../../utils/request");
 const queryUtils = require("../../utils/query");
 const constants = require("../../constants");
 
-const env = process.env.NODE_ENV || constants.development;
-
-const config = require("../../../config")[env];
+const config = require("../../../config")[constants.getEnv()];
 const host = config.host;
 const agencyResourceId = config.agency_resource;
 const agencyServiceResourceId = config.agency_service_resource;
