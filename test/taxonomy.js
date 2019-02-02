@@ -6,6 +6,7 @@ process.env.PORT = config.test_port;
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../server');
+const url = '/api/v1/taxonomy';
 
 const should = chai.should();
 const expect = chai.expect;
@@ -15,7 +16,7 @@ chai.use(chaiHttp);
 describe('Taxonomy', () => {
     it('should GET taxonomies limit 100', (done) => {
         chai.request(server)
-            .get('/api/v1/taxonomy')
+            .get(url)
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('array');
@@ -26,7 +27,7 @@ describe('Taxonomy', () => {
 
     it('should GET taxonomy with ID 10', (done) => {
         chai.request(server)
-            .get('/api/v1/taxonomy/10')
+            .get(`${url}/10`)
             .end((err, res) => {
                 res.should.have.status(200);
                 const tax = res.body[0];
@@ -37,12 +38,25 @@ describe('Taxonomy', () => {
 
     it('should GET taxonomy with under basic needs category', (done) => {
         chai.request(server)
-            .get('/api/v1/taxonomy/basic-needs')
+            .get(`${url}/basic-needs`)
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('array');
                 res.body.forEach(tax => {
                     expect(tax.TAXONOMY_CODE).to.match(/^B.*$/);
+                });
+                done();
+            });
+    });
+
+    it('should GET taxonomy subcategories for given category ID', (done) => {
+        chai.request(server)
+            .get(`${url}/10/children`)
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('array');
+                res.body.forEach(tax => {
+                    expect(tax.TAXON_ID_SUBCAT_OF).to.eq('10');
                 });
                 done();
             });

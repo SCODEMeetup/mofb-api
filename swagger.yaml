@@ -13,95 +13,6 @@ servers:
     description: "Production server"
 basePath: "/api/v1"
 paths:
-  /pantries:
-    get:
-      tags:
-        - "Pantries"
-      summary: "returns a list of pantries"
-      parameters:
-        - name: limit
-          in: query
-          required: false
-          description: "The maximum number of results returned"
-          schema:
-            type: integer
-            format: int64
-            minimum: 1
-            default: 100
-        - name: pageNumber
-          in: query
-          required: false
-          description: "The page number of the data to be returned"
-          schema:
-            type: integer
-            format: int64
-            minimum: 1
-            default: 1
-      responses:
-        "200":
-          description: "Successfully queries the smart city datasets and returns the results"
-  /pantries/{zipCode}:
-    get:
-      tags:
-        - "Pantries"
-      summary: "returns a list of pantries within that zipcode"
-      parameters:
-        - name: zipCode
-          in: path
-          required: true
-          description: "The zip code for food pantry search area"
-          schemea:
-            type: integer
-            format: int64
-        - name: limit
-          in: query
-          required: false
-          description: "The maximum number of results returned"
-          schema:
-            type: integer
-            format: int64
-            minimum: 1
-            default: 100
-        - name: pageNumber
-          in: query
-          required: false
-          description: "The page number of the data to be returned"
-          schema:
-            type: integer
-            format: int64
-            minimum: 1
-            default: 1
-      responses:
-        "200":
-          description: "Successfully queries the smart city datasets and returns the results"
-  /query/pantries:
-    get:
-      tags:
-        - "Query"
-      summary: "returns a list of pantries"
-      description: "This returns the entire list of pantries. There is no pagination"
-      parameters:
-        - name: currentlyActive
-          in: query
-          required: false
-          description: "only return the active pantries"
-          type: boolean
-        - name: handicapAccessible
-          in: query
-          required: false
-          description: "only return the pantries that are handicap accessible"
-          type: boolean
-        - name: limit
-          in: query
-          required: false
-          description: "set a limit to how many results are returned"
-          schema:
-            type: integer
-            format: int64
-            minimum: 1
-      responses:
-        "200":
-          description: "Successfully queries the smart city datasets and returns the results"
   /taxonomy:
     get:
       tags:
@@ -145,6 +56,22 @@ paths:
       responses:
         "200":
           description: "Successfully queries the smart city datasets and returns the results"
+  /taxonomy/{id}/children:
+    get:
+      tags:
+        - "Taxonomy"
+      summary: "Returns All subcategories of taxonomy for the given ID"
+      parameters:
+        - name: ID
+          in: path
+          required: true
+          description: "The ID of the taxonomy to return"
+          schemea:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: "Successfully queries the smart city datasets and returns the results"
   /taxonomy/basic-needs:
     get:
       tags:
@@ -155,6 +82,56 @@ paths:
         "200":
           description: "Successfully queries the smart city datasets and returns the results"
 
+  /agency:
+    get:
+      tags:
+        - "Agencies"
+      summary: "Returns a list of Agencies"
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          description: "The maximum number of results returned"
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+            default: 100
+        - name: pageNumber
+          in: query
+          required: false
+          description: "The page number of the data to be returned"
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+            default: 1
+        - name: taxonomyId
+          in: query
+          required: false
+          description: "Taxonomy ID for agency"
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: "Successfully queries the smart city datasets and returns the results"
+  /agency/{id}:
+    get:
+      tags:
+        - "Agencies"
+      summary: "Returns agency record for the given ID"
+      parameters:
+        - name: ID
+          in: path
+          required: true
+          description: "The ID of the agency to return"
+          schemea:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: "Successfully queries the smart city datasets and returns the results"
 externalDocs:
   description: "Find out more about the API"
   url: "https://github.com/SCODEMeetup/mofb-api"
