@@ -47,9 +47,11 @@ $ npm run start
 
 GCP (google cloud platform)
 
-1. Pantries - https://mofb-api.appspot.com/pantries
-2. Swagger documentation - https://mofb-api.appspot.com/api-docs/
-
+1. Swagger documentation - https://mofb-api.appspot.com/api-docs/ 
+2. Existing endpoints (please see the swagger documentation for more details)
+   1. Taxonomies - https://mofb-api.appspot.com/api/v1/pantries, https://mofb-api.appspot.com/api/v1/pantries/43210 
+   2. Pantries - https://mofb-api.appspot.com/api/v1/taxonomy/
+   
 ## Data
 
 1. taxonomy.csv: This dataset explains the taxonomy codes applicable to different types of
