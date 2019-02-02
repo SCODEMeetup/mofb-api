@@ -2,8 +2,9 @@ const express = require("express");
 const app = express();
 const requestUtils = require("../../utils/request");
 const queryUtils = require("../../utils/query");
+const constants = require("../../constants");
 
-const env = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV || constants.development;
 
 const config = require("../../../config")[env];
 const host = config.host;
@@ -11,7 +12,7 @@ const agencyResourceId = config.agency_resource;
 const agencyServiceResourceId = config.agency_service_resource;
 const serviceTaxonomyResourceId = config.service_taxonomy_resource;
 
-const uri = `${host}/api/3/action/datastore_search_sql?sql=SELECT * from "${agencyResourceId}" agency `;
+const uri = `${host}/api/3/action/datastore_search_sql?sql=SELECT * FROM "${agencyResourceId}" agency `;
 
 app.get("/", function (req, res) {
     let query = '';

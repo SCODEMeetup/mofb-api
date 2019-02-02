@@ -6,6 +6,7 @@ process.env.PORT = config.test_port;
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../server');
+const url = '/api/v1/agency';
 
 const should = chai.should();
 
@@ -14,7 +15,7 @@ chai.use(chaiHttp);
 describe('Agencies', () => {
     it('should GET agencies limit 100', (done) => {
         chai.request(server)
-            .get('/api/v1/agency')
+            .get(url)
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('array');
@@ -25,7 +26,7 @@ describe('Agencies', () => {
 
     it('should GET agencies with limit of 5', (done) => {
         chai.request(server)
-            .get('/api/v1/agency?limit=5')
+            .get(`${url}?limit=5`)
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('array');
@@ -36,7 +37,7 @@ describe('Agencies', () => {
 
     it('should GET agencies with taxonomy ID of 10', (done) => {
         chai.request(server)
-            .get('/api/v1/agency?taxonomyId=10')
+            .get(`${url}?taxonomyId=10`)
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('array');
@@ -49,7 +50,7 @@ describe('Agencies', () => {
 
     it('should GET agency with ID of 27600', (done) => {
         chai.request(server)
-            .get('/api/v1/agency/27600')
+            .get(`${url}/27600`)
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body[0].AGENCY_ID.should.eq('27600');

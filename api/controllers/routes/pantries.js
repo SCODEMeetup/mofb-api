@@ -1,8 +1,9 @@
 const express = require("express");
 const app = express();
 const requestUtils = require("../../utils/request");
+const constants = require("../../constants");
 
-const env = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV || constants.development;
 
 const config = require("../../../config")[env];
 const host = config.host;
