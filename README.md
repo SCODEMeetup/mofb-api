@@ -49,8 +49,14 @@ GCP (google cloud platform)
 
 1. Swagger documentation - https://mofb-api.appspot.com/api-docs/ 
 2. Existing endpoints (please see the swagger documentation for more details)
-   1. Taxonomies - https://mofb-api.appspot.com/api/v1/pantries, https://mofb-api.appspot.com/api/v1/pantries/43210 
-   2. Pantries - https://mofb-api.appspot.com/api/v1/taxonomy/
+   1. Taxonomies - 
+       1. all - https://mofb-api.appspot.com/api/v1/taxonomy, 
+       2. by id - https://mofb-api.appspot.com/api/v1/taxonomy/{id}, e.g. 10
+       3. *Immediate* subcategory of a taxonomy id (immediate children) - https://mofb-api.appspot.com/api/v1/taxonomy/{id}/children, e.g. 10
+       4. "Basic needs" taxonomy and *all* its sub categories - https://mofb-api.appspot.com/api/v1/taxonomy/basic-needs
+   2. Agencies - 
+       1. all - https://mofb-api.appspot.com/api/v1/agency
+       2. by id - https://mofb-api.appspot.com/api/v1/agency/{id}, e.g. 5120
    
 ## Data
 
