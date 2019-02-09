@@ -45,10 +45,11 @@
     "nodemon": "^1.18.4"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.16.3",
+    "nodemon": "^1.18.4",
     "request": "^2.88.0",
     "swagger-ui-express": "^4.0.1",
-    "yamljs": "^0.3.0",
-    "nodemon": "^1.18.4"
+    "yamljs": "^0.3.0"
   }
 }

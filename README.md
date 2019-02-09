@@ -20,6 +20,11 @@ $ npm run start
 
 3. Server runs at localhost:3000
 
+## Running tests
+
+```bash
+$ npm test
+```
 ## Docker build
 
 1. Run `npm i` to install all node modules
