@@ -56,7 +56,8 @@ GCP (google cloud platform)
        4. "Basic needs" taxonomy and *all* its sub categories - https://mofb-api.appspot.com/api/v1/taxonomy/basic-needs
    2. Agencies - 
        1. all - https://mofb-api.appspot.com/api/v1/agency
-       2. by id - https://mofb-api.appspot.com/api/v1/agency/{id}, e.g. 5120
+       2. by agency id - https://mofb-api.appspot.com/api/v1/agency/{id}, e.g. 5120
+       3. by taxonomy id = https://mofb-api.appspot.com/api/v1/agency?taxonomyId=11 
    
 ## Data
 
