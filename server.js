@@ -1,20 +1,23 @@
 var express = require('express'),
     app = express(),
-    port = process.env.PORT || 3000;
-const swaggerUi = require('swagger-ui-express');
-const YAML = require('yamljs');
-const swaggerDocument = YAML.load('./swagger.yaml');
+    port = process.env.PORT || 3000,
+    cors = require('cors')
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use(cors())
+const swaggerUi = require('swagger-ui-express')
+const YAML = require('yamljs')
+const swaggerDocument = YAML.load('./swagger.yaml')
 
-const taxonomyRouter = require('./api/controllers/routes/taxonomy');
-const agencyRouter = require('./api/controllers/routes/agency');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
-app.use('/api/v1/taxonomy', taxonomyRouter);
-app.use('/api/v1/agency', agencyRouter);
+const taxonomyRouter = require('./api/controllers/routes/taxonomy')
+const agencyRouter = require('./api/controllers/routes/agency')
 
-app.listen(port);
+app.use('/api/v1/taxonomy', taxonomyRouter)
+app.use('/api/v1/agency', agencyRouter)
 
-console.log('Mid Ohio Food Bank RESTful API server started on: ' + port);
+app.listen(port)
 
-module.exports = app;
+console.log('Mid Ohio Food Bank RESTful API server started on: ' + port)
+
+module.exports = app
