@@ -82,19 +82,3 @@ GCP (google cloud platform)
    1. ![Services aka Taxonomies with subcategories as graph](/extra/services-taxanomy-hierarchy.png)
    2. ![Services aka Taxonomies with subcategories as table](/extra/services-hierarchy-table.png)
    3. ![Agency and Services relation](/extra/agency-services-relation.png)
-
-6. Queries
-   1. Generating services hierarchy with its categories
-      ```
-          SELECT        _TAXON_ID_, _TAXONOMY_CODE_, _DESCRIPTION_, _TAXONOMY_LEVEL_, _TAXON_ID_SUBCAT_OF_
-          FROM            dbo.taxonomy
-          WHERE        (_ACTIVE_FLAG_ = N'Y') AND (_TAXONOMY_CODE_ = N'B') OR
-                                  (_ACTIVE_FLAG_ = N'Y') AND (_TAXONOMY_CODE_ LIKE N'%BD%')
-          ORDER BY _TAXONOMY_CODE_
-      ```
-   2. Getting one service
-      ```
-          To query each individual point use this and swap out the Description as needed: SELECT  _TAXON_ID_, _TAXONOMY_CODE_, _DESCRIPTION_, _TAXONOMY_LEVEL_, _TAXON_ID_SUBCAT_OF_
-          FROM            dbo.taxonomy
-          WHERE        (_ACTIVE_FLAG_ = N'Y') AND (_DESCRIPTION_ = N'FOOD')
-      ```
