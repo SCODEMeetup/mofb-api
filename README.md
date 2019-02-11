@@ -50,7 +50,7 @@ $ npm test
 
 ## Environment
 
-GCP (google cloud platform)
+GCP (google cloud platform), automated app engine deployment
 
 1. Swagger documentation - https://mofb-api.appspot.com/api-docs/ 
 2. Existing endpoints (please see the swagger documentation for more details)
