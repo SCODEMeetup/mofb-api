@@ -15,6 +15,10 @@ class Taxonomy {
         });
         return taxonomyList;
     }
+
+    static getObject(res) {
+        return new Taxonomy(res);
+    }
 }
 
 module.exports = Taxonomy;

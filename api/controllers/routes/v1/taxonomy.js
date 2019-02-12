@@ -19,7 +19,7 @@ app.get("/", function (req, res) {
     const level = req.query.level;
     const levelQuery = `"TAXONOMY_LEVEL" = ${level}`;
     const queryString = queryUtils.getQueryString(req, uri, level ? levelQuery : null, tableName);
-    requestUtils.sendRequest(queryString, res);
+    requestUtils.getList(queryString, res);
 });
 
 /**
@@ -27,7 +27,7 @@ app.get("/", function (req, res) {
  */
 app.get("/basic-needs", function (_req, res) {
     const queryString = uri + queryUtils.setDefaultFilters('"TAXONOMY_CODE" LIKE N\'B%\'', tableName);
-    requestUtils.sendRequest(queryString, res);
+    requestUtils.getList(queryString, res);
 });
 
 /**
@@ -35,7 +35,7 @@ app.get("/basic-needs", function (_req, res) {
  */
 app.get("/:id", function (req, res) {
     const queryString = uri + queryUtils.setDefaultFilters(`"TAXON_ID" = ${req.params.id}`, tableName);
-    requestUtils.sendRequest(queryString, res);
+    requestUtils.getList(queryString, res);
 });
 
 /**
@@ -43,7 +43,7 @@ app.get("/:id", function (req, res) {
  */
 app.get("/:id/children", function (req, res) {
     const queryString = uri + queryUtils.setDefaultFilters(`"TAXON_ID_SUBCAT_OF" = ${req.params.id}`, tableName);
-    requestUtils.sendRequest(queryString, res);
+    requestUtils.getList(queryString, res);
 });
 
 module.exports = app;

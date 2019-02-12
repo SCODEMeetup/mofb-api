@@ -30,8 +30,7 @@ describe('Taxonomy V2', () => {
             .get(`${url}/10`)
             .end((err, res) => {
                 res.should.have.status(200);
-                const tax = res.body[0];
-                tax.id.should.be.eql('10');
+                res.body.id.should.be.eql('10');
                 done();
             });
     });

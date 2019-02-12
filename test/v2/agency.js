@@ -53,7 +53,7 @@ describe('Agencies V2', () => {
             .get(`${url}/27600`)
             .end((err, res) => {
                 res.should.have.status(200);
-                res.body[0].id.should.eq('27600');
+                res.body.id.should.eq('27600');
                 done();
             });
     });

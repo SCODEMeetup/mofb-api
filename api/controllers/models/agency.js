@@ -14,6 +14,10 @@ class Agency {
         });
         return agencyList;
     }
+
+    static getObject(res) {
+        return new Agency(res);
+    }
 }
 
 module.exports = Agency;

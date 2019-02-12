@@ -30,7 +30,7 @@ app.get("/", function (req, res) {
     }
     query = uri + query;
     const queryString = queryUtils.getQueryString(req, query, filter, tableName);
-    requestUtils.sendRequest(queryString, res);
+    requestUtils.getList(queryString, res);
 });
 
 /**
@@ -38,7 +38,7 @@ app.get("/", function (req, res) {
  */
 app.get("/:id", function (req, res) {
     const queryString = uri + queryUtils.setDefaultFilters(`agency."AGENCY_ID" = ${req.params.id}`, tableName);
-    requestUtils.sendRequest(queryString, res);
+    requestUtils.getList(queryString, res);
 });
 
 module.exports = app;

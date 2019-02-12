@@ -63,7 +63,7 @@ describe('Locations V2', () => {
             .get(`${url}/7300/service/10`)
             .end((err, res) => {
                 res.should.have.status(200);
-                res.body[0].id.should.eq('7300');
+                res.body.id.should.eq('7300');
                 done();
             });
     });

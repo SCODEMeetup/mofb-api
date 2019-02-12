@@ -38,7 +38,7 @@ app.get("/", function (req, res) {
     }
     requestBody = uri + query + requestBody;
     const queryString = queryUtils.getQueryString(req, requestBody, filter, tableName);
-    requestUtils.sendRequest(queryString, res);
+    requestUtils.getList(queryString, res);
 });
 
 function getFilters(existingFilters, addFilter) {
@@ -55,7 +55,7 @@ app.get("/:id/service/:serviceId", function (req, res) {
     let requestBody = query + queryUtils.joinTables;
     const queryString = uri + requestBody +
         queryUtils.setDefaultFilters(`${tableName}."LOCATION_ID" = ${req.params.id} AND service_taxonomy."TAXON_ID" = ${req.params.serviceId}`, tableName);
-    requestUtils.sendRequest(queryString, res);
+    requestUtils.getList(queryString, res);
 });
 
 module.exports = app;
