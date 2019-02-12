@@ -11,7 +11,7 @@ servers:
     description: "running locally"
   - url: "https://mofb-api.appspot.com"
     description: "Production server"
-basePath: "/api/v1"
+basePath: "/api/v2"
 paths:
   /taxonomy:
     get:
@@ -126,6 +126,71 @@ paths:
           in: path
           required: true
           description: "The ID of the agency to return"
+          schemea:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: "Successfully queries the smart city datasets and returns the results"
+
+  /location:
+    get:
+      tags:
+        - "Locations"
+      summary: "Returns a list of locations"
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          description: "The maximum number of results returned"
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+            default: 100
+        - name: pageNumber
+          in: query
+          required: false
+          description: "The page number of the data to be returned"
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+            default: 1
+        - name: taxonomyId
+          in: query
+          required: false
+          description: "Taxonomy ID for location"
+          schema:
+            type: integer
+            format: int64
+        - name: agencyId
+          in: query
+          required: false
+          description: "Agency ID for location"
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: "Successfully queries the smart city datasets and returns the results"
+  /location/{locationId}/service/{serviceId}:
+    get:
+      tags:
+        - "Locations"
+      summary: "Returns Location record for the given ID and service ID"
+      parameters:
+        - name: locationId
+          in: path
+          required: true
+          description: "The ID of the location to return"
+          schemea:
+            type: integer
+            format: int64
+        - name: serviceId
+          in: path
+          required: true
+          description: "The ID of the service for location. Used to return specific hours"
           schemea:
             type: integer
             format: int64

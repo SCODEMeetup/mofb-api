@@ -7,11 +7,22 @@ const swaggerDocument = YAML.load('./swagger.yaml');
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-const taxonomyRouter = require('./api/controllers/routes/taxonomy');
-const agencyRouter = require('./api/controllers/routes/agency');
+const taxonomyRouterV1 = require('./api/controllers/routes/v1/taxonomy');
+const agencyRouterV1 = require('./api/controllers/routes/v1/agency');
+const locationRouterV1 = require('./api/controllers/routes/v1/location');
 
-app.use('/api/v1/taxonomy', taxonomyRouter);
-app.use('/api/v1/agency', agencyRouter);
+const taxonomyRouterV2 = require('./api/controllers/routes/v2/taxonomy');
+const agencyRouterV2 = require('./api/controllers/routes/v2/agency');
+const locationRouterV2 = require('./api/controllers/routes/v2/location');
+
+app.use('/api/v1/taxonomy', taxonomyRouterV1);
+app.use('/api/v1/agency', agencyRouterV1);
+app.use('/api/v1/location', locationRouterV1);
+
+app.use('/api/v2/taxonomy', taxonomyRouterV2);
+app.use('/api/v2/agency', agencyRouterV2);
+app.use('/api/v2/location', locationRouterV2);
+
 
 app.listen(port);
 

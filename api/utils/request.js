@@ -19,8 +19,9 @@ module.exports = {
      * Handle request
      * @param uri URI for request
      * @param res Response
+     * @param mapper Maps data set to object
      */
-    sendRequest: function (uri, res) {
+    sendRequest: function (uri, res, mapper) {
         const options = {
             body: {},
             headers: {
@@ -32,6 +33,7 @@ module.exports = {
         };
 
         request(options, function (error, response, body) {
+            // console.log(uri);
             console.log("statusCode:", response && response.statusCode);
             if (error || !body.success) {
                 Object.keys(body.error).forEach(key => {
@@ -39,8 +41,9 @@ module.exports = {
                 });
                 res.status(400).send("Could not complete request");
             } else {
-                res.send(body.result.records);
+                const result = mapper ? mapper(body.result.records) : body.result.records
+                res.send(result);
             }
         });
-    }
+    },
 }
