@@ -20,6 +20,11 @@ $ npm run start
 
 3. Server runs at localhost:3000
 
+## Running tests
+
+```bash
+$ npm test
+```
 ## Docker build
 
 1. Run `npm i` to install all node modules
@@ -45,7 +50,7 @@ $ npm run start
 
 ## Environment
 
-GCP (google cloud platform)
+GCP (google cloud platform), automated app engine deployment
 
 1. Swagger documentation - https://mofb-api.appspot.com/api-docs/ 
 2. Existing endpoints (please see the swagger documentation for more details)
@@ -56,7 +61,8 @@ GCP (google cloud platform)
        4. "Basic needs" taxonomy and *all* its sub categories - https://mofb-api.appspot.com/api/v1/taxonomy/basic-needs
    2. Agencies - 
        1. all - https://mofb-api.appspot.com/api/v1/agency
-       2. by id - https://mofb-api.appspot.com/api/v1/agency/{id}, e.g. 5120
+       2. by agency id - https://mofb-api.appspot.com/api/v1/agency/{id}, e.g. 5120
+       3. by taxonomy id = https://mofb-api.appspot.com/api/v1/agency?taxonomyId=11 
    
 ## Data
 
@@ -76,19 +82,3 @@ GCP (google cloud platform)
    1. ![Services aka Taxonomies with subcategories as graph](/extra/services-taxanomy-hierarchy.png)
    2. ![Services aka Taxonomies with subcategories as table](/extra/services-hierarchy-table.png)
    3. ![Agency and Services relation](/extra/agency-services-relation.png)
-
-6. Queries
-   1. Generating services hierarchy with its categories
-      ```
-          SELECT        _TAXON_ID_, _TAXONOMY_CODE_, _DESCRIPTION_, _TAXONOMY_LEVEL_, _TAXON_ID_SUBCAT_OF_
-          FROM            dbo.taxonomy
-          WHERE        (_ACTIVE_FLAG_ = N'Y') AND (_TAXONOMY_CODE_ = N'B') OR
-                                  (_ACTIVE_FLAG_ = N'Y') AND (_TAXONOMY_CODE_ LIKE N'%BD%')
-          ORDER BY _TAXONOMY_CODE_
-      ```
-   2. Getting one service
-      ```
-          To query each individual point use this and swap out the Description as needed: SELECT  _TAXON_ID_, _TAXONOMY_CODE_, _DESCRIPTION_, _TAXONOMY_LEVEL_, _TAXON_ID_SUBCAT_OF_
-          FROM            dbo.taxonomy
-          WHERE        (_ACTIVE_FLAG_ = N'Y') AND (_DESCRIPTION_ = N'FOOD')
-      ```
