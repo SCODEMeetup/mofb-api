@@ -1,11 +1,11 @@
-const config = require('../config');
+const config = require('../../config');
+const server = require('../../server');
 
 process.env.NODE_ENV = config.test_env;
 process.env.PORT = config.test_port;
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const server = require('../server');
 const url = '/api/v1/taxonomy';
 
 const should = chai.should();
@@ -13,7 +13,7 @@ const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-describe('Taxonomy', () => {
+describe('Taxonomy V1', () => {
     it('should GET taxonomies limit 100', (done) => {
         chai.request(server)
             .get(url)
