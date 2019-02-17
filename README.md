@@ -53,9 +53,10 @@ $ npm test
 
 ## Environment
 
-Travis CI for build 
+#### Travis CI for build
+1.  When a PR is opened Travis CI will run the build automatically as a pre-requisite for merging
 
-GCP (google cloud platform), automated app engine deployment
+#### GCP (google cloud platform), automated app engine deployment
 
 1. Swagger documentation - https://mofb-api.appspot.com/api-docs/ 
 2. Existing endpoints (please see the swagger documentation for more details)
