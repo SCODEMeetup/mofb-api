@@ -36,6 +36,9 @@ $ npm test
 
 1. Node.js
 2. Express
+3. ChaiJS 
+4. MochaJS 
+5. Swagger
 
 ## Tools
 
@@ -49,6 +52,8 @@ $ npm test
 4. Create the swagger documentation (see swagger.yaml file)
 
 ## Environment
+
+Travis CI for build 
 
 GCP (google cloud platform), automated app engine deployment
 
