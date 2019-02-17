@@ -36,6 +36,9 @@ $ npm test
 
 1. Node.js
 2. Express
+3. ChaiJS 
+4. MochaJS 
+5. Swagger
 
 ## Tools
 
@@ -46,11 +49,15 @@ $ npm test
 1. Create the endpoint in router file
 2. Write test for endpoint
 3. If necessary, import the router file in server.js
-4. Create the swagger documentation (see swagger.yaml file)
+4. Create/update the swagger documentation (see swagger.yaml file)
 
 ## Environment
 
-GCP (google cloud platform), automated app engine deployment
+#### Travis CI for build
+1. When a PR is opened Travis CI will run the build automatically as a pre-requisite for merging.
+2. You can check the status of Travis CI build in your PR.  
+
+#### GCP (google cloud platform), automated app engine deployment
 
 1. Swagger documentation - https://mofb-api.appspot.com/api-docs/ 
 2. Existing endpoints (please see the swagger documentation for more details)
