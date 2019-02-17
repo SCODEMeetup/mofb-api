@@ -15,8 +15,6 @@ node_js:
 notifications:
   email:
   - yadav.21@osu.edu
-  - mihiramin89@gmail.com
-  - del.legg.iii@gmail.com
 
 before_install:
 - docker build -t mofb-api .
