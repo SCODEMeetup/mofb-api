@@ -20,7 +20,7 @@ class Location {
         });
         return locationList;
     }
-    
+
     static getObject(res) {
         return new Location(res);
     }

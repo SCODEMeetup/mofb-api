@@ -35,7 +35,7 @@ describe('Taxonomy V2', () => {
             });
     });
 
-    it('should GET taxonomy with under basic needs category', (done) => {
+    it('should GET taxonomies under basic needs category', (done) => {
         chai.request(server)
             .get(`${url}/basic-needs`)
             .end((err, res) => {
@@ -43,6 +43,19 @@ describe('Taxonomy V2', () => {
                 res.body.should.be.a('array');
                 res.body.forEach(tax => {
                     expect(tax.code).to.match(/^B.*$/);
+                });
+                done();
+            });
+    });
+
+    it('should GET taxonomies under food category', (done) => {
+        chai.request(server)
+            .get(`${url}/food`)
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('array');
+                res.body.forEach(tax => {
+                    expect(tax.code).to.match(/^BD-.*$/);
                 });
                 done();
             });
