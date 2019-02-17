@@ -13,7 +13,7 @@ function taxonomyRoutes(service) {
      * Get Request for all Food categories
      */
     app.get("/food", function (req, res) {
-        service.getFoodCategories(req, res);
+        service.getAllFoodCategories(req, res);
     });
 
     /**

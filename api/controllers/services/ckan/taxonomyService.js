@@ -21,7 +21,7 @@ class TaxonomyCkanService extends AbstractService {
         this.requestUtils.getObject(queryString, res, Taxonomy.getObject);
     }
 
-    getFoodCategories(req, res) {
+    getAllFoodCategories(_req, res) {
         const queryString = this.uri + this.queryUtils.setDefaultFilters('"TAXONOMY_CODE" LIKE N\'BD-%\'', this.tableName);
         this.requestUtils.getList(queryString, res, Taxonomy.getList);
     }
