@@ -49,7 +49,7 @@ $ npm test
 1. Create the endpoint in router file
 2. Write test for endpoint
 3. If necessary, import the router file in server.js
-4. Create the swagger documentation (see swagger.yaml file)
+4. Create/update the swagger documentation (see swagger.yaml file)
 
 ## Environment
 
