@@ -1,0 +1,25 @@
+sudo: required
+
+language: node_js
+
+services:
+- docker
+
+cache:
+  directories:
+  - node_modules
+
+node_js:
+- "8"
+
+notifications:
+  email:
+  - yadav.21@osu.edu
+  - mihiramin89@gmail.com
+  - del.legg.iii@gmail.com
+
+before_install:
+- docker build -t mofb-api .
+
+script:
+- npm run build
