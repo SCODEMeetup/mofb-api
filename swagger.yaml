@@ -72,6 +72,15 @@ paths:
       responses:
         "200":
           description: "Successfully queries the smart city datasets and returns the results"
+  /taxonomy/food:
+    get:
+      tags:
+        - "Taxonomy"
+      summary: 'Returns a list of service categories under the "Food" category'
+      description: "This returns the entire list of food categories. There is no pagination"
+      responses:
+        "200":
+          description: "Successfully queries the smart city datasets and returns the results"
   /taxonomy/basic-needs:
     get:
       tags:
