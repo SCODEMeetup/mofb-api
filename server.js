@@ -17,7 +17,7 @@ app.use('/api/v1/taxonomy', taxonomyRouterV1);
 app.use('/api/v1/agency', agencyRouterV1);
 app.use('/api/v1/location', locationRouterV1);
 
-app.use(require('./routes.js').getRoutes('v2', 'ckan'));
+app.use(require('./mofbRoutes.js').getRoutes('v2', 'ckan'));
 
 
 
