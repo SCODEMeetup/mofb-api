@@ -26,10 +26,10 @@ class LocationCkanService extends AbstractService {
         let requestBody = '';
         if (req.query.taxonomyId) {
             requestBody = this.queryUtils.joinTables;
-            filter = getFilters(filter, `service_taxonomy."TAXON_ID" = ${req.query.taxonomyId}`);
+            filter = getFilters(filter, `service_taxonomy."TAXON_ID" IN (${req.query.taxonomyId})`);
         }
         if (req.query.agencyId) {
-            filter = getFilters(filter, `${this.tableName}."AGENCY_ID" = ${req.query.agencyId}`);
+            filter = getFilters(filter, `${this.tableName}."AGENCY_ID" IN (${req.query.agencyId})`);
         }
         requestBody = this.uri + this.query + requestBody;
         const queryString = this.queryUtils.getQueryString(req, requestBody, filter, this.tableName);

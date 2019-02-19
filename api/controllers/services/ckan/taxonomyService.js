@@ -11,7 +11,7 @@ class TaxonomyCkanService extends AbstractService {
 
     getAll(req, res) {
         const level = req.query.level;
-        const levelQuery = `"TAXONOMY_LEVEL" = ${level}`;
+        const levelQuery = `"TAXONOMY_LEVEL" IN (${level})`;
         const queryString = this.queryUtils.getQueryString(req, this.uri, level ? levelQuery : null, this.tableName);
         this.requestUtils.getList(queryString, res, Taxonomy.getList);
     }
@@ -32,7 +32,7 @@ class TaxonomyCkanService extends AbstractService {
     }
 
     getChildren(req, res) {
-        const queryString = this.uri + this.queryUtils.setDefaultFilters(`"TAXON_ID_SUBCAT_OF" = ${req.params.id}`, this.tableName);
+        const queryString = this.uri + this.queryUtils.setDefaultFilters(`"TAXON_ID_SUBCAT_OF" IN (${req.params.id})`, this.tableName);
         this.requestUtils.getList(queryString, res, Taxonomy.getList);
     }
 }

@@ -23,11 +23,11 @@ module.exports = {
      */
     getList: function (uri, res, mapper) {
         const options = getRequestOptions(uri);
-        const callBack = function(body) {
+        const callBack = function (body) {
             const result = mapper ? mapper(body.result.records) : body.result.records;
             res.send(result);
         }
-        sendRequest(options, callBack);
+        sendRequest(options, res, callBack);
     },
 
     /**
@@ -38,8 +38,13 @@ module.exports = {
      */
     getObject: function (uri, res, mapper) {
         const options = getRequestOptions(uri);
-        sendRequest(options, function(body) { 
-            res.send(mapper(body.result.records[0])); 
+        sendRequest(options, res, function (body) {
+            if (body.result.records.length === 0) {
+                res.status(404).send("No results for query");
+            } else {
+                const result = mapper(body.result.records[0]);
+                res.send(result);
+            }
         });
     },
 }
@@ -56,16 +61,24 @@ function getRequestOptions(uri) {
     };
 }
 
-function sendRequest(options, callback) {
-    request(options, function (error, response, body) {
+function sendRequest(options, res, callback) {
+    request(options, function (_error, response, body) {
         console.log("statusCode:", response && response.statusCode);
-        if (error || !body.success) {
-            Object.keys(body.error).forEach(key => {
-                console.log(key + ": " + body.error[key]);
-            });
-            res.status(400).send("Could not complete request");
+        if (!body.success) {
+            handleError(body, res);
         } else {
             callback(body);
         }
     });
+}
+
+function handleError(body, response) {
+    if (body.error) {
+        Object.keys(body.error).forEach(key => {
+            console.log(key + ": " + body.error[key]);
+        });
+        response.status(400).send("Could not complete request");
+    } else {
+        response.status(500).send("Internal server error");
+    }
 }
