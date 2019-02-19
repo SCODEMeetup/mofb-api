@@ -55,7 +55,7 @@ $ npm test
 
 #### Travis CI for build
 1. When a PR is opened Travis CI will run the build automatically as a pre-requisite for merging.
-2. You can check the status of Travis CI build in your PR.  
+2. You can check the status of Travis CI build in your Pull Request.  
 
 #### GCP (google cloud platform), automated app engine deployment
 
