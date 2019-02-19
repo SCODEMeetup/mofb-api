@@ -21,7 +21,7 @@ class AgencyService extends AbstractService {
                 INNER JOIN "${this.serviceTaxonomyResourceId}" service_taxonomy ON agency_service."AGENCY_ID" = service_taxonomy."AGENCY_ID" 
                 AND agency_service."LINE_NUMBER" = service_taxonomy."LINE_NUMBER"
             `;
-            filter = `service_taxonomy."TAXON_ID" = ${req.query.taxonomyId}`;
+            filter = `service_taxonomy."TAXON_ID" IN (${req.query.taxonomyId})`;
         }
         query = this.uri + query;
         const queryString = this.queryUtils.getQueryString(req, query, filter, this.tableName);
