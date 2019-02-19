@@ -1,5 +1,5 @@
 runtime: nodejs8
-instance_class: B1
+instance_class: F1
 env_variables:
   BUCKET_NAME: "mofb-api"
 handlers:
