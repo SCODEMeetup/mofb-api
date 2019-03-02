@@ -10,19 +10,17 @@ class Location {
         this.phoneExtension = res.PHONE_EXTENSION;
         this.handicapAccessFlag = res.HANDICAP_ACCESS;
         this.hours = res.HOURS;
+        this.lat = res.lat;
+        this.long = res.long;
     }
 
-    static getList(res) {
+    static get(res) {
         let locationList = [];
         res.forEach(r => {
             const t = new Location(r);
             locationList.push(t);
         });
         return locationList;
-    }
-
-    static getObject(res) {
-        return new Location(res);
     }
 }
 
