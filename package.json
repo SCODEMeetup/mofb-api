@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
-    "test": "mocha --recursive --timeout 10000 --exit",
+    "test": "",
     "build": "npm run test"
   },
   "repository": {
