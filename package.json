@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
-    "test": "",
-    "build": ""
+    "test": "echo \"No test specified\" && exit 0",
+    "build": "npm install"
   },
   "repository": {
     "type": "git",

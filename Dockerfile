@@ -9,6 +9,7 @@ COPY ./package.json .
 COPY ./package-lock.json .
 COPY ./server.js .
 COPY ./config.js .
+COPY ./cache.js
 COPY ./swagger.yaml .
 
 RUN npm install
