@@ -1,16 +1,16 @@
 var NodeCache = require('node-cache');
 var myCache = new NodeCache();
 var md5 = require('md5');
-var ttl_secs = 600;
 
 module.exports = {
+    TTL_SECS_DEFAULT: 600,
     get: function(key, callback) {
         myCache.get(md5(key), (err, data) => {
             callback(err, data);
         })
     },
-    set: function(key, val, callback) {
-        myCache.set(md5(key), val, ttl_secs, (err, success) => {
+    set: function(key, val, ttl, callback) {
+        myCache.set(md5(key), val, ttl, (err, success) => {
             if(callback) {
                 callback(err, success);
             }
