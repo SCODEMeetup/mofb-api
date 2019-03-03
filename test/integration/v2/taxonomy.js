@@ -1,19 +1,18 @@
-const config = require('../../config');
-const server = require('../../server');
-
-process.env.NODE_ENV = config.test_env;
+const config = require('../../../config');
 process.env.PORT = config.test_port;
 
-const chai = require('chai');
-const chaiHttp = require('chai-http');
-const url = '/api/v1/taxonomy';
+const server = require('../../../server');
 
+const chai = require('chai');
 const should = chai.should();
+const chaiHttp = require('chai-http');
+const url = '/api/v2/taxonomy';
+
 const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-describe('Taxonomy V1', () => {
+describe('Taxonomy V2', () => {
     it('should GET taxonomies limit 100', (done) => {
         chai.request(server)
             .get(url)
@@ -30,20 +29,32 @@ describe('Taxonomy V1', () => {
             .get(`${url}/10`)
             .end((err, res) => {
                 res.should.have.status(200);
-                const tax = res.body[0];
-                tax.TAXON_ID.should.be.eql('10');
+                res.body.id.should.be.eql('10');
                 done();
             });
     });
 
-    it('should GET taxonomy with under basic needs category', (done) => {
+    it('should GET taxonomies under basic needs category', (done) => {
         chai.request(server)
             .get(`${url}/basic-needs`)
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('array');
                 res.body.forEach(tax => {
-                    expect(tax.TAXONOMY_CODE).to.match(/^B.*$/);
+                    expect(tax.code).to.match(/^B.*$/);
+                });
+                done();
+            });
+    });
+
+    it('should GET taxonomies under food category', (done) => {
+        chai.request(server)
+            .get(`${url}/food`)
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('array');
+                res.body.forEach(tax => {
+                    expect(tax.code).to.match(/^BD-.*$/);
                 });
                 done();
             });
@@ -56,7 +67,7 @@ describe('Taxonomy V1', () => {
                 res.should.have.status(200);
                 res.body.should.be.a('array');
                 res.body.forEach(tax => {
-                    expect(tax.TAXON_ID_SUBCAT_OF).to.eq('10');
+                    expect(tax.parentCategoryId).to.eq('10');
                 });
                 done();
             });

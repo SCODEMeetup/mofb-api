@@ -8,6 +8,11 @@ class AgencyService extends AbstractService {
         this.serviceTaxonomyResourceId = this.config.service_taxonomy_resource;
         this.agencyResourceId = this.config.agency_resource;
         this.uri = `${this.host}/api/3/action/datastore_search_sql?sql=SELECT * FROM "${this.agencyResourceId}" ${this.tableName} `;
+        this.joinQuery = `
+        INNER JOIN "${this.agencyServiceResourceId}" agency_service ON agency."AGENCY_ID" = agency_service."AGENCY_ID" 
+        INNER JOIN "${this.serviceTaxonomyResourceId}" service_taxonomy ON agency_service."AGENCY_ID" = service_taxonomy."AGENCY_ID" 
+        AND agency_service."LINE_NUMBER" = service_taxonomy."LINE_NUMBER"
+    `;
 
     }
 
@@ -15,12 +20,7 @@ class AgencyService extends AbstractService {
         let query = '';
         let filter = null;
         if (req.query.taxonomyId) {
-            query =
-                `
-                INNER JOIN "${this.agencyServiceResourceId}" agency_service ON agency."AGENCY_ID" = agency_service."AGENCY_ID" 
-                INNER JOIN "${this.serviceTaxonomyResourceId}" service_taxonomy ON agency_service."AGENCY_ID" = service_taxonomy."AGENCY_ID" 
-                AND agency_service."LINE_NUMBER" = service_taxonomy."LINE_NUMBER"
-            `;
+            query = this.joinQuery;
             filter = `service_taxonomy."TAXON_ID" IN (${req.query.taxonomyId})`;
         }
         query = this.uri + query;

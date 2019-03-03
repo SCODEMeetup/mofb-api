@@ -1,12 +1,30 @@
 const request = require("request");
-var cache = require('../../cache');
+const Cache = require('../../cache');
+/**
+ * Utility Service class for external requests
+ */
+class RequestUtils {
+    static instance() {
+        if(!this.INSTANCE) {
+            this.INSTANCE = new RequestUtils();
+            this.INSTANCE.cache = Cache.instance();
+        }
+        return this.INSTANCE;
+    }
 
-module.exports = {
+    /**
+     * Override cache for request utils
+     * @param {Cache} cache 
+     */
+    setCache(cache) {
+        this.cache = cache;
+    }
+
     /**
      * Gets paging params from request or sets defaults if not present
      * @param req Request
      */
-    getPagingParams: function (req) {
+    getPagingParams(req) {
         const limit = req.query.limit || 100;
         const pageNumber = req.query.pageNumber || 1;
 
@@ -15,29 +33,23 @@ module.exports = {
             offset,
             limit
         }
-    },
+    }
+
     /**
      * Handle request for list of objects
      * @param uri URI for request
      * @param res Response
      * @param mapper Maps data set to object
      */
-    getList: function (uri, res, mapper) {
-        cache.get(uri, (_err, val) => {
-            if (val) {
-                res.send(val);
-            }
-            else {
-                const options = getRequestOptions(uri);
-                const callBack = function (body) {
-                    const result = mapper ? mapper(body.result.records) : body.result.records;
-                    cache.set(uri, result, cache.TTL_SECS_DEFAULT);
-                    res.send(result);
-                }
-                sendRequest(options, res, callBack);
-            }
-        });
-    },
+    getList(uri, res, mapper) {
+        const cached = this.cache.get(uri);
+        if (cached) {
+            res.send(cached);
+        }
+        else {
+            this.handleRequest(uri, res, this.handleListResponse(uri, res, mapper));
+        }
+    }
 
     /**
      * Handle request for single object GET
@@ -45,26 +57,61 @@ module.exports = {
      * @param res Response
      * @param mapper Maps data set to object
      */
-    getObject: function (uri, res, mapper) {
-        cache.get(uri, (_err, val) => {
-            if (val) {
-                res.send(val);
+    getObject(uri, res, mapper) {
+        const cached = this.cache.get(uri);
+        if (cached) {
+            res.send(cached);
+        }
+        else {
+            this.handleRequest(uri, res, this.handleObjectResponse(uri, res, mapper));
+        }
+    }
+
+    /**
+     * Handles request
+     * @param {string} uri URI for request
+     * @param {Response} res Response object
+     * @param {Function} callBack Callback function
+     */
+    handleRequest(uri, res, callBack) {
+        const options = getRequestOptions(uri);
+        sendRequest(options, res, callBack);
+    }
+
+    /**
+     * Callback to handle requests for lists
+     * @param {string} uri URI for request
+     * @param {Response} res Response object
+     * @param {Function} mapper Mapper function for results
+     */
+    handleListResponse(uri, res, mapper) {
+        return body => {
+            const result = mapper ? mapper(body.result.records) : body.result.records;
+            this.cache.set(uri, result, this.cache.TTL_SECS_DEFAULT);
+            res.send(result);
+        };
+    }
+
+    /**
+     * Callback to handle requests for single objects
+     * @param {string} uri URI for request
+     * @param {Response} res Response object
+     * @param {Function} mapper Mapper function for result
+     */
+    handleObjectResponse(uri, res, mapper) {
+        return body => {
+            if (body.result.records.length === 0) {
+                res.status(404).send("No results for query");
+            } else {
+                const result = mapper(body.result.records);
+                this.cache.set(uri, result[0], this.cache.TTL_SECS_DEFAULT);
+                res.send(result[0]);
             }
-            else {
-                const options = getRequestOptions(uri);
-                sendRequest(options, res, function (body) {
-                    if (body.result.records.length === 0) {
-                        res.status(404).send("No results for query");
-                    } else {
-                        const result = mapper(body.result.records);
-                        cache.set(uri, result[0], cache.TTL_SECS_DEFAULT);
-                        res.send(result[0]);
-                    }
-                });
-            }
-        });
+        }
     }
 }
+
+module.exports = RequestUtils;
 
 function getRequestOptions(uri) {
     return {

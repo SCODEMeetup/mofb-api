@@ -1,9 +1,11 @@
-var cache = require('../../../../cache');
-var md5 = require('md5');
-var csv = require('csv');
-var fs = require('fs');
+var Cache = require('../../../../cache');
+var cache = Cache.instance();
 var filePath = 'extra/latLong.csv';
-var parse = csv.parse;
+var fs = require('fs');
+var md5 = require('md5');
+var parse = require('csv').parse;
+
+
 function LatLong(long, lat) {
     this.lat = lat;
     this.long = long;

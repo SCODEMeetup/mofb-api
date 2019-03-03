@@ -11,3 +11,7 @@
 node_modules
 yarn-error.log
 .history/
+
+# Code coverage
+.nyc_output
+/coverage
