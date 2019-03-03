@@ -19,10 +19,7 @@ app.use('/api/v1/location', locationRouterV1);
 
 app.use(require('./api/routes.js').getRoutes('v2', 'ckan'));
 
-
-
-app.listen(port)
+app.listen(port);
 
 console.log('Mid Ohio Food Bank RESTful API server started on: ' + port)
 
-module.exports = app

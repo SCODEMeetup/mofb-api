@@ -6,17 +6,13 @@ class Agency {
         this.taxonomyId = res.TAXON_ID;
     }
 
-    static getList(res) {
+    static get(res) {
         let agencyList = [];
         res.forEach(r => {
             const t = new Agency(r);
             agencyList.push(t);
         });
         return agencyList;
-    }
-
-    static getObject(res) {
-        return new Agency(res);
     }
 }
 

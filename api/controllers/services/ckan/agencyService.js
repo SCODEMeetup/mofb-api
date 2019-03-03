@@ -25,12 +25,12 @@ class AgencyService extends AbstractService {
         }
         query = this.uri + query;
         const queryString = this.queryUtils.getQueryString(req, query, filter, this.tableName);
-        this.requestUtils.getList(queryString, res, Agency.getList);
+        this.requestUtils.getList(queryString, res, Agency.get);
     }
 
     get(req, res) {
         const queryString = this.uri + this.queryUtils.setDefaultFilters(`agency."AGENCY_ID" = ${req.params.id}`, this.tableName);
-        this.requestUtils.getObject(queryString, res, Agency.getObject);
+        this.requestUtils.getObject(queryString, res, Agency.get);
     }
 }
 

@@ -1,4 +1,5 @@
 const request = require("request");
+var cache = require('../../cache');
 
 module.exports = {
     /**
@@ -22,12 +23,20 @@ module.exports = {
      * @param mapper Maps data set to object
      */
     getList: function (uri, res, mapper) {
-        const options = getRequestOptions(uri);
-        const callBack = function (body) {
-            const result = mapper ? mapper(body.result.records) : body.result.records;
-            res.send(result);
-        }
-        sendRequest(options, res, callBack);
+        cache.get(uri, (_err, val) => {
+            if (val) {
+                res.send(val);
+            }
+            else {
+                const options = getRequestOptions(uri);
+                const callBack = function (body) {
+                    const result = mapper ? mapper(body.result.records) : body.result.records;
+                    cache.set(uri, result);
+                    res.send(result);
+                }
+                sendRequest(options, res, callBack);
+            }
+        });
     },
 
     /**
@@ -37,16 +46,24 @@ module.exports = {
      * @param mapper Maps data set to object
      */
     getObject: function (uri, res, mapper) {
-        const options = getRequestOptions(uri);
-        sendRequest(options, res, function (body) {
-            if (body.result.records.length === 0) {
-                res.status(404).send("No results for query");
-            } else {
-                const result = mapper(body.result.records[0]);
-                res.send(result);
+        cache.get(uri, (_err, val) => {
+            if (val) {
+                res.send(val);
+            }
+            else {
+                const options = getRequestOptions(uri);
+                sendRequest(options, res, function (body) {
+                    if (body.result.records.length === 0) {
+                        res.status(404).send("No results for query");
+                    } else {
+                        const result = mapper(body.result.records);
+                        cache.set(result[0]);
+                        res.send(result[0]);
+                    }
+                });
             }
         });
-    },
+    }
 }
 
 function getRequestOptions(uri) {
