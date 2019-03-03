@@ -31,7 +31,7 @@ module.exports = {
                 const options = getRequestOptions(uri);
                 const callBack = function (body) {
                     const result = mapper ? mapper(body.result.records) : body.result.records;
-                    cache.set(uri, result);
+                    cache.set(uri, result, cache.TTL_SECS_DEFAULT);
                     res.send(result);
                 }
                 sendRequest(options, res, callBack);
@@ -57,7 +57,7 @@ module.exports = {
                         res.status(404).send("No results for query");
                     } else {
                         const result = mapper(body.result.records);
-                        cache.set(result[0]);
+                        cache.set(uri, result[0], cache.TTL_SECS_DEFAULT);
                         res.send(result[0]);
                     }
                 });
