@@ -5,8 +5,9 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
-    "test": "echo \"No test specified\" && exit 0",
-    "build": "npm install"
+    "test:integration": "nyc mocha \"test/integration/**/*.js\" --exit",
+    "test": "nyc --reporter=html --reporter=text mocha \"test/unit/**/*.js\" --exit",
+    "build": "npm install && npm run test"
   },
   "repository": {
     "type": "git",
@@ -43,7 +44,8 @@
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
     "mocha": "^5.2.0",
-    "nodemon": "^1.18.4"
+    "nodemon": "^1.18.4",
+    "nyc": "^13.3.0"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -53,6 +55,7 @@
     "node-cache": "^4.2.0",
     "nodemon": "^1.18.4",
     "request": "^2.88.0",
+    "sinon": "^7.2.6",
     "swagger-ui-express": "^4.0.1",
     "yamljs": "^0.3.0"
   }

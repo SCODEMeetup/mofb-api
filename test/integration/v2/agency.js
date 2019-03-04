@@ -1,19 +1,18 @@
-const config = require('../../config');
-const server = require('../../server');
-
-process.env.NODE_ENV = config.test_env;
+const config = require('../../../config');
 process.env.PORT = config.test_port;
 
-const chai = require('chai');
-const chaiHttp = require('chai-http');
-const url = '/api/v2/location';
+const server = require('../../../server');
 
+const chai = require('chai');
 const should = chai.should();
+
+const chaiHttp = require('chai-http');
+const url = '/api/v2/agency';
 
 chai.use(chaiHttp);
 
-describe('Locations V2', () => {
-    it('should GET locations limit 100', (done) => {
+describe('Agencies V2', () => {
+    it('should GET agencies limit 100', (done) => {
         chai.request(server)
             .get(url)
             .end((err, res) => {
@@ -24,7 +23,7 @@ describe('Locations V2', () => {
             });
     });
 
-    it('should GET locations with limit of 5', (done) => {
+    it('should GET agencies with limit of 5', (done) => {
         chai.request(server)
             .get(`${url}?limit=5`)
             .end((err, res) => {
@@ -35,35 +34,28 @@ describe('Locations V2', () => {
             });
     });
 
-    it('should GET locations with taxonomy ID of 10', (done) => {
+    it('should GET agencies with taxonomy ID of 10', (done) => {
         chai.request(server)
             .get(`${url}?taxonomyId=10`)
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('array');
-                done();
-            });
-    });
-
-    it('should GET locations with agency ID of 10', (done) => {
-        chai.request(server)
-            .get(`${url}?agencyId=10`)
-            .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.be.a('array');
-                res.body.forEach(location => {
-                    location.agencyId.should.eq('10');
+                res.body.forEach(agency => {
+                    agency.taxonomyId.should.eq('10');
                 });
                 done();
             });
     });
 
-    it('should GET location with ID of 7300 and service category 10', (done) => {
+    it('should GET agency with ID of 27600', (done) => {
         chai.request(server)
-            .get(`${url}/7300/service/10`)
+            .get(`${url}/27600`)
             .end((err, res) => {
+                if(err) {
+                    console.log(err);
+                }
                 res.should.have.status(200);
-                res.body.id.should.eq('7300');
+                res.body.id.should.eq('27600');
                 done();
             });
     });

@@ -1,6 +1,7 @@
 const Location = require("../../models/location");
 const AbstractService = require('../abstractService');
 const latLong = require('../csv/latLong');
+const QueryUtils = require('../../../utils/query');
 
 class LocationCkanService extends AbstractService {
     constructor() {
@@ -26,7 +27,7 @@ class LocationCkanService extends AbstractService {
         let filter = '';
         let requestBody = '';
         if (req.query.taxonomyId) {
-            requestBody = this.queryUtils.joinTables;
+            requestBody = QueryUtils.joinTables;
             filter = getFilters(filter, `service_taxonomy."TAXON_ID" IN (${req.query.taxonomyId})`);
         }
         if (req.query.agencyId) {
@@ -38,7 +39,7 @@ class LocationCkanService extends AbstractService {
     }
 
     get(req, res) {
-        let requestBody = this.query + this.queryUtils.joinTables;
+        let requestBody = this.query + QueryUtils.joinTables;
         const queryString = this.uri + requestBody +
             this.queryUtils.setDefaultFilters(`${this.tableName}."LOCATION_ID" = ${req.params.id} AND service_taxonomy."TAXON_ID" = ${req.params.serviceId}`, this.tableName);
         this.requestUtils.getObject(queryString, res, locationWithCoord(Location.get));
