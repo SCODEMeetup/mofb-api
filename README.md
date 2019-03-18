@@ -51,6 +51,9 @@ $ npm test
 3. If necessary, import the router file in server.js
 4. Create/update the swagger documentation (see swagger.yaml file)
 
+## Documentation
+   1. [Swagger documentation](https://mofb-api.appspot.com/api-docs/)
+
 ## Environment
 
 #### Travis CI for build
@@ -58,18 +61,19 @@ $ npm test
 2. You can check the status of Travis CI build in your Pull Request.  
 
 #### GCP (google cloud platform), automated app engine deployment
-
-1. Swagger documentation - https://mofb-api.appspot.com/api-docs/ 
-2. Existing endpoints (please see the swagger documentation for more details)
+1. Some examples (please visit the swagger documentation for more details)
    1. Taxonomies - 
-       1. all - https://mofb-api.appspot.com/api/v1/taxonomy, 
-       2. by id - https://mofb-api.appspot.com/api/v1/taxonomy/{id}, e.g. 10
-       3. *Immediate* subcategory of a taxonomy id (immediate children) - https://mofb-api.appspot.com/api/v1/taxonomy/{id}/children, e.g. 10
-       4. "Basic needs" taxonomy and *all* its sub categories - https://mofb-api.appspot.com/api/v1/taxonomy/basic-needs
+       1. all - https://mofb-api.appspot.com/api/v2/taxonomy, 
+       2. by id - https://mofb-api.appspot.com/api/v2/taxonomy/{id}, e.g. 10
+       3. *Immediate* subcategory of a taxonomy id (immediate children) - https://mofb-api.appspot.com/api/v2/taxonomy/{id}/children, e.g. 10
+       4. "Food" taxonomy and *all* its sub categories - https://mofb-api.appspot.com/api/v2/taxonomy/food
    2. Agencies - 
-       1. all - https://mofb-api.appspot.com/api/v1/agency
-       2. by agency id - https://mofb-api.appspot.com/api/v1/agency/{id}, e.g. 5120
-       3. by taxonomy id = https://mofb-api.appspot.com/api/v1/agency?taxonomyId=11 
+       1. all - https://mofb-api.appspot.com/api/v2/agency
+       2. by agency id - https://mofb-api.appspot.com/api/v2/agency/{id}, e.g. 5120
+       3. by taxonomy id - https://mofb-api.appspot.com/api/v2/agency?taxonomyId=11
+   3. Location -
+       1. by multiple agencies and taxonomy id https://mofb-api.appspot.com/api/v2/location?agencyId=39650,39651&taxonomyId=12
+       2. by location and service id, https://mofb-api.appspot.com/api/v2/location/39651/service/12 
    
 ## Data
 
