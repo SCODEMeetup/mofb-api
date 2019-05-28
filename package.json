@@ -7,7 +7,7 @@
     "start": "nodemon server.js",
     "test:integration": "nyc mocha \"test/integration/**/*.js\" --exit",
     "test": "nyc --reporter=html --reporter=text mocha \"test/unit/**/*.js\" --exit",
-    "build": "npm install && npm run test"
+    "build": "npm install"
   },
   "repository": {
     "type": "git",
