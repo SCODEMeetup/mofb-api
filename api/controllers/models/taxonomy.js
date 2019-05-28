@@ -1,10 +1,10 @@
 class Taxonomy {
     constructor(res) {
-        this.id = res.TAXON_ID;
-        this.code = res.TAXONOMY_CODE;
-        this.description = res.DESCRIPTION;
-        this.level = res.TAXONOMY_LEVEL;
-        this.parentCategoryId = res.TAXON_ID_SUBCAT_OF;
+        this.id = res.taxon_id;
+        this.code = res.taxonomy_code;
+        this.description = res.description;
+        this.level = res.taxonomy_level;
+        this.parentCategoryId = res.taxon_id_subcat_of;
     }
 
     static get(res) {

@@ -74,6 +74,7 @@ class RequestUtils {
      * @param {Function} callBack Callback function
      */
     handleRequest(uri, res, callBack) {
+    console.log(uri)
         const options = getRequestOptions(uri);
         sendRequest(options, res, callBack);
     }
@@ -86,7 +87,7 @@ class RequestUtils {
      */
     handleListResponse(uri, res, mapper) {
         return body => {
-            const result = mapper ? mapper(body.result.records) : body.result.records;
+            const result = mapper ? mapper(body) : body;
             this.cache.set(uri, result, this.cache.TTL_SECS_DEFAULT);
             res.send(result);
         };
@@ -100,10 +101,10 @@ class RequestUtils {
      */
     handleObjectResponse(uri, res, mapper) {
         return body => {
-            if (body.result.records.length === 0) {
+            if (body.length === 0) {
                 res.status(404).send("No results for query");
             } else {
-                const result = mapper(body.result.records);
+                const result = mapper(body);
                 this.cache.set(uri, result[0], this.cache.TTL_SECS_DEFAULT);
                 res.send(result[0]);
             }
@@ -128,7 +129,7 @@ function getRequestOptions(uri) {
 function sendRequest(options, res, callback) {
     request(options, function (_error, response, body) {
         console.log("statusCode:", response && response.statusCode);
-        if (!body.success) {
+        if (response.statusCode != 200) {
             handleError(body, res);
         } else {
             callback(body);
