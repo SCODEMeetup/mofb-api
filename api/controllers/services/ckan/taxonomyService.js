@@ -5,7 +5,7 @@ class TaxonomyCkanService extends AbstractService {
     constructor() {
         super("taxonomy");
         this.resourceId = this.config.taxonomy_resource;
-        this.uri = `${this.host}/api/3/action/datastore_search_sql?sql=SELECT * FROM "${this.resourceId}" ${this.tableName} `;
+        this.uri = `${this.host}/api/v1/organization/handson_central_ohio/dataset/${this.resourceId}/query?_format=json`;
 
     }
 

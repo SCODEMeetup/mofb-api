@@ -25,9 +25,9 @@ class QueryUtils {
      * @param filterString 
      */
     setDefaultFilters(filterString, tableName) {
-        let returnUri = ` WHERE ${tableName}."ACTIVE_FLAG" = 'Y'`;
+        let returnUri = `&${tableName}."ACTIVE_FLAG" = 'Y'`;
         if (filterString) {
-            returnUri = returnUri + ` AND ${filterString}`;
+            returnUri = returnUri + ` &where= ${filterString}`;
         }
         return returnUri;
     }
@@ -46,7 +46,7 @@ class QueryUtils {
         } = this.requestUtils.getPagingParams(req);
         let returnUri = uri + this.setDefaultFilters(filterString, tableName);
 
-        return returnUri + ` OFFSET ${offset} ROWS LIMIT ${limit}`;
+        return returnUri + ` OFFSET ${offset}&limit=${limit}`;
     }
 }
 
