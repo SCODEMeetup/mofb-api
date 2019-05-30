@@ -25,9 +25,9 @@ class QueryUtils {
      * @param filterString 
      */
     setDefaultFilters(filterString, tableName) {
-        let returnUri = `&${tableName}."ACTIVE_FLAG" = 'Y'`;
+        let returnUri = `&where=active_flag ='Y'`;
         if (filterString) {
-            returnUri = returnUri + ` &where= ${filterString}`;
+            returnUri = returnUri + ` AND ${filterString}`;
         }
         return returnUri;
     }
@@ -46,7 +46,7 @@ class QueryUtils {
         } = this.requestUtils.getPagingParams(req);
         let returnUri = uri + this.setDefaultFilters(filterString, tableName);
 
-        return returnUri + ` OFFSET ${offset}&limit=${limit}`;
+        return returnUri + `&limit=${limit}`;
     }
 }
 
@@ -54,9 +54,9 @@ class QueryUtils {
  * SQL Join for service categories to agencies
  */
 QueryUtils.joinTables = `
-    INNER JOIN "${agencyServiceResourceId}" agency_service ON service_location."AGENCY_ID" = agency_service."AGENCY_ID" 
-    AND service_location."LINE_NUMBER" = agency_service."LINE_NUMBER" 
-    INNER JOIN "${serviceTaxonomyResourceId}" service_taxonomy ON agency_service."AGENCY_ID" = service_taxonomy."AGENCY_ID" 
-    AND agency_service."LINE_NUMBER" = service_taxonomy."LINE_NUMBER"
+    INNER JOIN "${agencyServiceResourceId}" agency_service ON service_location."agency_id" = agency_service."agency_id"
+    AND service_location."line_number" = agency_service."line_number"
+    INNER JOIN "${serviceTaxonomyResourceId}" service_taxonomy ON agency_service."agency_id" = service_taxonomy."agency_id"
+    AND agency_service."line_number" = service_taxonomy."line_number"
     `;
 module.exports = QueryUtils;

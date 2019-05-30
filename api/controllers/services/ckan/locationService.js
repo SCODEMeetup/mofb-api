@@ -8,17 +8,17 @@ class LocationCkanService extends AbstractService {
         super("agency_location");
         this.agencyLocationResourceId = this.config.agency_location_resource;
         this.serviceLocationResourceId = this.config.service_location_resource;
-        this.uri = `${this.host}/api/3/action/datastore_search_sql?sql=`;
+        this.uri = `${this.host}/api/v1/organization/handson_central_ohio/dataset/${this.agencyLocationResourceId}/query?_format=json`;
 
         this.queryFields = `
-    ${this.tableName}."LOCATION_ID", ${this.tableName}."LOCATION_NUMBER", ${this.tableName}."STREET_1", ${this.tableName}."STREET_2", ${this.tableName}."ZIP", ${this.tableName}."NAME",
-    ${this.tableName}."PHONE_AREA_CODE", ${this.tableName}."PHONE_NUMBER", ${this.tableName}."PHONE_EXTENSION", ${this.tableName}."HANDICAP_ACCESS", 
-    service_location."HOURS"
+    ${this.tableName}."location_id", ${this.tableName}."location_number", ${this.tableName}."street_1", ${this.tableName}."street_2", ${this.tableName}."zip", ${this.tableName}."name",
+    ${this.tableName}."phone_area_code", ${this.tableName}."phone_number", ${this.tableName}."phone_extension", ${this.tableName}."handicap_access",
+    service_location."hours"
 `;
         this.query = `
     SELECT ${this.queryFields} FROM "${this.agencyLocationResourceId}" ${this.tableName} 
-    INNER JOIN "${this.serviceLocationResourceId}" service_location ON ${this.tableName}."AGENCY_ID" = service_location."AGENCY_ID"
-    AND ${this.tableName}."LOCATION_ID" = service_location."LOCATION_ID"
+    INNER JOIN "${this.serviceLocationResourceId}" service_location ON ${this.tableName}."agency_id" = service_location."agency_id"
+    AND ${this.tableName}."location_id" = service_location."location_id"
 `;
 
     }
@@ -28,10 +28,10 @@ class LocationCkanService extends AbstractService {
         let requestBody = '';
         if (req.query.taxonomyId) {
             requestBody = QueryUtils.joinTables;
-            filter = getFilters(filter, `service_taxonomy."TAXON_ID" IN (${req.query.taxonomyId})`);
+            filter = getFilters(filter, `service_taxonomy."taxon_id" IN (${req.query.taxonomyId})`);
         }
         if (req.query.agencyId) {
-            filter = getFilters(filter, `${this.tableName}."AGENCY_ID" IN (${req.query.agencyId})`);
+            filter = getFilters(filter, `${this.tableName}."agency_id" IN (${req.query.agencyId})`);
         }
         requestBody = this.uri + this.query + requestBody;
         const queryString = this.queryUtils.getQueryString(req, requestBody, filter, this.tableName);
@@ -41,7 +41,7 @@ class LocationCkanService extends AbstractService {
     get(req, res) {
         let requestBody = this.query + QueryUtils.joinTables;
         const queryString = this.uri + requestBody +
-            this.queryUtils.setDefaultFilters(`${this.tableName}."LOCATION_ID" = ${req.params.id} AND service_taxonomy."TAXON_ID" = ${req.params.serviceId}`, this.tableName);
+            this.queryUtils.setDefaultFilters(`${this.tableName}."location_id" = ${req.params.id} AND service_taxonomy."taxon_id" = ${req.params.serviceId}`, this.tableName);
         this.requestUtils.getObject(queryString, res, locationWithCoord(Location.get));
     }
 }
@@ -56,7 +56,7 @@ function getFilters(existingFilters, addFilter) {
 function locationWithCoord(mapper) {
     return body => {
         body.forEach(b => {
-            latLong.getLatLong(b.LOCATION_ID, b.LOCATION_NUMBER, (err, res) => {
+            latLong.getLatLong(b.location_id, b.location_number, (err, res) => {
                 if(res) {
                     b.lat = res.lat;
                     b.long = res.long;

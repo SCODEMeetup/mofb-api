@@ -1,9 +1,9 @@
 class Agency {
     constructor(res) {
-        this.id = res.AGENCY_ID;
-        this.name = res.NAME;
-        this.locationId = res.LOCATION_ID;
-        this.taxonomyId = res.TAXON_ID;
+        this.id = String(res.agency_id)
+        this.name = res.name
+        this.locationId = String(res.location_id)
+        this.taxonomyId = res.taxon_id
     }
 
     static get(res) {
