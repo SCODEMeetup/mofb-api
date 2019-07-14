@@ -74,7 +74,6 @@ class RequestUtils {
      * @param {Function} callBack Callback function
      */
     handleRequest(uri, res, callBack) {
-        console.log('uri -',uri)
         const options = getRequestOptions(uri);
         sendRequest(options, res, callBack);
     }
@@ -129,7 +128,6 @@ function getRequestOptions(uri) {
 function sendRequest(options, res, callback) {
     request(options, function (_error, response, body) {
 
-        console.log("statusCode:", response && response.statusCode);
         if (response.statusCode != 200) {
             handleError(body, res);
         } else {

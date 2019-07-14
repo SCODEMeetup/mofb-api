@@ -7,11 +7,11 @@ class AgencyService extends AbstractService {
         this.agencyServiceResourceId = this.config.agency_service_resource;
         this.serviceTaxonomyResourceId = this.config.service_taxonomy_resource;
         this.agencyResourceId = this.config.agency_resource;
-        this.uri = `${this.host}/api/v1/organization/handson_central_ohio/dataset/${this.agencyResourceId}/query?_format=json`;
+        this.uri = `${this.host}/api/3/action/datastore_search_sql?sql=SELECT * FROM "${this.agencyResourceId}" ${this.tableName} `;
         this.joinQuery = `
-        &where= INNER JOIN "${this.agencyServiceResourceId}" agency_service ON agency."agency_id" = agency_service."agency_id"
-        INNER JOIN "${this.serviceTaxonomyResourceId}" service_taxonomy ON agency_service."agency_id" = service_taxonomy."agency_id"
-        AND agency_service."line_number" = service_taxonomy."line_number"
+        INNER JOIN "${this.agencyServiceResourceId}" agency_service ON agency."AGENCY_ID" = agency_service."AGENCY_ID"
+        INNER JOIN "${this.serviceTaxonomyResourceId}" service_taxonomy ON agency_service."AGENCY_ID" = service_taxonomy."AGENCY_ID"
+        AND agency_service."LINE_NUMBER" = service_taxonomy."LINE_NUMBER"
     `;
 
     }
@@ -21,7 +21,7 @@ class AgencyService extends AbstractService {
         let filter = null;
         if (req.query.taxonomyId) {
             query = this.joinQuery;
-            filter = `service_taxonomy."taxon_id" IN (${req.query.taxonomyId})`;
+            filter = `service_taxonomy."TAXON_ID" IN (${req.query.taxonomyId})`;
         }
         query = this.uri + query;
         const queryString = this.queryUtils.getQueryString(req, query, filter, this.tableName);
@@ -29,7 +29,7 @@ class AgencyService extends AbstractService {
     }
 
     get(req, res) {
-        const queryString = this.uri + this.queryUtils.setDefaultFilters(`"agency_id" = ${req.params.id}`, this.tableName);
+        const queryString = this.uri + this.queryUtils.setDefaultFilters(`agency."AGENCY_ID" = ${req.params.id}`, this.tableName);
         this.requestUtils.getObject(queryString, res, Agency.get);
     }
 }

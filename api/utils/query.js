@@ -50,13 +50,4 @@ class QueryUtils {
     }
 }
 
-/**
- * SQL Join for service categories to agencies
- */
-QueryUtils.joinTables = `
-    INNER JOIN "${agencyServiceResourceId}" agency_service ON service_location."agency_id" = agency_service."agency_id"
-    AND service_location."line_number" = agency_service."line_number"
-    INNER JOIN "${serviceTaxonomyResourceId}" service_taxonomy ON agency_service."agency_id" = service_taxonomy."agency_id"
-    AND agency_service."line_number" = service_taxonomy."line_number"
-    `;
 module.exports = QueryUtils;
