@@ -28,8 +28,11 @@ class LocationService extends AbstractService {
 
         query = this.uri
         let queryString = this.queryUtils.getQueryString(req, query, filter, this.tableName)
+
+        const agencyIds = `${req.query.agencyId}`
+        const uniqueAgencyIds = unique(agencyIds.split(','))
         if (req.query.agencyId) {
-            queryString = queryString + `& where "agency_id" = (${req.query.agencyId})`
+            queryString = queryString + `& where "agency_id" = (${uniqueAgencyIds})`
         }
         this.requestUtils.getList(queryString, res, locationWithCoord(Location.get))
     }
@@ -61,5 +64,17 @@ function locationWithCoord(mapper) {
         return mapper(body);
     }
 }
+
+/**
+ * Remove duplicate array elements
+ * @param arr Array with duplicates
+ * @return unique array
+ */
+function unique(arr) {
+  const u = {};
+  return arr.filter((v) => {
+    return u[v] = (v !== undefined && !u.hasOwnProperty(v));
+  });
+};
 
 module.exports = LocationService;

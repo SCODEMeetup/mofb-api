@@ -25,7 +25,7 @@ class RequestUtils {
      * @param req Request
      */
     getPagingParams(req) {
-        const limit = req.query.limit || 100;
+        const limit = req.query.limit || 200;
         const pageNumber = req.query.pageNumber || 1;
 
         const offset = limit * (pageNumber - 1);
