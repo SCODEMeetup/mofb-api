@@ -8,13 +8,13 @@ class Taxonomy {
     }
 
     static get(res) {
-        let taxonomyList = [];
+        let taxonomyList = []
         res.forEach(r => {
-            const t = new Taxonomy(r);
-            taxonomyList.push(t);
-        });
-        return taxonomyList;
+            const t = new Taxonomy(r)
+            taxonomyList.push(t)
+        })
+        return taxonomyList
     }
 }
 
-module.exports = Taxonomy;
+module.exports = Taxonomy

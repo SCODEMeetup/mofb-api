@@ -7,13 +7,13 @@ class Agency {
     }
 
     static get(res) {
-        let agencyList = [];
+        let agencyList = []
         res.forEach(r => {
-            const t = new Agency(r);
-            agencyList.push(t);
-        });
-        return agencyList;
+            const t = new Agency(r)
+            agencyList.push(t)
+        })
+        return agencyList
     }
 }
 
-module.exports = Agency;
+module.exports = Agency
