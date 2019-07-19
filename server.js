@@ -17,7 +17,7 @@ app.use('/api/v1/taxonomy', taxonomyRouterV1);
 app.use('/api/v1/agency', agencyRouterV1);
 app.use('/api/v1/location', locationRouterV1);
 
-app.use(require('./api/routes.js').getRoutes('v2', 'ckan'));
+app.use(require('./api/routes.js').getRoutes('v2', 'scosv2'));
 
 app.listen(port);
 

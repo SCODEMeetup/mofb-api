@@ -84,18 +84,25 @@ $ npm test
    
 ## Data
 
-1. taxonomy.csv: This dataset explains the taxonomy codes applicable to different types of
+1. Taxonomy: This dataset explains the taxonomy codes applicable to different types of
    services
-   https://ckan.smartcolumbusos.com/dataset/food-pantry-and-user-data/resource/371dd944-411c-4851-a065-9f3f605ddfb9
-2. agency.csv: This dataset identifies the locations of agencies across Central Ohio region
-   https://ckan.smartcolumbusos.com/dataset/food-pantry-and-user-data/resource/570a8e02-fb0e-4cee-895b-3b32bd740650
-3. service_taxonomy.csv : This dataset presents the details about the taxonomy codes applicable
+   https://discovery.smartcolumbusos.com/dataset/handson_central_ohio/371dd944_411c_4851_a065_9f3f605ddfb9
+2. Agency: 
+   https://discovery.smartcolumbusos.com/dataset/handson_central_ohio/6425f64b_f162_4cd4_b271_5038b6752df5  
+3. Agency Location:
+   https://discovery.smartcolumbusos.com/dataset/handson_central_ohio/570a8e02_fb0e_4cee_895b_3b32bd740650
+4. Service Location: This dataset contains additional information about the service locations, such as hours of operation:
+   https://discovery.smartcolumbusos.com/dataset/handson_central_ohio/ec24773c_7cff_4589_9e2f_bcdeb5cdfd48  
+5. Service Taxonomy: This dataset presents the details about the taxonomy codes applicable
    to each agency. In other words, services offered at each agency are presented
-   https://ckan.smartcolumbusos.com/dataset/food-pantry-and-user-data/resource/2a919af7-12d3-47a4-b86a-56692e2e1623
-4. service_location.csv : This dataset contains additional information about the service locations,
-   such as hours of operation:
-   https://ckan.smartcolumbusos.com/dataset/b0390b58-35c9-45e8-8a2d-d2472b20d65f/resource/ec24773c-7cff-4589-9e2f-bcdeb5cdfd48/download/service_location.csv
-5. Images
+   https://discovery.smartcolumbusos.com/dataset/handson_central_ohio/2a919af7_12d3_47a4_b86a_56692e2e1623
+6. Agency Service: 
+   https://discovery.smartcolumbusos.com/dataset/handson_central_ohio/49b19dab_a7a8_4049_add2_7a0a1f0cce07
+7. Agency Consolidated: As the SCOS version doesn't support joining multiple datasets (per July 2019) we loaded a consolidated dataset that combines  agency, agency_service and service_taxonomy
+   https://discovery.smartcolumbusos.com/dataset/handson_central_ohio/agency_consolidated  
+8. Location Consolidated: As the SCOS version doesn't support joining multiple datasets (per July 2019) we loaded a consolidated dataset that combines agency_location, service_location, agency_service, service_taxonomy
+   https://discovery.smartcolumbusos.com/dataset/handson_central_ohio/location_consolidated   
+7. Images
 
    1. ![Services aka Taxonomies with subcategories as graph](/extra/services-taxanomy-hierarchy.png)
    2. ![Services aka Taxonomies with subcategories as table](/extra/services-hierarchy-table.png)

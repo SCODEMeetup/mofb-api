@@ -69,6 +69,7 @@ paths:
           schemea:
             type: integer
             format: int64
+            example: 5120
       responses:
         "200":
           description: "Successfully queries the smart city datasets and returns the results"
@@ -142,6 +143,22 @@ paths:
         "200":
           description: "Successfully queries the smart city datasets and returns the results"
 
+  /agency?taxonomyId={}:
+    get:
+      tags:
+        - "Agencies"
+      summary: "Returns agency record(s) for a given taxonomy"
+      parameters:
+        - in: query
+          name: taxonomyId
+          required: true
+          description: "The taxonomy id"
+          schemea:
+            type: integer
+      responses:
+        "200":
+          description: "Successfully queries the smart city datasets and returns the results"
+
   /location:
     get:
       tags:
@@ -183,6 +200,28 @@ paths:
       responses:
         "200":
           description: "Successfully queries the smart city datasets and returns the results"
+  /location?taxonomyId={}&agencyId={}:
+    get:
+      tags:
+      - "Locations"
+      summary: "Returns Location record for the given taxonomy ID and service ID"
+      parameters:
+      - name: taxonomyId
+        in: query
+        required: true
+        description: "The taxonomy id"
+        schemea:
+          type: integer
+      - name: agencyId
+        in: query
+        required: true
+        description: "The agency id, you can pass comma separate multiple values too"
+        schemea:
+          type: integer
+      responses:
+        "200":
+          description: "Successfully queries the smart city datasets and returns the results"
+
   /location/{locationId}/service/{serviceId}:
     get:
       tags:

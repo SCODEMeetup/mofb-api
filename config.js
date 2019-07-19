@@ -3,12 +3,12 @@ const config = {
     test_port: 3001,
     development: {
         host: "https://data.smartcolumbusos.com",
-        agency_location_resource: "570a8e02-fb0e-4cee-895b-3b32bd740650",
-        service_location_resource: "ec24773c-7cff-4589-9e2f-bcdeb5cdfd48",
+        agency_location_resource: "570a8e02_fb0e_4cee_895b_3b32bd740650",
+        service_location_resource: "ec24773c_7cff_4589_9e2f_bcdeb5cdfd48",
         taxonomy_resource: "371dd944_411c_4851_a065_9f3f605ddfb9",
-        service_taxonomy_resource: "2a919af7-12d3-47a4-b86a-56692e2e1623",
-        agency_service_resource: "49b19dab-a7a8-4049-add2-7a0a1f0cce07",
-        agency_resource: "6425f64b-f162-4cd4-b271-5038b6752df5"
+        service_taxonomy_resource: "2a919af7_12d3_47a4_b86a_56692e2e1623",
+        agency_service_resource: "49b19dab_a7a8_4049_add2_7a0a1f0cce07",
+        agency_resource: "6425f64b_f162_4cd4_b271_5038b6752df5"
     },
     test: {
         host: "testHost",

@@ -9,8 +9,8 @@ class AgencyService extends AbstractService {
         this.agencyResourceId = this.config.agency_resource;
         this.uri = `${this.host}/api/3/action/datastore_search_sql?sql=SELECT * FROM "${this.agencyResourceId}" ${this.tableName} `;
         this.joinQuery = `
-        INNER JOIN "${this.agencyServiceResourceId}" agency_service ON agency."AGENCY_ID" = agency_service."AGENCY_ID" 
-        INNER JOIN "${this.serviceTaxonomyResourceId}" service_taxonomy ON agency_service."AGENCY_ID" = service_taxonomy."AGENCY_ID" 
+        INNER JOIN "${this.agencyServiceResourceId}" agency_service ON agency."AGENCY_ID" = agency_service."AGENCY_ID"
+        INNER JOIN "${this.serviceTaxonomyResourceId}" service_taxonomy ON agency_service."AGENCY_ID" = service_taxonomy."AGENCY_ID"
         AND agency_service."LINE_NUMBER" = service_taxonomy."LINE_NUMBER"
     `;
 

@@ -25,7 +25,7 @@ class RequestUtils {
      * @param req Request
      */
     getPagingParams(req) {
-        const limit = req.query.limit || 100;
+        const limit = req.query.limit || 500;
         const pageNumber = req.query.pageNumber || 1;
 
         const offset = limit * (pageNumber - 1);
@@ -74,7 +74,6 @@ class RequestUtils {
      * @param {Function} callBack Callback function
      */
     handleRequest(uri, res, callBack) {
-    console.log(uri)
         const options = getRequestOptions(uri);
         sendRequest(options, res, callBack);
     }
@@ -128,7 +127,7 @@ function getRequestOptions(uri) {
 
 function sendRequest(options, res, callback) {
     request(options, function (_error, response, body) {
-        console.log("statusCode:", response && response.statusCode);
+
         if (response.statusCode != 200) {
             handleError(body, res);
         } else {
@@ -138,10 +137,7 @@ function sendRequest(options, res, callback) {
 }
 
 function handleError(body, response) {
-    if (body.error) {
-        Object.keys(body.error).forEach(key => {
-            console.log(key + ": " + body.error[key]);
-        });
+    if (body) {
         response.status(400).send("Could not complete request");
     } else {
         response.status(500).send("Internal server error");

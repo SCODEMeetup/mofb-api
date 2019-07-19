@@ -12,11 +12,11 @@ class LocationCkanService extends AbstractService {
 
         this.queryFields = `
     ${this.tableName}."LOCATION_ID", ${this.tableName}."LOCATION_NUMBER", ${this.tableName}."STREET_1", ${this.tableName}."STREET_2", ${this.tableName}."ZIP", ${this.tableName}."NAME",
-    ${this.tableName}."PHONE_AREA_CODE", ${this.tableName}."PHONE_NUMBER", ${this.tableName}."PHONE_EXTENSION", ${this.tableName}."HANDICAP_ACCESS", 
+    ${this.tableName}."PHONE_AREA_CODE", ${this.tableName}."PHONE_NUMBER", ${this.tableName}."PHONE_EXTENSION", ${this.tableName}."HANDICAP_ACCESS",
     service_location."HOURS"
 `;
         this.query = `
-    SELECT ${this.queryFields} FROM "${this.agencyLocationResourceId}" ${this.tableName} 
+    SELECT ${this.queryFields} FROM "${this.agencyLocationResourceId}" ${this.tableName}
     INNER JOIN "${this.serviceLocationResourceId}" service_location ON ${this.tableName}."AGENCY_ID" = service_location."AGENCY_ID"
     AND ${this.tableName}."LOCATION_ID" = service_location."LOCATION_ID"
 `;
