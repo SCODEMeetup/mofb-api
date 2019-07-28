@@ -46,7 +46,7 @@ class QueryUtils {
         } = this.requestUtils.getPagingParams(req)
         let returnUri = uri + this.setDefaultFilters(filterString, tableName)
 
-        return returnUri + ` & limit=${limit}`
+        return returnUri + ` &limit=${limit}`
     }
 }
 
