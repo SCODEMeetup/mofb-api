@@ -31,7 +31,7 @@ class TaxonomyService extends AbstractService {
     }
 
     getChildren(req, res) {
-        const queryString = this.uri + this.queryUtils.setDefaultFilters(`"taxon_id_subcat_of" IN (${req.params.id})`, this.tableName)
+        const queryString = this.uri + this.queryUtils.setDefaultFilters(`"taxon_id_subcat_of" IN (\'${req.params.id}\')`, this.tableName)
         this.requestUtils.getList(queryString, res, Taxonomy.get)
     }
 }
