@@ -1,5 +1,5 @@
 # Community Service Locator API
-1. API site: https://mofb-api.appspot.com/api/v2/taxonomy
+1. API site: https://mofb-api.appspot.com/api-docs/
 1. UI Site: https://scode-test.appspot.com/
 2. Community services repos:
     1. UI: https://github.com/SCODEMeetup/community-services-locator-ui
