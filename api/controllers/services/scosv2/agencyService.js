@@ -17,13 +17,13 @@ class AgencyService extends AbstractService {
             filter = `"taxon_id" = (${req.query.taxonomyId})`
         }
         query = this.uri
-        const queryString = this.queryUtils.getQueryString(req, query, filter, this.tableName)
+        const queryString = this.queryUtils.getQueryString(req, query, filter)
         this.requestUtils.getList(queryString, res, Agency.get)
 
     }
 
     get(req, res) {
-        const queryString = this.uri + this.queryUtils.setDefaultFilters(`"agency_id" = ${req.params.id}`, this.tableName)
+        const queryString = this.uri + this.queryUtils.setDefaultFilters(`"agency_id" = ${req.params.id}`)
         this.requestUtils.getObject(queryString, res, Agency.get)
     }
 }

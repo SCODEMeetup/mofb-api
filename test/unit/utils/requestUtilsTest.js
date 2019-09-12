@@ -25,7 +25,7 @@ describe('Request Utils', () => {
 
     it('should get paging params default', () => {
         const paging = utils.getPagingParams({ query: {} });
-        expect(paging).to.eql({ offset: 0, limit: 100 });
+        expect(paging).to.eql({ offset: 0, limit: 500 });
     });
 
     it('should get paging params with input', () => {
@@ -70,14 +70,14 @@ describe('Request Utils', () => {
 
     it('should handle object responses', () => {
         const objectHandler = utils.handleObjectResponse('testUri', res, body => ['test']);
-        objectHandler({ result: { records: ['test']}});
+        objectHandler(['test']);
         expect(cacheStub.set.args).to.eql([['testUri', 'test', 600]]);
         expect(responseStub.args).to.eql([['test']]);
     });
 
     it('should handle object responses no response', () => {
         const objectHandler = utils.handleObjectResponse('testUri', res, body => ['test']);
-        objectHandler({ result: { records: []}});
+        objectHandler([]);
         expect(cacheStub.set.notCalled).to.be.true;
         expect(responseStub.args).to.eql([['No results for query']]);
     });

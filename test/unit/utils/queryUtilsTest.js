@@ -13,17 +13,17 @@ describe('Query Utils', () => {
     queryUtils.setRequestUtils(requestUtilStub);
 
     it('should set default filters no filter string', () => {
-        const query = queryUtils.setDefaultFilters(null, 'test table');
-        expect(query).to.equal(' WHERE test table."ACTIVE_FLAG" = \'Y\'');
+        const query = queryUtils.setDefaultFilters(null);
+        expect(query).to.equal('&where=active_flag =\'Y\'');
     });
 
     it('should set default filters with filter string', () => {
-        const query = queryUtils.setDefaultFilters('filters', 'test table');
-        expect(query).to.equal(' WHERE test table."ACTIVE_FLAG" = \'Y\' AND filters');
+        const query = queryUtils.setDefaultFilters('filters');
+        expect(query).to.equal('&where=active_flag =\'Y\' AND filters');
     });
 
     it('should set query string', () => {
-        const query = queryUtils.getQueryString(null, 'testUri', 'testFilterString', 'testTableName')
-        expect(query).to.equal('testUri WHERE testTableName."ACTIVE_FLAG" = \'Y\' AND testFilterString OFFSET 0 ROWS LIMIT 10');
+        const query = queryUtils.getQueryString(null, 'testUri', 'testFilterString')
+        expect(query).to.equal('testUri&where=active_flag =\'Y\' AND testFilterString &limit=10');
     });
 })

@@ -24,7 +24,7 @@ class QueryUtils {
      * Set active flag to all queries
      * @param filterString 
      */
-    setDefaultFilters(filterString, tableName) {
+    setDefaultFilters(filterString) {
         let returnUri = `&where=active_flag ='Y'`
         if (filterString) {
             returnUri = returnUri + ` AND ${filterString}`
@@ -39,12 +39,12 @@ class QueryUtils {
      * @param filterString any additional filters
      * @param tableName Name of primary table in query
      */
-    getQueryString(req, uri, filterString, tableName) {
+    getQueryString(req, uri, filterString) {
         const {
             offset,
             limit
         } = this.requestUtils.getPagingParams(req)
-        let returnUri = uri + this.setDefaultFilters(filterString, tableName)
+        let returnUri = uri + this.setDefaultFilters(filterString)
 
         return returnUri + ` &limit=${limit}`
     }
