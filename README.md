@@ -1,11 +1,11 @@
 # Community Service Locator API
 1. API site: https://mofb-api.appspot.com/api-docs/
-1. UI Site: https://scode-test.appspot.com/
-2. Community services repos:
+2. UI Site: https://scode-test.appspot.com/
+3. Community services repos:
     1. UI: https://github.com/SCODEMeetup/community-services-locator-ui
     2. API: https://github.com/SCODEMeetup/mofb-api
-3. Project Board: https://github.com/orgs/SCODEMeetup/projects/8
-4. [Project Introduction](https://scodemeetup.github.io/locator-jekyll/)
+4. Project Board: https://github.com/orgs/SCODEMeetup/projects/8
+5. [Project Introduction](https://scodemeetup.github.io/locator-jekyll/)
 
 ## Product Description and requirements
 
