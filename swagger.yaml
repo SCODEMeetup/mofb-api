@@ -1,28 +1,28 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  title: "Mid Ohio Food Bank RESTful API"
-  description: ""
-  version: "0.0.2"
+  title: 'Mid Ohio Food Bank RESTful API'
+  description: ''
+  version: '0.0.2'
   contact:
-    name: "Report an Issue"
-    url: "https://github.com/SCODEMeetup/mofb-api/issues"
+    name: 'Report an Issue'
+    url: 'https://github.com/SCODEMeetup/mofb-api/issues'
 servers:
-  - url: "http://localhost:3000"
-    description: "running locally"
-  - url: "https://mofb-api.appspot.com"
-    description: "Production server"
-basePath: "/api/v2"
+  - url: 'http://localhost:3000'
+    description: 'running locally'
+  - url: 'https://mofb-api.appspot.com'
+    description: 'Production server'
+basePath: '/api/v2'
 paths:
   /taxonomy:
     get:
       tags:
-        - "Taxonomy"
-      summary: "Returns a list of Service Categories (taxonomies)"
+        - 'Taxonomy'
+      summary: 'Returns a list of Service Categories (taxonomies)'
       parameters:
         - name: limit
           in: query
           required: false
-          description: "The maximum number of results returned"
+          description: 'The maximum number of results returned'
           schema:
             type: integer
             format: int64
@@ -31,77 +31,77 @@ paths:
         - name: pageNumber
           in: query
           required: false
-          description: "The page number of the data to be returned"
+          description: 'The page number of the data to be returned'
           schema:
             type: integer
             format: int64
             minimum: 1
             default: 1
       responses:
-        "200":
-          description: "Successfully queries the smart city datasets and returns the results"
+        '200':
+          description: 'Successfully queries the smart city datasets and returns the results'
   /taxonomy/{id}:
     get:
       tags:
-        - "Taxonomy"
-      summary: "Returns Taxonomy record for the given ID"
+        - 'Taxonomy'
+      summary: 'Returns Taxonomy record for the given ID'
       parameters:
         - name: ID
           in: path
           required: true
-          description: "The ID of the taxonomy to return"
+          description: 'The ID of the taxonomy to return'
           schemea:
             type: integer
             format: int64
       responses:
-        "200":
-          description: "Successfully queries the smart city datasets and returns the results"
+        '200':
+          description: 'Successfully queries the smart city datasets and returns the results'
   /taxonomy/{id}/children:
     get:
       tags:
-        - "Taxonomy"
-      summary: "Returns All subcategories of taxonomy for the given ID"
+        - 'Taxonomy'
+      summary: 'Returns All subcategories of taxonomy for the given ID'
       parameters:
         - name: ID
           in: path
           required: true
-          description: "The ID of the taxonomy to return"
+          description: 'The ID of the taxonomy to return'
           schemea:
             type: integer
             format: int64
             example: 5120
       responses:
-        "200":
-          description: "Successfully queries the smart city datasets and returns the results"
+        '200':
+          description: 'Successfully queries the smart city datasets and returns the results'
   /taxonomy/food:
     get:
       tags:
-        - "Taxonomy"
+        - 'Taxonomy'
       summary: 'Returns a list of service categories under the "Food" category'
-      description: "This returns the entire list of food categories. There is no pagination"
+      description: 'This returns the entire list of food categories. There is no pagination'
       responses:
-        "200":
-          description: "Successfully queries the smart city datasets and returns the results"
+        '200':
+          description: 'Successfully queries the smart city datasets and returns the results'
   /taxonomy/basic-needs:
     get:
       tags:
-        - "Taxonomy"
+        - 'Taxonomy'
       summary: 'Returns a list of service categories under the "Basic Needs" category'
-      description: "This returns the entire list of basic needs categories. There is no pagination"
+      description: 'This returns the entire list of basic needs categories. There is no pagination'
       responses:
-        "200":
-          description: "Successfully queries the smart city datasets and returns the results"
+        '200':
+          description: 'Successfully queries the smart city datasets and returns the results'
 
   /agency:
     get:
       tags:
-        - "Agencies"
-      summary: "Returns a list of Agencies"
+        - 'Agencies'
+      summary: 'Returns a list of Agencies'
       parameters:
         - name: limit
           in: query
           required: false
-          description: "The maximum number of results returned"
+          description: 'The maximum number of results returned'
           schema:
             type: integer
             format: int64
@@ -110,7 +110,7 @@ paths:
         - name: pageNumber
           in: query
           required: false
-          description: "The page number of the data to be returned"
+          description: 'The page number of the data to be returned'
           schema:
             type: integer
             format: int64
@@ -119,56 +119,56 @@ paths:
         - name: taxonomyId
           in: query
           required: false
-          description: "Taxonomy ID for agency"
+          description: 'Taxonomy ID for agency'
           schema:
             type: integer
             format: int64
       responses:
-        "200":
-          description: "Successfully queries the smart city datasets and returns the results"
+        '200':
+          description: 'Successfully queries the smart city datasets and returns the results'
   /agency/{id}:
     get:
       tags:
-        - "Agencies"
-      summary: "Returns agency record for the given ID"
+        - 'Agencies'
+      summary: 'Returns agency record for the given ID'
       parameters:
         - name: ID
           in: path
           required: true
-          description: "The ID of the agency to return"
+          description: 'The ID of the agency to return'
           schemea:
             type: integer
             format: int64
       responses:
-        "200":
-          description: "Successfully queries the smart city datasets and returns the results"
+        '200':
+          description: 'Successfully queries the smart city datasets and returns the results'
 
   /agency?taxonomyId={}:
     get:
       tags:
-        - "Agencies"
-      summary: "Returns agency record(s) for a given taxonomy"
+        - 'Agencies'
+      summary: 'Returns agency record(s) for a given taxonomy'
       parameters:
         - in: query
           name: taxonomyId
           required: true
-          description: "The taxonomy id"
+          description: 'The taxonomy id'
           schemea:
             type: integer
       responses:
-        "200":
-          description: "Successfully queries the smart city datasets and returns the results"
+        '200':
+          description: 'Successfully queries the smart city datasets and returns the results'
 
   /location:
     get:
       tags:
-        - "Locations"
-      summary: "Returns a list of locations"
+        - 'Locations'
+      summary: 'Returns a list of locations'
       parameters:
         - name: limit
           in: query
           required: false
-          description: "The maximum number of results returned"
+          description: 'The maximum number of results returned'
           schema:
             type: integer
             format: int64
@@ -177,7 +177,7 @@ paths:
         - name: pageNumber
           in: query
           required: false
-          description: "The page number of the data to be returned"
+          description: 'The page number of the data to be returned'
           schema:
             type: integer
             format: int64
@@ -186,65 +186,65 @@ paths:
         - name: taxonomyId
           in: query
           required: false
-          description: "Taxonomy ID for location"
+          description: 'Taxonomy ID for location'
           schema:
             type: integer
             format: int64
         - name: agencyId
           in: query
           required: false
-          description: "Agency ID for location"
+          description: 'Agency ID for location'
           schema:
             type: integer
             format: int64
       responses:
-        "200":
-          description: "Successfully queries the smart city datasets and returns the results"
+        '200':
+          description: 'Successfully queries the smart city datasets and returns the results'
   /location?taxonomyId={}&agencyId={}:
     get:
       tags:
-      - "Locations"
-      summary: "Returns Location record for the given taxonomy ID and service ID"
+        - 'Locations'
+      summary: 'Returns Location record for the given taxonomy ID and service ID'
       parameters:
-      - name: taxonomyId
-        in: query
-        required: true
-        description: "The taxonomy id"
-        schemea:
-          type: integer
-      - name: agencyId
-        in: query
-        required: true
-        description: "The agency id, you can pass comma separate multiple values too"
-        schemea:
-          type: integer
+        - name: taxonomyId
+          in: query
+          required: true
+          description: 'The taxonomy id'
+          schemea:
+            type: integer
+        - name: agencyId
+          in: query
+          required: true
+          description: 'The agency id, you can pass comma separate multiple values too'
+          schemea:
+            type: integer
       responses:
-        "200":
-          description: "Successfully queries the smart city datasets and returns the results"
+        '200':
+          description: 'Successfully queries the smart city datasets and returns the results'
 
   /location/{locationId}/service/{serviceId}:
     get:
       tags:
-        - "Locations"
-      summary: "Returns Location record for the given ID and service ID"
+        - 'Locations'
+      summary: 'Returns Location record for the given ID and service ID'
       parameters:
         - name: locationId
           in: path
           required: true
-          description: "The ID of the location to return"
+          description: 'The ID of the location to return'
           schemea:
             type: integer
             format: int64
         - name: serviceId
           in: path
           required: true
-          description: "The ID of the service for location. Used to return specific hours"
+          description: 'The ID of the service for location. Used to return specific hours'
           schemea:
             type: integer
             format: int64
       responses:
-        "200":
-          description: "Successfully queries the smart city datasets and returns the results"
+        '200':
+          description: 'Successfully queries the smart city datasets and returns the results'
 externalDocs:
-  description: "Find out more about the API"
-  url: "https://github.com/SCODEMeetup/mofb-api"
+  description: 'Find out more about the API'
+  url: 'https://github.com/SCODEMeetup/mofb-api'

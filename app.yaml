@@ -1,11 +1,11 @@
 runtime: nodejs8
 instance_class: F1
 env_variables:
-  BUCKET_NAME: "mofb-api"
+  BUCKET_NAME: 'mofb-api'
 handlers:
-- url: /stylesheets
-  static_dir: stylesheets
-- url: /.*
-  secure: always
-  redirect_http_response_code: 301
-  script: auto
+  - url: /stylesheets
+    static_dir: stylesheets
+  - url: /.*
+    secure: always
+    redirect_http_response_code: 301
+    script: auto
