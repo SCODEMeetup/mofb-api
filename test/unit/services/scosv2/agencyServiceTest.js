@@ -3,7 +3,7 @@ process.env.NODE_ENV = config.test_env;
 
 const expect = require('chai').expect;
 
-const AgencyService = require('../../../../api/controllers/services/ckan/agencyService');
+const AgencyService = require('../../../../api/controllers/services/scosv2/agencyService');
 const Agency = require('../../../../api/controllers/models/agency');
 const service = new AgencyService();
 const ServiceStub = require('../serviceStub');
@@ -21,7 +21,7 @@ describe('Agency Service', () => {
         expect(service.agencyServiceResourceId).to.equal('testAgencyServiceResource');
         expect(service.serviceTaxonomyResourceId).to.equal('testServiceTaxonomyResource');
         expect(service.agencyResourceId).to.equal('testAgencyResource');
-        expect(service.uri).to.equal('testHost/api/3/action/datastore_search_sql?sql=SELECT * FROM "testAgencyResource" agency ');
+        expect(service.uri).to.equal('testHost/api/v1/organization/handson_central_ohio/dataset/agency_consolidated/query?_format=json');
     });
 
     it('should get all with no params', () => {
@@ -29,7 +29,7 @@ describe('Agency Service', () => {
             query: {}
         };
         service.getAll(req, res);
-        expect(stubs.getQueryStringStub.args).to.eql([[req, service.uri, null, 'agency']], 'getQueryString args');
+        expect(stubs.getQueryStringStub.args).to.eql([[req, service.uri, null]], 'getQueryString args');
         expect(stubs.getListStub.args).to.eql([['stub string', res, Agency.get]]);
     });
 
@@ -40,7 +40,7 @@ describe('Agency Service', () => {
             }
         };
         service.getAll(req, res);
-        expect(stubs.getQueryStringStub.args).to.eql([[req, service.uri + service.joinQuery, `service_taxonomy."TAXON_ID" IN (1)`, 'agency']], 'getQueryString args');
+        expect(stubs.getQueryStringStub.args).to.eql([[req, service.uri, `"taxon_id" = (1)`]], 'getQueryString args');
         expect(stubs.getListStub.args).to.eql([['stub string', res, Agency.get]]);
     });
 
@@ -52,7 +52,7 @@ describe('Agency Service', () => {
             }
         };
         service.get(req, res);
-        expect(stubs.setDefaultFiltersStub.args).to.eql([[`agency."AGENCY_ID" = 1`, 'agency']], 'getQueryString args');
+        expect(stubs.setDefaultFiltersStub.args).to.eql([[`"agency_id" = 1`]], 'getQueryString args');
         expect(stubs.getObjectStub.args).to.eql([[service.uri + 'stub filters', res, Agency.get]]);
     });
 })

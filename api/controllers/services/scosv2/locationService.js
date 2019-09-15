@@ -32,7 +32,7 @@ class LocationService extends AbstractService {
          }
 
         query = this.uri
-        let queryString = this.queryUtils.getQueryString(req, query, filter, this.tableName)
+        let queryString = this.queryUtils.getQueryString(req, query, filter)
 
         console.log(queryString)
         this.requestUtils.getList(queryString, res, locationWithCoord(Location.get))
@@ -40,7 +40,7 @@ class LocationService extends AbstractService {
 
     get(req, res) {
         const queryString = this.uri +
-                    this.queryUtils.setDefaultFilters(`"location_id" = ${req.params.id} AND "taxon_id" = ${req.params.serviceId}`, this.tableName);
+                    this.queryUtils.setDefaultFilters(`"location_id" = ${req.params.id} AND "taxon_id" = ${req.params.serviceId}`);
         this.requestUtils.getObject(queryString, res, locationWithCoord(Location.get));
     }
 }

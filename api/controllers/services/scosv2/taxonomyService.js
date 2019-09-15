@@ -11,27 +11,28 @@ class TaxonomyService extends AbstractService {
     getAll(req, res) {
         const level = req.query.level
         const levelQuery = `"taxonomy_level" IN (${level})`
-        const queryString = this.queryUtils.getQueryString(req, this.uri, level ? levelQuery : null, this.tableName)
+        const queryString = this.queryUtils.getQueryString(req, this.uri, level ? levelQuery : null)
         this.requestUtils.getList(queryString, res, Taxonomy.get)
     }
 
     get(req, res) {
-        const queryString = this.uri + this.queryUtils.setDefaultFilters(`"taxon_id" = ${req.params.id}`, this.tableName)
+        const queryString = this.uri + this.queryUtils.setDefaultFilters(`"taxon_id" = ${req.params.id}`)
+        console.log(this.requestUtils.getObject);
         this.requestUtils.getObject(queryString, res, Taxonomy.get)
     }
 
     getAllFoodCategories(_req, res) {
-        const queryString = this.uri + this.queryUtils.setDefaultFilters(encodeURIComponent('"taxonomy_code" LIKE \'BD-%\''), this.tableName)
+        const queryString = this.uri + this.queryUtils.setDefaultFilters(encodeURIComponent('"taxonomy_code" LIKE \'BD-%\''))
         this.requestUtils.getList(queryString, res, Taxonomy.get)
     }
 
     getBasicNeeds(_req, res) {
-        const queryString = this.uri + this.queryUtils.setDefaultFilters(encodeURIComponent('"taxonomy_code" LIKE \'B%\''), this.tableName)
+        const queryString = this.uri + this.queryUtils.setDefaultFilters(encodeURIComponent('"taxonomy_code" LIKE \'B%\''))
         this.requestUtils.getList(queryString, res, Taxonomy.get)
     }
 
     getChildren(req, res) {
-        const queryString = this.uri + this.queryUtils.setDefaultFilters(`"taxon_id_subcat_of" IN (\'${req.params.id}\')`, this.tableName)
+        const queryString = this.uri + this.queryUtils.setDefaultFilters(`"taxon_id_subcat_of" IN (\'${req.params.id}\')`)
         this.requestUtils.getList(queryString, res, Taxonomy.get)
     }
 }
