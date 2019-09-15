@@ -1,4 +1,4 @@
-const expect = require('chai').expect;
+const { expect } = require('chai');
 const sinon = require('sinon');
 const Cache = require('../../../cache');
 const RequestUtils = require('../../../api/utils/request');
@@ -86,6 +86,7 @@ describe('Request Utils', () => {
       'test',
     ]);
     objectHandler([]);
+    // eslint-disable-next-line no-unused-expressions
     expect(cacheStub.set.notCalled).to.be.true;
     expect(responseStub.args).to.eql([['No results for query']]);
   });

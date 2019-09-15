@@ -8,7 +8,7 @@ class Taxonomy {
   }
 
   static get(res) {
-    let taxonomyList = [];
+    const taxonomyList = [];
     res.forEach(r => {
       const t = new Taxonomy(r);
       taxonomyList.push(t);

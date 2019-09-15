@@ -9,7 +9,7 @@ class TaxonomyService extends AbstractService {
   }
 
   getAll(req, res) {
-    const level = req.query.level;
+    const { level } = req.query;
     const levelQuery = `"taxonomy_level" IN (${level})`;
     const queryString = this.queryUtils.getQueryString(
       req,
@@ -49,7 +49,7 @@ class TaxonomyService extends AbstractService {
     const queryString =
       this.uri +
       this.queryUtils.setDefaultFilters(
-        `"taxon_id_subcat_of" IN (\'${req.params.id}\')`
+        `"taxon_id_subcat_of" IN ('${req.params.id}')`
       );
     this.requestUtils.getList(queryString, res, Taxonomy.get);
   }

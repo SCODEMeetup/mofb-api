@@ -1,12 +1,12 @@
-const config = require('../../../config');
-process.env.PORT = config.test_port;
-
-const server = require('../../../server');
-
 const chai = require('chai');
+const chaiHttp = require('chai-http');
+const config = require('../../../config');
+const server = require('../../../server');
+// eslint-disable-next-line no-unused-vars
 const should = chai.should();
 
-const chaiHttp = require('chai-http');
+process.env.PORT = config.test_port;
+
 const url = '/api/v2/agency';
 
 chai.use(chaiHttp);

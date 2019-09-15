@@ -1,6 +1,7 @@
-var NodeCache = require('node-cache');
-var myCache = new NodeCache();
-var md5 = require('md5');
+const NodeCache = require('node-cache');
+
+const myCache = new NodeCache();
+const md5 = require('md5');
 
 /**
  * Cache to store key value pairs, retrieve values by key, and get current list of keys
@@ -39,7 +40,7 @@ class Cache {
   set(key, val, ttl, callback) {
     return myCache.set(md5(key), val, ttl, (err, success) => {
       if (callback) {
-        return callback(err, success);
+        callback(err, success);
       }
     });
   }
@@ -52,7 +53,7 @@ class Cache {
   keys(callback) {
     return myCache.keys((err, keys) => {
       if (callback) {
-        return callback(err, keys);
+        callback(err, keys);
       }
     });
   }

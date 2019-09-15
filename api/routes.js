@@ -1,4 +1,7 @@
+/* eslint-disable import/no-dynamic-require */
+/* eslint-disable global-require */
 const express = require('express');
+
 const app = express();
 
 function getRoutes(version, path) {

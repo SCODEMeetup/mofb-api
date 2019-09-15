@@ -1,12 +1,13 @@
+const { expect } = require('chai');
 const config = require('../../../../config');
-process.env.NODE_ENV = config.test_env;
-
-const expect = require('chai').expect;
-
 const AgencyService = require('../../../../api/controllers/services/scosv2/agencyService');
 const Agency = require('../../../../api/controllers/models/agency');
+
+process.env.NODE_ENV = config.test_env;
+
 const service = new AgencyService();
 const ServiceStub = require('../serviceStub');
+
 const stubs = new ServiceStub(service);
 
 const res = {};
@@ -68,7 +69,7 @@ describe('Agency Service', () => {
       'getQueryString args'
     );
     expect(stubs.getObjectStub.args).to.eql([
-      [service.uri + 'stub filters', res, Agency.get],
+      [`${service.uri}stub filters`, res, Agency.get],
     ]);
   });
 });

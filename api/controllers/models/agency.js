@@ -7,7 +7,7 @@ class Agency {
   }
 
   static get(res) {
-    let agencyList = [];
+    const agencyList = [];
     res.forEach(r => {
       const t = new Agency(r);
       agencyList.push(t);

@@ -1,10 +1,10 @@
+const { expect } = require('chai');
+const sinon = require('sinon');
 const config = require('../../../config');
-process.env.NODE_ENV = config.test_env;
 const QueryUtils = require('../../../api/utils/query');
 const RequestUtils = require('../../../api/utils/request');
 
-const expect = require('chai').expect;
-const sinon = require('sinon');
+process.env.NODE_ENV = config.test_env;
 
 describe('Query Utils', () => {
   const queryUtils = new QueryUtils();

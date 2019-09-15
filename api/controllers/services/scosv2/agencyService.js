@@ -1,4 +1,4 @@
-const Agency = require('../../models/agency').default;
+const Agency = require('../../models/agency');
 const AbstractService = require('../abstractService');
 
 class AgencyService extends AbstractService {

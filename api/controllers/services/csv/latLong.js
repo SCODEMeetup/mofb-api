@@ -1,9 +1,10 @@
-var Cache = require('../../../../cache');
-var cache = Cache.instance();
-var filePath = 'extra/latLong.csv';
-var fs = require('fs');
-var md5 = require('md5');
-var parse = require('csv').parse;
+const filePath = 'extra/latLong.csv';
+const fs = require('fs');
+const md5 = require('md5');
+const { parse } = require('csv');
+const Cache = require('../../../../cache');
+
+const cache = Cache.instance();
 
 function LatLong(long, lat) {
   this.lat = lat;
@@ -14,9 +15,9 @@ fs.readFile(filePath, (err, fileData) => {
   if (err) {
     console.log(err);
   } else {
-    parse(fileData.toString(), {}, (err, data) => {
+    parse(fileData.toString(), {}, (e, data) => {
       data.forEach(d => {
-        var key = getCoordKey(d[0], d[1]);
+        const key = getCoordKey(d[0], d[1]);
         cache.set(key, new LatLong(d[2], d[3]));
       });
     });
@@ -24,7 +25,7 @@ fs.readFile(filePath, (err, fileData) => {
 });
 
 function getLatLong(id, num, callback) {
-  var key = getCoordKey(id, num);
+  const key = getCoordKey(id, num);
   cache.get(key, (err, val) => {
     callback(err, val);
   });

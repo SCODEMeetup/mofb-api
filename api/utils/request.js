@@ -125,7 +125,7 @@ function getRequestOptions(uri) {
 
 function sendRequest(options, res, callback) {
   request(options, function(_error, response, body) {
-    if (response.statusCode != 200) {
+    if (response.statusCode !== 200) {
       handleError(body, res);
     } else {
       callback(body);

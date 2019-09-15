@@ -1,6 +1,6 @@
 module.exports = {
   development: 'development',
-  getEnv: function() {
+  getEnv() {
     return process.env.NODE_ENV || this.development;
   },
 };

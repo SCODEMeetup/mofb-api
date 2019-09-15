@@ -1,7 +1,7 @@
+const lodash = require('lodash');
 const Location = require('../../models/location');
 const AbstractService = require('../abstractService');
 const latLong = require('../csv/latLong');
-const lodash = require('lodash');
 
 class LocationService extends AbstractService {
   constructor() {
@@ -21,17 +21,17 @@ class LocationService extends AbstractService {
     if (req.query.agencyId) {
       const agencyIds = `${req.query.agencyId}`;
       const uniqueAgencyIdsArr = lodash.uniq(agencyIds.split(','));
-      filter = filter + ' AND ';
+      filter += ' AND ';
       uniqueAgencyIdsArr.forEach((value, key, arr) => {
-        filter = filter + 'agency_id  = ' + value;
+        filter = `${filter}agency_id  = ${value}`;
         if (!Object.is(arr.length - 1, key)) {
-          filter = filter + ' OR ';
+          filter += ' OR ';
         }
       });
     }
 
     query = this.uri;
-    let queryString = this.queryUtils.getQueryString(req, query, filter);
+    const queryString = this.queryUtils.getQueryString(req, query, filter);
 
     console.log(queryString);
     this.requestUtils.getList(

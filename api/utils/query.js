@@ -1,9 +1,4 @@
-const constants = require('../constants');
-const config = require('../../config')[constants.getEnv()];
 const RequestUtils = require('./request');
-
-const agencyServiceResourceId = config.agency_service_resource;
-const serviceTaxonomyResourceId = config.service_taxonomy_resource;
 
 class QueryUtils {
   static instance() {
@@ -25,7 +20,7 @@ class QueryUtils {
   setDefaultFilters(filterString) {
     let returnUri = `&where=active_flag ='Y'`;
     if (filterString) {
-      returnUri = returnUri + ` AND ${filterString}`;
+      returnUri += ` AND ${filterString}`;
     }
     return returnUri;
   }
@@ -39,9 +34,9 @@ class QueryUtils {
    */
   getQueryString(req, uri, filterString) {
     const { offset, limit } = this.requestUtils.getPagingParams(req);
-    let returnUri = uri + this.setDefaultFilters(filterString);
+    const returnUri = uri + this.setDefaultFilters(filterString);
 
-    return returnUri + ` &limit=${limit}`;
+    return `${returnUri} &limit=${limit}`;
   }
 }
 

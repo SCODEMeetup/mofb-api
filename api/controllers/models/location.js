@@ -15,7 +15,7 @@ class Location {
   }
 
   static get(res) {
-    let locationList = [];
+    const locationList = [];
     res.forEach(r => {
       const t = new Location(r);
       locationList.push(t);
