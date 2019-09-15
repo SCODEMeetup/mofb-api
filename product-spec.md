@@ -35,7 +35,6 @@ Food pantries service customers based on zip code. If you are from a certain zip
 
 6. The API project shall provide the data in JSON form, as it is currently the easiest cross-language way to consume data.
 
-
 ## Assumptions
 
 - All abuse/throttling concerns will eventually be handled by the Smart Columbus Project and will not be handled by this project.
@@ -62,4 +61,3 @@ Informal communciation shall be accomplished on the slack channel, `#scode-api` 
 ## Timeline
 
 Useable Product and Technical Specifications are to be completed by 14 August.
-

@@ -1,7 +1,7 @@
-version: "3"
+version: '3'
 
 services:
-  mofb-api: 
+  mofb-api:
     build:
       context: .
     container_name: mofb-api
@@ -10,4 +10,3 @@ services:
     environment:
       env: dev
       PORT: 3000
-   
