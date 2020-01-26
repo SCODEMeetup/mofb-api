@@ -19,14 +19,15 @@
 ## Build / Run
 
 1. If Node was installed via `nvm`, run `nvm use` to use the correct version
-1. Run `npm i` to install all node modules
-2. Start server using
+2. Run `npm i` to install all node modules
+3. Copy `.env.example`, rename to `.env`, and update any necessary config
+4. Start server using
 
 ```bash
-$ npm run start
+$ npm start
 ```
 
-3. Server runs at localhost:8000
+3. Access Swagger docs at http://localhost:8000/api-docs (endpoints can be tested directly from this page)
 
 ## Docker build
 
