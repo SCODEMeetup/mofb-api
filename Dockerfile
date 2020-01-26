@@ -15,4 +15,4 @@ RUN npx tsc
 ENV PORT=8000
 
 USER node
-CMD node ./dist/server.js
+CMD npm run start:prod

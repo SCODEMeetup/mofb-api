@@ -4,7 +4,9 @@ import express from 'express';
 import { Server } from 'typescript-rest';
 import createLogger, { initLogger } from './utils/logger';
 
-dotenv.config();
+const { ENV } = process.env;
+const path = `.env${ENV ? `.${ENV}` : ''}`;
+dotenv.config({ path });
 
 // NOTE: these imports happen here because they require the env to be configured first
 /* eslint-disable import/first */
@@ -16,7 +18,7 @@ import {
 } from './middleware/errorHandlers';
 /* eslint-enable import/first */
 
-const { ENV, PORT = 8000, LOG_LEVEL = 'info' } = process.env;
+const { PORT = 8000, LOG_LEVEL = 'info' } = process.env;
 
 initLogger(LOG_LEVEL);
 const log = createLogger('mofb-api');
