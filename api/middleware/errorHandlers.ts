@@ -1,11 +1,11 @@
-import bunyan from 'bunyan';
 import { NextFunction, Request, Response, Router } from 'express';
 import {
   NotFoundError,
   HttpError,
 } from 'typescript-rest/dist/server/model/errors';
+import createLogger from '../utils/logger';
 
-const log = bunyan.createLogger({ name: 'errorHandler' });
+const log = createLogger('errorHandler');
 
 const handle404Error = (router: Router): void => {
   router.use((req: Request, res: Response): void => {

@@ -1,19 +1,25 @@
-import bunyan from 'bunyan';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
 import { Server } from 'typescript-rest';
+import createLogger, { initLogger } from './utils/logger';
+
+dotenv.config();
+
+// NOTE: these imports happen here because they require the env to be configured first
+/* eslint-disable import/first */
+import controllers from './controllers';
 import {
   handle404Error,
   handleClientError,
   handleServerError,
 } from './middleware/errorHandlers';
+/* eslint-enable import/first */
 
-dotenv.config();
+const { ENV, PORT = 8000, LOG_LEVEL = 'info' } = process.env;
 
-const { ENV, PORT = 8000 } = process.env;
-
-const log = bunyan.createLogger({ name: 'mofb-api' });
+initLogger(LOG_LEVEL);
+const log = createLogger('mofb-api');
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const handleError = (e: any): void => {
@@ -33,10 +39,7 @@ if (ENV !== 'test') {
 // pre-routing middleware
 app.use(cors());
 
-// NOTE: this require has to happen here so the env is already set up
-// eslint-disable-next-line global-require
-Server.buildServices(app, ...require('./controllers').default);
-// only execute one endpoint
+Server.buildServices(app, ...controllers);
 Server.ignoreNextMiddlewares(true);
 
 handle404Error(app);

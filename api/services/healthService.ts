@@ -1,10 +1,10 @@
-import bunyan from 'bunyan';
 import { makeSCOSRequest } from './SCOSService';
 import HealthDto from '../models/dto/healthDto';
+import getLogger from '../utils/logger';
 
 const { AGENCIES_TABLE, CATEGORIES_TABLE } = process.env;
 
-const log = bunyan.createLogger({ name: 'healthService' });
+const log = getLogger('healthService');
 
 async function getHealth(): Promise<HealthDto> {
   let agenciesTableConnected = false;

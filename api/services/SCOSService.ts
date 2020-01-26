@@ -1,9 +1,9 @@
-import bunyan from 'bunyan';
 import request from 'request-promise';
+import getLogger from '../utils/logger';
 
 const { SCOS_HOST } = process.env;
 
-const log = bunyan.createLogger({ name: 'SCOSService' });
+const log = getLogger('SCOSService');
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function makeSCOSRequest(body: any): Promise<any> {
