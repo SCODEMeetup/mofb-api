@@ -13,13 +13,13 @@ async function getHealth(): Promise<HealthDto> {
     await makeSCOSRequest(`SELECT 1 FROM ${AGENCIES_TABLE} LIMIT 1`);
     agenciesTableFine = true;
   } catch (err) {
-    log.error(`Error requesting from agencies table: ${err}`);
+    log.error(err);
   }
   try {
     await makeSCOSRequest(`SELECT 1 FROM ${CATEGORIES_TABLE} LIMIT 1`);
     categoriesTableFine = true;
   } catch (err) {
-    log.error(`Error requesting from categories table: ${err}`);
+    log.error(err);
   }
   return {
     agenciesTableFine,

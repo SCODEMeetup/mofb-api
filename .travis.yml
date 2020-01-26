@@ -11,7 +11,6 @@ cache:
 
 notifications:
   email:
-    - yadav.21@osu.edu
     - henderson.molly4@gmail.com
 
 before_install:

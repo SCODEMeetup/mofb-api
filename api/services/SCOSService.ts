@@ -20,7 +20,7 @@ async function makeSCOSRequest(body: any): Promise<any> {
     const response = await request(opts);
     return JSON.parse(response);
   } catch (err) {
-    throw new Error(`Error from SCOS API: ${JSON.stringify(err.error)}`);
+    throw new Error(`Error from SCOS API: ${err}`);
   }
 }
 
