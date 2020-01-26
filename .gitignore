@@ -15,3 +15,6 @@ yarn-error.log
 # Code coverage
 .nyc_output
 /coverage
+
+dist
+.env
