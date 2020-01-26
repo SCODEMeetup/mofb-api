@@ -2,9 +2,13 @@ FROM node:12.10.0-alpine
 EXPOSE 8000
 WORKDIR /app
 
-COPY ./node_modules node_modules/
+COPY ./api /api
+COPY ./node_modules /node_modules
 COPY ./package.json .
-COPY ./dist dist/
+COPY ./package-lock.json .
+COPY ./swagger.config.json .
+
+RUN npm run build
 
 ENV PORT=8000
 

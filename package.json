@@ -6,9 +6,7 @@
     "postinstall": "npx tsc",
     "start": "tsc-watch --preserveWatchOutput --onSuccess \"concurrently 'npm run swagger' 'node ./dist/server.js | bunyan'\"",
     "swagger": "swaggerGen -c ./swagger.config.json",
-    "test:integration": "nyc mocha \"test/integration/**/*.[t|j]s\" --exit",
-    "test": "nyc --reporter=html --reporter=text mocha \"test/unit/**/*.[t|j]s\" --exit",
-    "build": "npm install && npm run test",
+    "build": "npm install && npm run swagger",
     "lint": "eslint './**/*.ts'",
     "lint:fix": "eslint --fix './**/*.ts'"
   },
@@ -20,7 +18,7 @@
     "RESTful"
   ],
   "author": "SCODE-API",
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/SCODEMeetup/mofb-api/issues"
   },
@@ -28,17 +26,12 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "2.7.0",
     "@typescript-eslint/parser": "2.7.0",
-    "chai-http": "^4.2.1",
-    "chai": "^4.2.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.3.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint": "^6.4.0",
-    "mocha": "^5.2.0",
-    "nyc": "^14.1.1",
-    "prettier": "^1.18.2",
-    "sinon": "^7.2.6"
+    "prettier": "^1.18.2"
   },
   "dependencies": {
     "@types/bunyan": "1.8.6",
