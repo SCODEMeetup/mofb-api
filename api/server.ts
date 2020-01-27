@@ -8,6 +8,11 @@ const { ENV } = process.env;
 const path = `.env${ENV ? `.${ENV}` : ''}`;
 dotenv.config({ path });
 
+const { PORT = 8000, LOG_LEVEL = 'info' } = process.env;
+
+initLogger(LOG_LEVEL);
+const log = createLogger('mofb-api');
+
 // NOTE: these imports happen here because they require the env to be configured first
 /* eslint-disable import/first */
 import controllers from './controllers';
@@ -17,11 +22,6 @@ import {
   handleServerError,
 } from './middleware/errorHandlers';
 /* eslint-enable import/first */
-
-const { PORT = 8000, LOG_LEVEL = 'info' } = process.env;
-
-initLogger(LOG_LEVEL);
-const log = createLogger('mofb-api');
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const handleError = (e: any): void => {
