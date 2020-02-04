@@ -1,8 +1,7 @@
 import { makeSCOSRequest } from './scosService';
 import HealthDto from '../models/dto/healthDto';
 import getLogger from '../utils/logger';
-
-const { AGENCIES_TABLE, CATEGORIES_TABLE } = process.env;
+import { AGENCIES_TABLE, CATEGORIES_TABLE } from '../utils/constants';
 
 const log = getLogger('healthService');
 
