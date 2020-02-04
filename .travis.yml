@@ -9,12 +9,9 @@ cache:
   directories:
     - node_modules
 
-node_js:
-  - '8'
-
 notifications:
   email:
-    - yadav.21@osu.edu
+    - henderson.molly4@gmail.com
 
 before_install:
   - docker build -t mofb-api .

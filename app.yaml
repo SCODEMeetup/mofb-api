@@ -1,4 +1,4 @@
-runtime: nodejs8
+runtime: nodejs
 instance_class: F1
 env_variables:
   BUCKET_NAME: 'mofb-api'

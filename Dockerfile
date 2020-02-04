@@ -1,22 +1,18 @@
-FROM node:8
+FROM node:12.10.0-alpine
+EXPOSE 8000
+WORKDIR /app
 
-EXPOSE 3000
-WORKDIR .
-COPY ./api /api
-COPY ./test /test
-COPY ./node_modules /node_modules
+COPY ./api api
+COPY ./node_modules node_modules
 COPY ./package.json .
 COPY ./package-lock.json .
-COPY ./server.js .
-COPY ./config.js .
-COPY ./cache.js .
-COPY ./swagger.yaml .
+COPY ./swagger.config.json .
+COPY ./tsconfig.json .
 
-RUN npm install
 RUN npm run build
+RUN npx tsc
 
-ENV PORT=3000
+ENV PORT=8000
 
 USER node
-CMD ["npm","start"]
-
+CMD npm run start:prod

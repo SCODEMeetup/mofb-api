@@ -14,51 +14,44 @@
 
 ## Pre-requisites
 
-1. Install Node.js from [installer](https://nodejs.org/en/)
-2. Or using [command line](https://nodejs.org/en/download/package-manager/)
+1. Install Node.js using [nvm](https://github.com/nvm-sh/nvm) (_RECOMMENDED_), or from [installer](https://nodejs.org/en/), or using [command line](https://nodejs.org/en/download/package-manager/)
 
 ## Build / Run
 
-1. Run `npm i` to install all node modules
-2. Start server using
+1. If Node was installed via `nvm`, run `nvm use` to use the correct version
+2. Run `npm i` to install all node modules
+3. Copy `.env.example`, rename to `.env`, and update any necessary config
+4. Start server using
 
 ```bash
-$ npm run start
+$ npm start
 ```
 
-3. Server runs at localhost:3000
-
-## Running tests
-
-```bash
-$ npm test
-```
+3. Access Swagger docs at http://localhost:8000/api-docs (endpoints can be tested directly from this page)
 
 ## Docker build
 
 1. Run `npm i` to install all node modules
-2. Run `docker-compose build` to build the image
-3. Run `docker-compose up` to start image
-4. To access the swagger documentation navigate to http://localhost:3000/api-docs or http://{env}/api-docs/
+2. Run `docker-compose up` to start image
+3. To access the swagger documentation navigate to http://localhost:8000/api-docs or http://{env}/api-docs/
 
 ## Tech Stack
 
 1. Node.js
-2. Express
-3. ChaiJS
-4. MochaJS
-5. Swagger
+2. TypeScript
+3. Express
+4. Swagger
 
 ## Tools
 
-1. [VSCode](https://code.visualstudio.com/)
+1. Recommended editor: [VSCode](https://code.visualstudio.com/)
 
 ## Adding a new endpoint
 
-1. Create the endpoint in router file
-2. Write test for endpoint
-3. If necessary, import the router file in server.js
-4. Create/update the swagger documentation (see swagger.yaml file)
+1. Create a new function in the corresponding file in `api/controllers`. (If you create a new file, be sure to add it to `index.ts`.) 
+   *  Include the relevant `@Path` and `@<method>` decorators from the `typescript-rest` library.
+2. Put service logic in the `api/services` directory, general helper/utility logic in `api/utils`, and DTOs in `api/models`.
+3. Note that you may have to restart the app for Swagger doc changes to apply.
 
 ## Documentation
 
@@ -73,43 +66,9 @@ $ npm test
 
 #### GCP (google cloud platform), automated app engine deployment
 
-1. Some examples (please visit the swagger documentation for more details)
-
-   1. Taxonomies -
-      1. all - https://mofb-api.appspot.com/api/v2/taxonomy,
-      2. by id - https://mofb-api.appspot.com/api/v2/taxonomy/{id}, e.g. 10
-      3. _Immediate_ subcategory of a taxonomy id (immediate children) - https://mofb-api.appspot.com/api/v2/taxonomy/{id}/children, e.g. 10
-      4. "Food" taxonomy and _all_ its sub categories - https://mofb-api.appspot.com/api/v2/taxonomy/food
-   2. Agencies -
-      1. all - https://mofb-api.appspot.com/api/v2/agency
-      2. by agency id - https://mofb-api.appspot.com/api/v2/agency/{id}, e.g. 5120
-      3. by taxonomy id - https://mofb-api.appspot.com/api/v2/agency?taxonomyId=11
-   3. Location -
-      1. by multiple agencies and taxonomy id https://mofb-api.appspot.com/api/v2/location?agencyId=39650,39651&taxonomyId=12
-      2. by location and service id, https://mofb-api.appspot.com/api/v2/location/39651/service/12
-
 ## Data
 
-1. Taxonomy: This dataset explains the taxonomy codes applicable to different types of
-   services
-   https://discovery.smartcolumbusos.com/dataset/handson_central_ohio/371dd944_411c_4851_a065_9f3f605ddfb9
-2. Agency:
-   https://discovery.smartcolumbusos.com/dataset/handson_central_ohio/6425f64b_f162_4cd4_b271_5038b6752df5
-3. Agency Location:
-   https://discovery.smartcolumbusos.com/dataset/handson_central_ohio/570a8e02_fb0e_4cee_895b_3b32bd740650
-4. Service Location: This dataset contains additional information about the service locations, such as hours of operation:
-   https://discovery.smartcolumbusos.com/dataset/handson_central_ohio/ec24773c_7cff_4589_9e2f_bcdeb5cdfd48
-5. Service Taxonomy: This dataset presents the details about the taxonomy codes applicable
-   to each agency. In other words, services offered at each agency are presented
-   https://discovery.smartcolumbusos.com/dataset/handson_central_ohio/2a919af7_12d3_47a4_b86a_56692e2e1623
-6. Agency Service:
-   https://discovery.smartcolumbusos.com/dataset/handson_central_ohio/49b19dab_a7a8_4049_add2_7a0a1f0cce07
-7. Agency Consolidated: As the SCOS version doesn't support joining multiple datasets (per July 2019) we loaded a consolidated dataset that combines agency, agency_service and service_taxonomy
-   https://discovery.smartcolumbusos.com/dataset/handson_central_ohio/agency_consolidated
-8. Location Consolidated: As the SCOS version doesn't support joining multiple datasets (per July 2019) we loaded a consolidated dataset that combines agency_location, service_location, agency_service, service_taxonomy
-   https://discovery.smartcolumbusos.com/dataset/handson_central_ohio/location_consolidated
-9. Images
-
-   1. ![Services aka Taxonomies with subcategories as graph](/extra/services-taxanomy-hierarchy.png)
-   2. ![Services aka Taxonomies with subcategories as table](/extra/services-hierarchy-table.png)
-   3. ![Agency and Services relation](/extra/agency-services-relation.png)
+1. Agency: This dataset outlines all information about the agencies that provide services
+   https://discovery.smartcolumbusos.com/dataset/handson_central_ohio/community_services_agencies
+2. Category: this dataset contains a list of categories that could describe the service(s) an agency provides
+   https://discovery.smartcolumbusos.com/dataset/handson_central_ohio/handson_central_ohio_agency_subcategory_terms
