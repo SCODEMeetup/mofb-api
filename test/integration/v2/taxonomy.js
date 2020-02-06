@@ -14,7 +14,7 @@ const { expect } = chai;
 chai.use(chaiHttp);
 
 describe('Taxonomy V2', () => {
-  it('should GET taxonomies limit 100', done => {
+  test('should GET taxonomies limit 100', done => {
     chai
       .request(server)
       .get(url)
@@ -26,7 +26,7 @@ describe('Taxonomy V2', () => {
       });
   });
 
-  it('should GET taxonomy with ID 10', done => {
+  test('should GET taxonomy with ID 10', done => {
     chai
       .request(server)
       .get(`${url}/10`)
@@ -37,7 +37,7 @@ describe('Taxonomy V2', () => {
       });
   });
 
-  it('should GET taxonomies under basic needs category', done => {
+  test('should GET taxonomies under basic needs category', done => {
     chai
       .request(server)
       .get(`${url}/basic-needs`)
@@ -51,7 +51,7 @@ describe('Taxonomy V2', () => {
       });
   });
 
-  it('should GET taxonomies under food category', done => {
+  test('should GET taxonomies under food category', done => {
     chai
       .request(server)
       .get(`${url}/food`)
@@ -65,7 +65,7 @@ describe('Taxonomy V2', () => {
       });
   });
 
-  it('should GET taxonomy subcategories for given category ID', done => {
+  test('should GET taxonomy subcategories for given category ID', done => {
     chai
       .request(server)
       .get(`${url}/10/children`)

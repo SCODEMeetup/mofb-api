@@ -12,7 +12,7 @@ const url = '/api/v2/location';
 chai.use(chaiHttp);
 
 describe('Locations V2', () => {
-  it('should GET locations limit 100', done => {
+  test('should GET locations limit 100', done => {
     chai
       .request(server)
       .get(url)
@@ -24,7 +24,7 @@ describe('Locations V2', () => {
       });
   });
 
-  it('should GET locations with limit of 5', done => {
+  test('should GET locations with limit of 5', done => {
     chai
       .request(server)
       .get(`${url}?limit=5`)
@@ -36,7 +36,7 @@ describe('Locations V2', () => {
       });
   });
 
-  it('should GET locations with taxonomy ID of 10', done => {
+  test('should GET locations with taxonomy ID of 10', done => {
     chai
       .request(server)
       .get(`${url}?taxonomyId=10`)
@@ -47,7 +47,7 @@ describe('Locations V2', () => {
       });
   });
 
-  it('should GET locations with agency ID of 10', done => {
+  test('should GET locations with agency ID of 10', done => {
     chai
       .request(server)
       .get(`${url}?agencyId=10`)
@@ -61,7 +61,7 @@ describe('Locations V2', () => {
       });
   });
 
-  it('should GET location with ID of 7300 and service category 10', done => {
+  test('should GET location with ID of 7300 and service category 10', done => {
     chai
       .request(server)
       .get(`${url}/7300/service/10`)

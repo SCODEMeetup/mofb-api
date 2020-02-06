@@ -12,7 +12,7 @@ const url = '/api/v2/agency';
 chai.use(chaiHttp);
 
 describe('Agencies V2', () => {
-  it('should GET agencies limit 100', done => {
+  test('should GET agencies limit 100', done => {
     chai
       .request(server)
       .get(url)
@@ -24,7 +24,7 @@ describe('Agencies V2', () => {
       });
   });
 
-  it('should GET agencies with limit of 5', done => {
+  test('should GET agencies with limit of 5', done => {
     chai
       .request(server)
       .get(`${url}?limit=5`)
@@ -36,7 +36,7 @@ describe('Agencies V2', () => {
       });
   });
 
-  it('should GET agencies with taxonomy ID of 10', done => {
+  test('should GET agencies with taxonomy ID of 10', done => {
     chai
       .request(server)
       .get(`${url}?taxonomyId=10`)
@@ -50,7 +50,7 @@ describe('Agencies V2', () => {
       });
   });
 
-  it('should GET agency with ID of 27600', done => {
+  test('should GET agency with ID of 27600', done => {
     chai
       .request(server)
       .get(`${url}/27600`)

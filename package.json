@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon server.js",
     "test:integration": "nyc mocha \"test/integration/**/*.js\" --exit",
-    "test": "nyc --reporter=html --reporter=text mocha \"test/unit/**/*.js\" --exit",
+    "test": "jest",
     "build": "npm install && npm run test",
     "lint": "eslint './**/*.js'",
     "lint:fix": "eslint --fix './**/*.js'"
@@ -50,6 +50,7 @@
     "eslint-config-prettier": "^6.3.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-prettier": "^3.1.0",
+    "jest": "^25.1.0",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.4",
     "nyc": "^14.1.1",
