@@ -9,7 +9,8 @@
     "swagger": "swaggerGen -c ./swagger.config.json",
     "build": "npm install && npm run swagger",
     "lint": "eslint './**/*.ts'",
-    "lint:fix": "eslint --fix './**/*.ts'"
+    "lint:fix": "eslint --fix './**/*.ts'",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -27,11 +28,12 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "2.7.0",
     "@typescript-eslint/parser": "2.7.0",
+    "eslint": "^6.4.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.3.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-prettier": "^3.1.0",
-    "eslint": "^6.4.0",
+    "jest": "^25.1.0",
     "prettier": "^1.18.2"
   },
   "dependencies": {
