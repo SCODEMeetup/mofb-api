@@ -34,7 +34,8 @@
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-prettier": "^3.1.0",
     "jest": "^25.1.0",
-    "prettier": "^1.18.2"
+    "prettier": "^1.18.2",
+    "supertest": "^4.0.2"
   },
   "dependencies": {
     "@types/bunyan": "1.8.6",
@@ -59,5 +60,11 @@
     "typescript": "3.7.2",
     "typescript-rest": "2.2.2",
     "typescript-rest-swagger": "1.0.4"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnoePatterns": [ 
+      "/node_modules/"
+    ]
   }
 }
