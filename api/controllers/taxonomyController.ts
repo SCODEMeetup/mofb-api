@@ -7,7 +7,8 @@ import { getSubcategories } from '../services/taxonomyService';
 @Tags('Taxonomy')
 export default class TaxonomyController {
   /**
-   * Returns status of the API.
+   * Returns all subcategories of a given category id.
+   * @param id Id of the parent category
    */
   @GET
   @Path('/:id/children')

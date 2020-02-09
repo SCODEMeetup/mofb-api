@@ -1,4 +1,4 @@
-import ScosSubcategoryDto from "./scosSubcategoryDto";
+import ScosSubcategoryDto from './scosSubcategoryDto';
 
 export default interface ScosCategoryDto {
   category: string;
