@@ -50,15 +50,12 @@ function mapToLocationDto(agency: ScosAgencyDto): LocationDto | null {
 
 async function getLocations(
   taxonomyId: string,
-  agencyIds: string[] | null,
   limit: number,
   pageNumber: number
 ): Promise<LocationDto[]> {
   log.debug(
-    `Getting locations by taxonomy id: ${taxonomyId}; agencyIds: ${agencyIds}; limit: ${limit}; pageNumber: ${pageNumber}`
+    `Getting locations by taxonomy id: ${taxonomyId}; limit: ${limit}; pageNumber: ${pageNumber}`
   );
-
-  // TODO: account for agencyIds (?)
 
   const query = `SELECT * FROM ${AGENCIES_TABLE} WHERE taxonomy.category = '${taxonomyId}' LIMIT ${limit}`;
   const response: ScosAgencyDto[] = await makeSCOSRequest(query);
