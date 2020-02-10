@@ -58,7 +58,7 @@ async function getLocations(
     `Getting locations by taxonomy id: ${taxonomyId}; agencyIds: ${agencyIds}; limit: ${limit}; pageNumber: ${pageNumber}`
   );
 
-  // TODO: account for agencyIds
+  // TODO: account for agencyIds (?)
 
   const query = `SELECT * FROM ${AGENCIES_TABLE} WHERE taxonomy.category = '${taxonomyId}' LIMIT ${limit}`;
   const response: ScosAgencyDto[] = await makeSCOSRequest(query);
