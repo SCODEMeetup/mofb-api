@@ -2,14 +2,14 @@ import ScosAddressDto from './scosAddressDto';
 import ScosPhoneDto from './ScosPhoneDto';
 
 export default interface ScosSiteDto {
-  Address: ScosAddressDto;
-  Distance: string;
-  Email: string;
-  Latitude: number;
-  Longitude: number;
-  Name: string;
-  STGPhones: ScosPhoneDto;
-  STPhones: ScosPhoneDto;
-  STText: string;
-  URL: string;
+  address: ScosAddressDto[];
+  distance: string;
+  email: string;
+  latitude: number;
+  longitude: number;
+  name: string;
+  stgphones: ScosPhoneDto[];
+  stphones: ScosPhoneDto[];
+  sttext: string;
+  url: string;
 }

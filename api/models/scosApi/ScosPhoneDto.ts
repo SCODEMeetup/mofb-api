@@ -1,4 +1,4 @@
 export default interface ScosPhoneDto {
-  Phone: string;
-  Type: string;
+  phone: string;
+  type: string;
 }
