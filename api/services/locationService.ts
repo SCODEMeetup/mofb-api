@@ -29,8 +29,8 @@ function mapToLocationDto(agency: ScosAgencyDto): LocationDto | null {
   const hours =
     agency.site_info.detailtext.find(x => x.label === 'Hours')?.text ?? '';
 
-  // TODO: this doesn't exist on this dataset
-  const handicapAccessFlag = 'Y';
+  // TODO: this doesn't exist on this dataset: defaulting to no so we don't have false positives
+  const handicapAccessFlag = 'N';
 
   return {
     id: agency.site_id,
@@ -57,7 +57,11 @@ async function getLocations(
     `Getting locations by taxonomy id: ${taxonomyId}; limit: ${limit}; pageNumber: ${pageNumber}`
   );
 
-  const query = `SELECT * FROM ${AGENCIES_TABLE} WHERE taxonomy.category = '${taxonomyId}' LIMIT ${limit}`;
+  const query = `
+    SELECT * FROM ${AGENCIES_TABLE}
+    WHERE taxonomy.category = '${taxonomyId}'
+    OR taxonomy.sub_category = '${taxonomyId}' 
+    LIMIT ${limit}`;
   const response: ScosAgencyDto[] = await makeSCOSRequest(query);
 
   return response.map(mapToLocationDto).filter(notEmpty);

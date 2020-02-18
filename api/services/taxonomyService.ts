@@ -22,11 +22,12 @@ async function getSubcategories(id: string): Promise<TaxonomyDto[]> {
 
   return response[0].subcat.map(
     (subcat: ScosSubcategoryDto): TaxonomyDto => ({
-      id: subcat.subcategoryid,
+      // ids aren't available in the agencies table, so we're just passing around the string for now
+      id: subcat.subcategory,
       description: subcat.subcategory,
       parentCategoryId: id,
-      // TODO: hardcoded bc I'm not sure if this is still available in the data
-      level: 1,
+      // "categories" are level 1; "subcategories" are level 2
+      level: 2,
     })
   );
 }
