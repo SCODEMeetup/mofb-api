@@ -22,6 +22,7 @@ module.exports = {
     'import/prefer-default-export': 0,
     'class-methods-use-this': 0,
     '@typescript-eslint/no-unused-vars': 2,
+    '@typescript-eslint/no-inferrable-types': 0,
     '@typescript-eslint/explicit-member-accessibility': [
       'warn',
       { accessibility: 'no-public' },
