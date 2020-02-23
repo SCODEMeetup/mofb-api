@@ -24,8 +24,11 @@
   "paths": {
     "@/*": ["api/*"]
   },
+  "include": [
+    "api/**/*"
+  ],
   "exclude": [
     "node_modules",
-    "test/**/*"
-  ],
+    "test"
+  ]
 }

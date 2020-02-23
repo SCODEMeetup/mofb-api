@@ -1,14 +1,18 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    project: './tsconfig.json',
+    project: ['./tsconfig.json', './test/tsconfig.json'],
   },
-  plugins: ['@typescript-eslint'],
+  plugins: [
+    '@typescript-eslint',
+    'jest'
+  ],
   extends: [
     'airbnb-base',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
     'prettier/@typescript-eslint',
+    'plugin:jest/recommended'
   ],
   settings: {
     'import/resolver': {
@@ -31,7 +35,7 @@ module.exports = {
   // rules specific to testing files
   overrides: [
     {
-      files: ['test/**/*.ts'],
+      files: ['**/test/**/*.test.[jt]s?(x)'],
       rules: {
         '@typescript-eslint/no-explicit-any': 0,
         '@typescript-eslint/explicit-function-return-type': 0,
