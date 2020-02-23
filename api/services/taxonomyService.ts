@@ -16,7 +16,7 @@ async function getSubcategories(id: string): Promise<TaxonomyDto[]> {
     query
   );
 
-  if (response?.length === 0) {
+  if (!response?.length) {
     throw new NotFoundError(`Invalid category id ${id}`);
   }
 

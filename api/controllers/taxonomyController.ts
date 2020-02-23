@@ -12,7 +12,9 @@ export default class TaxonomyController {
    */
   @GET
   @Path('/:id/children')
-  async getSubcategories(@PathParam('id') id: string): Promise<TaxonomyDto[]> {
+  static async getSubcategories(
+    @PathParam('id') id: string
+  ): Promise<TaxonomyDto[]> {
     return getSubcategories(id);
   }
 }

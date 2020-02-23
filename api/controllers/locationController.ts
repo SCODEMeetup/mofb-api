@@ -9,14 +9,16 @@ export default class LocationController {
   /**
    * Returns a list of locations.
    * @param taxonomyId NOTE: this is the name of a category, e.g., 'Health Care"
+   * @param limit
+   * @param pageNumber
    */
   @GET
-  async getLocations(
+  static async getLocations(
     @QueryParam('taxonomyId') taxonomyId: string,
     @QueryParam('limit') limit: string = '500',
     @QueryParam('pageNumber') pageNumber: string = '1'
   ): Promise<LocationDto[]> {
-    const limitInt = Math.min(500, parseInt(limit, 10));
+    const limitInt = parseInt(limit, 10) || 500;
     const pageNumberInt = parseInt(pageNumber, 10);
     return getLocations(taxonomyId, limitInt, pageNumberInt);
   }

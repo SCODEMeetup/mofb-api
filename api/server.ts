@@ -3,34 +3,33 @@ import dotenv from 'dotenv';
 import express from 'express';
 import { Server } from 'typescript-rest';
 import createLogger, { initLogger } from './utils/logger';
+import { ENV, PORT, LOG_LEVEL } from './utils/constants';
 
-const { ENV } = process.env;
-const path = `.env${ENV ? `.${ENV}` : ''}`;
-dotenv.config({ path });
-
-const { PORT = 8000, LOG_LEVEL = 'info' } = process.env;
-
-initLogger(LOG_LEVEL);
-const log = createLogger('mofb-api');
-
-// NOTE: these imports happen here because they require the env to be configured first
-/* eslint-disable import/first */
 import controllers from './controllers';
 import {
   handle404Error,
   handleClientError,
   handleServerError,
 } from './middleware/errorHandlers';
-/* eslint-enable import/first */
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const handleError = (e: any): void => {
+const path = `.env${ENV ? `.${ENV}` : ''}`;
+dotenv.config({ path });
+
+initLogger(LOG_LEVEL);
+const log = createLogger('mofb-api');
+
+const handleException = (e: Error): void => {
   log.error(e);
   process.exit(1);
 };
 
-process.on('uncaughtException', handleError);
-process.on('unhandledRejection', handleError);
+const handleRejection = (reason: {} | null | undefined): void => {
+  log.error(reason);
+  process.exit(1);
+};
+
+process.on('uncaughtException', handleException);
+process.on('unhandledRejection', handleRejection);
 
 const app = express();
 

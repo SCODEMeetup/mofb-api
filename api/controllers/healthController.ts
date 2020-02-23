@@ -11,7 +11,7 @@ export default class HealthController {
    */
   @GET
   @Path('/status')
-  async getStatus(): Promise<HealthDto> {
+  static async getStatus(): Promise<HealthDto> {
     return getHealth();
   }
 }
