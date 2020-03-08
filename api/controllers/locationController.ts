@@ -13,7 +13,7 @@ export default class LocationController {
    * @param pageNumber
    */
   @GET
-  static async getLocations(
+  async getLocations(
     @QueryParam('taxonomyId') taxonomyId: string,
     @QueryParam('limit') limit: string = '500',
     @QueryParam('pageNumber') pageNumber: string = '1'

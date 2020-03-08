@@ -2,8 +2,19 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
 import { Server } from 'typescript-rest';
+
+const { ENV } = process.env;
+const path = `.env${ENV ? `.${ENV}` : ''}`;
+dotenv.config({ path });
+
+// NOTE: these imports happen here because they require dotenv to be configured first
+/* eslint-disable import/first */
+import { PORT, LOG_LEVEL, IS_TESTING } from './utils/constants';
 import createLogger, { initLogger } from './utils/logger';
-import { ENV, PORT, LOG_LEVEL } from './utils/constants';
+
+// NOTE: this initLogger function needs to be called before importing any file that uses the logger
+initLogger(LOG_LEVEL);
+const log = createLogger('mofb-api');
 
 import controllers from './controllers';
 import {
@@ -11,29 +22,19 @@ import {
   handleClientError,
   handleServerError,
 } from './middleware/errorHandlers';
+/* eslint-enable import/first */
 
-const path = `.env${ENV ? `.${ENV}` : ''}`;
-dotenv.config({ path });
-
-initLogger(LOG_LEVEL);
-const log = createLogger('mofb-api');
-
-const handleException = (e: Error): void => {
+const handleException = (e: Error | {} | null | undefined): void => {
   log.error(e);
   process.exit(1);
 };
 
-const handleRejection = (reason: {} | null | undefined): void => {
-  log.error(reason);
-  process.exit(1);
-};
-
 process.on('uncaughtException', handleException);
-process.on('unhandledRejection', handleRejection);
+process.on('unhandledRejection', handleException);
 
 const app = express();
 
-if (ENV !== 'test') {
+if (!IS_TESTING) {
   Server.swagger(app, { filePath: './dist/swagger.json' });
 }
 
