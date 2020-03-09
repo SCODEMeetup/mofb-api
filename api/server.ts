@@ -48,11 +48,13 @@ handle404Error(app);
 handleClientError(app);
 handleServerError(app);
 
-app.listen(
-  PORT,
-  async (): Promise<void> => {
-    log.info(`Server is running on port ${PORT}...`);
-  }
-);
+if (!IS_TESTING) {
+  app.listen(
+    PORT,
+    async (): Promise<void> => {
+      log.info(`Server is running on port ${PORT}...`);
+    }
+  );
+}
 
 export default app;
