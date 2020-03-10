@@ -1,25 +1,17 @@
-import request from 'supertest';
-import app from '../../../api/server';
+import TaxonomyController from '../../../api/controllers/taxonomyController';
 import { getSubcategories } from '../../../api/services/taxonomyService';
 
 jest.mock('../../../api/services/taxonomyService');
 
-beforeEach(() => {
-  const getSubcategoriesMock = getSubcategories as jest.Mock;
-  // doesn't matter what's returned, as long as it's not empty
-  getSubcategoriesMock.mockResolvedValue('');
-});
+describe('TaxonomyController', () => {
+  const taxonomyController = new TaxonomyController();
 
-describe('/taxonomy', () => {
-  describe('GET /:id/children', () => {
+  describe('.getSubcategories', () => {
     it('calls the service with an ID', async () => {
       const category = '123';
 
-      const result = await request(app).get(
-        `/api/taxonomy/${category}/children`
-      );
+      await taxonomyController.getSubcategories(category);
 
-      expect(result.status).toEqual(200);
       expect(getSubcategories).toHaveBeenCalledWith(category);
     });
   });

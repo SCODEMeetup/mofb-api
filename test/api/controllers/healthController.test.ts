@@ -10,8 +10,8 @@ beforeEach(() => {
   getHealthMock.mockResolvedValue('');
 });
 
-describe('/health', () => {
-  describe('GET /status', () => {
+describe('HealthController', () => {
+  describe('.getStatus', () => {
     it('calls the service', async () => {
       const result = await request(app).get('/api/health/status');
       expect(result.status).toEqual(200);
