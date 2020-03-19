@@ -30,8 +30,11 @@ describe('locationService', () => {
                   name: 'Awesome Location',
                   latitude: '43.23498135',
                   longitude: '-45.9599555',
-                  stgphones: ['(614) 123-4567'],
-                  stphones: ['(614) 123-4568'],
+                  stgphones: [{ phone: '(614) 123-4567 Administrative' }],
+                  stphones: [
+                    { phone: '(614) 123-4568 Other' },
+                    { phone: '(614) 123-4567 Administrative' },
+                  ],
                 },
               ],
               detailtext: [
@@ -78,9 +81,10 @@ describe('locationService', () => {
       expect(location.address2).toEqual('Columbus OH');
       expect(location.zipCode).toEqual('43220');
       expect(location.name).toEqual('Awesome Location');
-      expect(location.areaCode).toEqual('');
-      expect(location.phoneNumber).toEqual('(614) 123-4567, (614) 123-4568');
-      expect(location.phoneExtension).toEqual('');
+      expect(location.phones).toEqual([
+        '(614) 123-4567 Administrative',
+        '(614) 123-4568 Other',
+      ]);
       expect(location.handicapAccessFlag).toEqual('N');
       expect(location.hours).toEqual('M-F 12-5p');
       expect(location.lat).toEqual('43.23498135');

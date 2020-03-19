@@ -1,3 +1,4 @@
+import { uniq } from 'lodash';
 import { makeSCOSRequest } from './scosService';
 import getLogger from '../utils/logger';
 import { AGENCIES_TABLE } from '../utils/constants';
@@ -24,7 +25,7 @@ function mapToLocationDto(agency: ScosAgencyDto): LocationDto | null {
   // not sure the difference between "st" vs "stg" phones
   // so we'll just show them all
   const phoneList = [...site.stgphones, ...site.stphones];
-  const phoneNumber = phoneList.join(', ');
+  const phones = uniq(phoneList.map(p => p.phone));
 
   const hours =
     agency.site_info.detailtext.find(x => x.label === 'Hours')?.text || '';
@@ -38,9 +39,7 @@ function mapToLocationDto(agency: ScosAgencyDto): LocationDto | null {
     address2,
     zipCode: address.zip,
     name: site.name,
-    areaCode: '',
-    phoneNumber,
-    phoneExtension: '',
+    phones,
     handicapAccessFlag,
     hours,
     lat: `${site.latitude}`,
