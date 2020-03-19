@@ -1,11 +1,12 @@
 import bunyan from 'bunyan';
+import { IS_TESTING } from './constants';
 
 let logLevel: bunyan.LogLevel;
 
 const createLogger = (name: string): bunyan =>
   bunyan.createLogger({
     name,
-    level: logLevel,
+    level: IS_TESTING ? bunyan.FATAL + 1 : logLevel,
   });
 
 export function initLogger(level: string): void {

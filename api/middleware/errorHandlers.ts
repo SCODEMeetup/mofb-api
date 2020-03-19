@@ -4,6 +4,7 @@ import {
   HttpError,
 } from 'typescript-rest/dist/server/model/errors';
 import createLogger from '../utils/logger';
+import { ENV } from '../utils/constants';
 
 const log = createLogger('errorHandler');
 
@@ -19,7 +20,7 @@ const handleClientError = (router: Router): void => {
   router.use(
     (err: Error, req: Request, res: Response, next: NextFunction): void => {
       if (err instanceof HttpError) {
-        if (process.env.ENV !== 'test') {
+        if (ENV !== 'test') {
           log.warn(err);
         }
         res.status(err.statusCode).send({
@@ -36,21 +37,12 @@ const handleClientError = (router: Router): void => {
 
 const handleServerError = (router: Router): void => {
   router.use(
-    async (
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      err: any,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      req: Request,
-      res: Response,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      next: NextFunction
-    ): Promise<void> => {
-      if (process.env.ENV !== 'test') {
+    async (err: Error, req: Request, res: Response): Promise<void> => {
+      if (ENV !== 'test') {
         log.error(err);
       }
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const data: Record<string, any> = {
+      const data = {
         title: err.name,
         message: 'Internal Server Error',
         status: 500,

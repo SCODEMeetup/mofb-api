@@ -4,9 +4,7 @@ export default interface LocationDto {
   address2: string;
   zipCode: string;
   name: string;
-  areaCode: string;
-  phoneNumber: string;
-  phoneExtension: string;
+  phones: string[];
   handicapAccessFlag: 'Y' | 'N';
   hours: string;
   lat: string;
