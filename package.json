@@ -4,7 +4,7 @@
   "description": "Columbus Helper API",
   "scripts": {
     "dev": "tsc-watch --preserveWatchOutput --onSuccess \"concurrently 'npm run swagger' 'node ./api/server.js | bunyan'\"",
-    "start": "ENV=production node ./api/server.js",
+    "start": "ENV=production npm run swagger && node ./api/server.js | bunyan",
     "swagger": "swaggerGen -c ./swagger.config.json",
     "build": "npm install && npm run swagger",
     "lint": "eslint './**/*.ts'",
