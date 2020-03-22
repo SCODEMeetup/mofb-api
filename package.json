@@ -3,8 +3,8 @@
   "version": "2.0.0",
   "description": "Columbus Helper API",
   "scripts": {
-    "start": "tsc-watch --preserveWatchOutput --onSuccess \"concurrently 'npm run swagger' 'node ./api/server.js | bunyan'\"",
-    "start:prod": "ENV=production node ./api/server.js",
+    "dev": "tsc-watch --preserveWatchOutput --onSuccess \"concurrently 'npm run swagger' 'node ./api/server.js | bunyan'\"",
+    "start": "ENV=production node ./api/server.js",
     "swagger": "swaggerGen -c ./swagger.config.json",
     "build": "npm install && npm run swagger",
     "lint": "eslint './**/*.ts'",
