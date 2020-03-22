@@ -8,14 +8,19 @@ describe('LocationController', () => {
 
   describe('.getLocations', () => {
     it('calls the service for the locations', async () => {
-      const category = '123';
+      const category1 = '123';
+      const category2 = '345';
       const limit = '250';
       const pageNumber = '2';
 
-      await locationController.getLocations(category, limit, pageNumber);
+      await locationController.getLocations(
+        `${category1},${category2}`,
+        limit,
+        pageNumber
+      );
 
       expect(getLocations).toHaveBeenCalledWith(
-        category,
+        [category1, category2],
         parseInt(limit, 10),
         parseInt(pageNumber, 10)
       );

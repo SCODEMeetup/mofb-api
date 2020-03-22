@@ -1,7 +1,7 @@
 import { uniq } from 'lodash';
 import { makeSCOSRequest } from './scosService';
 import getLogger from '../utils/logger';
-import { AGENCIES_TABLE } from '../utils/constants';
+import { AGENCIES_TABLE, CATEGORIES_TABLE } from '../utils/constants';
 import LocationDto from '../models/dto/locationDto';
 import ScosAgencyDto from '../models/scosApi/scosAgencyDto';
 import { notEmpty } from '../utils/typeGuards';
@@ -48,22 +48,34 @@ function mapToLocationDto(agency: ScosAgencyDto): LocationDto | null {
 }
 
 async function getLocations(
-  taxonomyId: string,
+  taxonomyIds: string[],
   limit: number,
   pageNumber: number
 ): Promise<LocationDto[]> {
   log.debug(
-    `Getting locations by taxonomy id: ${taxonomyId}; limit: ${limit}; pageNumber: ${pageNumber}`
+    `Getting locations by taxonomy ids: ${taxonomyIds}; limit: ${limit}; pageNumber: ${pageNumber}`
   );
 
+  const categories = taxonomyIds.map(t => `'${t}'`).join(', ');
+
   const query = `
-    SELECT * FROM ${AGENCIES_TABLE}
-    WHERE taxonomy.category = '${taxonomyId}'
-    OR taxonomy.sub_category = '${taxonomyId}' 
-    LIMIT ${limit}`;
+  SELECT DISTINCT a.* FROM 
+    ${AGENCIES_TABLE} a 
+    JOIN ${CATEGORIES_TABLE} c ON a.taxonomy.category = c.category 
+    CROSS JOIN UNNEST(c.subcat) AS subcat
+  WHERE
+    a.taxonomy.sub_category = subcat.subcategory AND
+    (
+      c.categoryid IN (${categories}) OR
+      subcat.subcategoryid IN (${categories})
+    )
+  LIMIT ${limit}`;
+
   const response: ScosAgencyDto[] = await makeSCOSRequest(query);
 
-  return response.map(mapToLocationDto).filter(notEmpty);
+  const mapped = response.map(mapToLocationDto).filter(notEmpty);
+  log.debug(`Returning ${mapped.length} locations`);
+  return mapped;
 }
 
 export { getLocations };
