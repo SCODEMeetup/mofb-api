@@ -8,7 +8,7 @@ import LocationDto from '../models/dto/locationDto';
 export default class LocationController {
   /**
    * Returns a list of locations.
-   * @param taxonomyId NOTE: this is the name of a category, e.g., 'Health Care"
+   * @param taxonomyId NOTE: this is a comma-separated list of category ids
    * @param limit
    * @param pageNumber
    */
@@ -20,6 +20,7 @@ export default class LocationController {
   ): Promise<LocationDto[]> {
     const limitInt = parseInt(limit, 10) || 500;
     const pageNumberInt = parseInt(pageNumber, 10);
-    return getLocations(taxonomyId, limitInt, pageNumberInt);
+    const taxonomyIds = taxonomyId.split(',');
+    return getLocations(taxonomyIds, limitInt, pageNumberInt);
   }
 }
