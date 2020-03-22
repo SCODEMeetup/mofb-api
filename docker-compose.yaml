@@ -6,7 +6,7 @@ services:
       context: .
     container_name: mofb-api
     ports:
-      - 3000:3000
+      - 8000:8000
     environment:
       env: dev
-      PORT: 3000
+      PORT: 8000
