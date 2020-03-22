@@ -35,7 +35,7 @@ process.on('unhandledRejection', handleException);
 const app = express();
 
 if (!IS_TESTING) {
-  Server.swagger(app, { filePath: './dist/swagger.json' });
+  Server.swagger(app, { filePath: './api/swagger.json' });
 }
 
 // pre-routing middleware

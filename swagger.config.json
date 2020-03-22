@@ -1,6 +1,6 @@
 {
   "swagger": {
-    "outputDirectory": "./dist",
+    "outputDirectory": "./api",
     "entryFile": "./api/server.ts",
     "name": "Community Helper API",
     "license": {

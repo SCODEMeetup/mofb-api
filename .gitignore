@@ -16,5 +16,9 @@ yarn-error.log
 .nyc_output
 /coverage
 
+api/**/*.js
+api/**/*.js.map
+api/swagger.json
+api/swagger.yaml
 dist
 .env
