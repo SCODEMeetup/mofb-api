@@ -64,8 +64,11 @@ describe('locationService', () => {
     JOIN ${CATEGORIES_TABLE} c ON a.taxonomy.category = c.category 
     CROSS JOIN UNNEST(c.subcat) AS subcat
   WHERE
-    c.categoryid IN ('${category}') OR
-    subcat.subcategoryid IN ('${category}')
+    a.taxonomy.sub_category = subcat.subcategory AND
+    (
+      c.categoryid IN ('${category}') OR
+      subcat.subcategoryid IN ('${category}')
+    )
   LIMIT ${limit}`;
 
       await getLocations([category], limit, page);

@@ -64,13 +64,18 @@ async function getLocations(
     JOIN ${CATEGORIES_TABLE} c ON a.taxonomy.category = c.category 
     CROSS JOIN UNNEST(c.subcat) AS subcat
   WHERE
-    c.categoryid IN (${categories}) OR
-    subcat.subcategoryid IN (${categories})
+    a.taxonomy.sub_category = subcat.subcategory AND
+    (
+      c.categoryid IN (${categories}) OR
+      subcat.subcategoryid IN (${categories})
+    )
   LIMIT ${limit}`;
 
   const response: ScosAgencyDto[] = await makeSCOSRequest(query);
 
-  return response.map(mapToLocationDto).filter(notEmpty);
+  const mapped = response.map(mapToLocationDto).filter(notEmpty);
+  log.debug(`Returning ${mapped.length} locations`);
+  return mapped;
 }
 
 export { getLocations };
