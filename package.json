@@ -4,13 +4,13 @@
   "description": "Columbus Helper API",
   "scripts": {
     "dev": "tsc-watch --preserveWatchOutput --onSuccess \"concurrently 'npm run swagger' 'node ./api/server.js | bunyan'\"",
-    "start": "ENV=production npm run swagger && node ./api/server.js | bunyan",
+    "start": "ENV=production node ./api/server.js | bunyan",
     "swagger": "swaggerGen -c ./swagger.config.json",
     "build": "npm install && npm run swagger",
     "lint": "eslint './**/*.ts'",
     "lint:fix": "eslint --fix './**/*.ts'",
     "test": "NODE_ENV=test jest --config=jest.config.js --require=test/setup-tests.ts",
-    "gcp-build": "tsc -p .",
+    "gcp-build": "tsc -p . && npm run swagger",
     "deploy": "gcloud app deploy"
   },
   "repository": {
