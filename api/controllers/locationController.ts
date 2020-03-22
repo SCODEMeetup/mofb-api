@@ -14,7 +14,7 @@ export default class LocationController {
    */
   @GET
   async getLocations(
-    @QueryParam('taxonomyId') taxonomyId: string,
+    @QueryParam('taxonomyId') taxonomyId: string = '',
     @QueryParam('limit') limit: string = '500',
     @QueryParam('pageNumber') pageNumber: string = '1'
   ): Promise<LocationDto[]> {

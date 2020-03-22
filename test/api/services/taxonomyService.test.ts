@@ -48,7 +48,7 @@ describe('taxonomyService', () => {
 
       const [taxonomy] = await getSubcategories(category);
 
-      expect(taxonomy.id).toEqual('test sub category');
+      expect(taxonomy.id).toEqual('test sub id');
       expect(taxonomy.description).toEqual('test sub category');
       expect(taxonomy.parentCategoryId).toEqual(category);
       expect(taxonomy.level).toEqual(2);

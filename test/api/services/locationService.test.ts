@@ -1,6 +1,6 @@
 import * as SCOSService from '../../../api/services/scosService';
 import { getLocations } from '../../../api/services/locationService';
-import { AGENCIES_TABLE } from '../../../api/utils/constants';
+import { AGENCIES_TABLE, CATEGORIES_TABLE } from '../../../api/utils/constants';
 
 import SpyInstance = jest.SpyInstance;
 
@@ -59,22 +59,26 @@ describe('locationService', () => {
       const page = 1;
 
       const sqlQuery = `
-    SELECT * FROM ${AGENCIES_TABLE}
-    WHERE taxonomy.category = '${category}'
-    OR taxonomy.sub_category = '${category}' 
-    LIMIT ${limit}`;
+  SELECT DISTINCT a.* FROM 
+    ${AGENCIES_TABLE} a 
+    JOIN ${CATEGORIES_TABLE} c ON a.taxonomy.category = c.category 
+    CROSS JOIN UNNEST(c.subcat) AS subcat
+  WHERE
+    c.categoryid IN ('${category}') OR
+    subcat.subcategoryid IN ('${category}')
+  LIMIT ${limit}`;
 
-      await getLocations(category, limit, page);
+      await getLocations([category], limit, page);
 
       expect(SCOSService.makeSCOSRequest).toHaveBeenCalledWith(sqlQuery);
     });
 
-    it('returns a formatted list of taxonomies', async () => {
+    it('returns a formatted list of locations', async () => {
       const category = '101';
       const limit = 350;
       const page = 1;
 
-      const [location] = await getLocations(category, limit, page);
+      const [location] = await getLocations([category], limit, page);
 
       expect(location.id).toEqual('123');
       expect(location.address1).toEqual('150 Oak St');

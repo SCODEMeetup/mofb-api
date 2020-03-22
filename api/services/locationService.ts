@@ -59,7 +59,7 @@ async function getLocations(
   const categories = taxonomyIds.map(t => `'${t}'`).join(', ');
 
   const query = `
-  SELECT  DISTINCT a.* FROM 
+  SELECT DISTINCT a.* FROM 
     ${AGENCIES_TABLE} a 
     JOIN ${CATEGORIES_TABLE} c ON a.taxonomy.category = c.category 
     CROSS JOIN UNNEST(c.subcat) AS subcat
