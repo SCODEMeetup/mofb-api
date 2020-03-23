@@ -20,11 +20,10 @@
 
 1. If Node was installed via `nvm`, run `nvm use` to use the correct version
 2. Run `npm i` to install all node modules
-3. Copy `.env.example`, rename to `.env`, and update any necessary config
-4. Start server using
+3. Start server using
 
 ```bash
-$ npm start
+$ npm run dev
 ```
 
 3. Access Swagger docs at http://localhost:8000/api-docs (endpoints can be tested directly from this page)
