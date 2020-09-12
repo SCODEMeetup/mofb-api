@@ -10,7 +10,7 @@ async function makeSCOSRequest(body: any): Promise<any> {
     body,
     headers: {
       'Content-Type': 'text/plain',
-      'User-Agent': 'needed something for scos',
+      'User-Agent': 'mofb-api',
     },
   };
   const url = `${SCOS_HOST}/api/v1/query?_format=json`;
