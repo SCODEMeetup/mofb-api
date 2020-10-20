@@ -1,14 +1,18 @@
 import { uniq } from 'lodash';
 import { makeSCOSRequest } from './scosService';
 import getLogger from '../utils/logger';
-import { AGENCIES_TABLE, CATEGORIES_TABLE } from '../utils/constants';
+import { AGENCIES_TABLE, CATEGORIES_TABLE }
+  from '../utils/constants';
 import LocationDto from '../models/dto/locationDto';
 import ScosAgencyDto from '../models/scosApi/scosAgencyDto';
 import { notEmpty } from '../utils/typeGuards';
+import { getFTLocationData } from './freshtrakService';
+import { objectExpression } from '@babel/types';
+import freshtrakLocationDto from '../models/freshtrakAPI/freshtrakLocationDto';
 
 const log = getLogger('locationService');
 
-function mapToLocationDto(agency: ScosAgencyDto): LocationDto | null {
+async function mapToLocationDto(agency: ScosAgencyDto): Promise<LocationDto | null> {
   // "Site" is an array of 1 element
   const [site] = agency.site_info.site;
 
@@ -33,8 +37,12 @@ function mapToLocationDto(agency: ScosAgencyDto): LocationDto | null {
   // TODO: find out how we can determine if locations have handicap access
   const handicapAccessFlag = 'N';
 
+  // retrieve FreshTrak data if there is a match
+  const freshtrakData = await getFTLocationData(agency, address.zip)
+
   return {
     id: agency.site_id,
+    provider_id: agency.provider_id,
     address1,
     address2,
     zipCode: address.zip,
@@ -44,6 +52,7 @@ function mapToLocationDto(agency: ScosAgencyDto): LocationDto | null {
     hours,
     lat: `${site.latitude}`,
     long: `${site.longitude}`,
+    freshtrakData,
   };
 }
 
@@ -72,10 +81,11 @@ async function getLocations(
   LIMIT ${limit}`;
 
   const response = await makeSCOSRequest<ScosAgencyDto[]>(query);
-
-  const mapped = response.map(mapToLocationDto).filter(notEmpty);
-  log.debug(`Returning ${mapped.length} locations`);
-  return mapped;
+  const promises = response.map(mapToLocationDto);
+  const mapped = await Promise.all(promises);
+  const filtered = mapped.filter(notEmpty);
+  log.debug(`Returning ${filtered.length} locations`);
+  return filtered;
 }
 
 export { getLocations };
