@@ -1,6 +1,6 @@
 import request from 'request-promise';
 import getLogger from '../utils/logger';
-import { FRESHTRAK_API_HOST, FRESHTRAK_ZIP_URL, FRESHTRAK_AGENCY_URL, FRESHTRAK_UTM_PARAMS } from '../utils/constants';
+import { FRESHTRAK_API_HOST, FRESHTRAK_ZIP_URL, FRESHTRAK_AGENCY_URL } from '../utils/constants';
 import ScosAgencyDto from '../models/scosApi/scosAgencyDto';
 import freshtrakEventDto from '../models/freshtrakApi/freshtrakEventDto';
 import freshtrakLocationDto from '../models/freshtrakApi/freshtrakLocationDto';
@@ -36,7 +36,7 @@ async function getFTLocationData(agency: ScosAgencyDto, zip: string) {
     var events: freshtrakEventDto[] | null = null;
     
     if(freshTrakAgencyID) {
-      agencyURL = FRESHTRAK_AGENCY_URL + freshTrakAgencyID + FRESHTRAK_UTM_PARAMS;
+      agencyURL = FRESHTRAK_AGENCY_URL + freshTrakAgencyID;
       const response: freshtrakResponseDto = await getFreshTrakEvents(freshTrakAgencyID);
       if(response)  {
         agencyName = response.agency.name;
@@ -44,7 +44,7 @@ async function getFTLocationData(agency: ScosAgencyDto, zip: string) {
       }
     }
     const ftLocationData: freshtrakLocationDto = {
-      zipURL: FRESHTRAK_ZIP_URL + zip + FRESHTRAK_UTM_PARAMS,
+      zipURL: FRESHTRAK_ZIP_URL + zip,
       agencyURL: agencyURL,
       agencyName: agencyName,
       events: events,
