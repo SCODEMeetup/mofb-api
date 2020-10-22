@@ -7,7 +7,7 @@ import LocationDto from '../models/dto/locationDto';
 import ScosAgencyDto from '../models/scosApi/scosAgencyDto';
 import { notEmpty } from '../utils/typeGuards';
 import { getFTLocationData } from './freshtrakService';
-import { objectExpression } from '@babel/types';
+//import { objectExpression } from '@babel/types';
 import freshtrakLocationDto from '../models/freshtrakAPI/freshtrakLocationDto';
 
 const log = getLogger('locationService');
@@ -65,7 +65,7 @@ async function getLocations(
     `Getting locations by taxonomy ids: ${taxonomyIds}; limit: ${limit}; pageNumber: ${pageNumber}`
   );
 
-  let categories = taxonomyIds.map(t => `'${t}'`).join(', ');
+  const categories = taxonomyIds.map(t => `'${t}'`).join(', ');
 
   const query = `
   SELECT DISTINCT a.* FROM 
