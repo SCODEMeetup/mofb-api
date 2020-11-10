@@ -24,6 +24,7 @@ describe('scosService', () => {
         body: sqlQuery,
         headers: {
           'Content-Type': 'text/plain',
+          'User-Agent': 'mofb-api',
         },
       });
       expect(response.body).toEqual(sqlQuery);
