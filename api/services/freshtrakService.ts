@@ -2,8 +2,8 @@ import request from 'request-promise';
 import getLogger from '../utils/logger';
 import { FRESHTRAK_API_HOST, FRESHTRAK_ZIP_URL, FRESHTRAK_AGENCY_URL } from '../utils/constants';
 import ScosAgencyDto from '../models/scosApi/scosAgencyDto';
-import freshtrakEventDto from '../models/freshtrakApi/freshtrakEventDto';
-import freshtrakLocationDto from '../models/freshtrakApi/freshtrakLocationDto';
+import freshtrakEventDto from '../models/freshtrakAPI/freshtrakEventDto';
+import freshtrakLocationDto from '../models/freshtrakAPI/freshtrakLocationDto';
 import freshtrakResponseDto from '../models/freshtrakAPI/freshtrakResponseDto';
 
 // in memory map to link site_id to FreshTrak agency id
@@ -29,6 +29,7 @@ freshTrakAgencies.set(10948, 606)
 
 
 async function getFTLocationData(agency: ScosAgencyDto, zip: string) {
+  console.log("agency.taxonomy.sub_category: " + agency.taxonomy.sub_category);
   if(agency.taxonomy.sub_category.includes('Emergency Food')) {
     const freshTrakAgencyID = freshTrakAgencies.get(parseInt(agency.site_id));
     var agencyURL = "";
