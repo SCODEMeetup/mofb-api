@@ -15,10 +15,12 @@ export const ENV = process.env.ENV || 'local';
 
 export const IS_TESTING = process.env.NODE_ENV === 'test';
 
-export const FRESHTRAK_API_HOST = 'https://pantry-finder-api.freshtrak.com';
+export const FRESHTRAK_API_HOST = process.env.FRESHTRAK_API_HOST || 
+  'https://pantry-finder-api.freshtrak.com';
 
-export const FRESHTRAK_ZIP_URL = 'https://beta.freshtrak.com/events/list/';
+export const FRESHTRAK_ZIP_URL = process.env.FRESHTRAK_ZIP_URL || 
+  'https://freshtrak.com/events/list/';
 
-export const FRESHTRAK_AGENCY_URL = 
-  'https://beta.freshtrak.com/agency/events/';
+export const FRESHTRAK_AGENCY_URL = process.env.FRESHTRAK_AGENCY_URL ||
+  'https://freshtrak.com/agency/events/';
   
