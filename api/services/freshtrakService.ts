@@ -5,6 +5,9 @@ import ScosAgencyDto from '../models/scosApi/scosAgencyDto';
 import freshtrakEventDto from '../models/freshtrakAPI/freshtrakEventDto';
 import freshtrakLocationDto from '../models/freshtrakAPI/freshtrakLocationDto';
 import freshtrakResponseDto from '../models/freshtrakAPI/freshtrakResponseDto';
+import { getFreshTrakEvents } from './freshtrakApiService'
+
+const log = getLogger('freshtrakService');
 
 // in memory map to link site_id to FreshTrak agency id
 // ToDo add linkage in FreshTrak Agencies endpoint
@@ -28,51 +31,27 @@ freshTrakAgencies.set(11479, 502)
 freshTrakAgencies.set(10948, 606)
 
 
-async function getFTLocationData(agency: ScosAgencyDto, zip: string) {
-  console.log("agency.taxonomy.sub_category: " + agency.taxonomy.sub_category);
-  if(agency.taxonomy.sub_category.includes('Emergency Food')) {
-    const freshTrakAgencyID = freshTrakAgencies.get(parseInt(agency.site_id));
-    var agencyURL = "";
-    var agencyName = "";
-    var events: freshtrakEventDto[] | null = null;
-    
-    if(freshTrakAgencyID) {
-      agencyURL = FRESHTRAK_AGENCY_URL + freshTrakAgencyID;
-      const response: freshtrakResponseDto = await getFreshTrakEvents(freshTrakAgencyID);
-      if(response)  {
-        agencyName = response.agency.name;
-        events = response.agency.events;
-      }
+async function getFTLocationData(site_id: string, zip: string): Promise<freshtrakLocationDto> {
+  const freshTrakAgencyID = freshTrakAgencies.get(parseInt(site_id));
+  var agencyURL = "";
+  var agencyName = "";
+  var events: freshtrakEventDto[] | null = null;
+  
+  if(freshTrakAgencyID) {
+    agencyURL = FRESHTRAK_AGENCY_URL + freshTrakAgencyID;
+    const response: freshtrakResponseDto = await getFreshTrakEvents(freshTrakAgencyID);
+    if(response)  {
+      agencyName = response.agency.name;
+      events = response.agency.events;
     }
-    const ftLocationData: freshtrakLocationDto = {
-      zipURL: FRESHTRAK_ZIP_URL + zip,
-      agencyURL: agencyURL,
-      agencyName: agencyName,
-      events: events,
-    }
-    return(ftLocationData);
   }
-}
-
-const log = getLogger('freshtrakService');
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-async function getFreshTrakEvents(agencyId: any): Promise<any>{
-  const opts = {
-    headers: {
-      'User-Agent': 'mofb-api',
-    },
-  };
-  const url = `${FRESHTRAK_API_HOST}/api/agencies/${agencyId}`;
-
-  log.debug(`Making GET request to ${url}`);
-
-  try {
-    const response = await request.get(url);
-    return JSON.parse(response);
-  } catch (err) {
-    log.debug(`Error from FreshTrak API: ${err}`);
+  const ftLocationData: freshtrakLocationDto = {
+    zipURL: FRESHTRAK_ZIP_URL + zip,
+    agencyURL: agencyURL,
+    agencyName: agencyName,
+    events: events,
   }
+  return(ftLocationData);
 }
 
 export { getFTLocationData };

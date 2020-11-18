@@ -7,6 +7,7 @@ import LocationDto from '../models/dto/locationDto';
 import ScosAgencyDto from '../models/scosApi/scosAgencyDto';
 import { notEmpty } from '../utils/typeGuards';
 import { getFTLocationData } from './freshtrakService';
+import freshtrakLocationDto from '../models/freshtrakAPI/freshtrakLocationDto';
 
 const log = getLogger('locationService');
 
@@ -35,8 +36,13 @@ async function mapToLocationDto(agency: ScosAgencyDto): Promise<LocationDto | nu
   // TODO: find out how we can determine if locations have handicap access
   const handicapAccessFlag = 'N';
 
-  // retrieve FreshTrak data if there is a match
-  const freshtrakData = await getFTLocationData(agency, address.zip)
+  // retrieve FreshTrak data if sub_category is 'Emergency Food'
+  var freshtrakData: freshtrakLocationDto | null;
+  if(agency.taxonomy.sub_category.includes('Emergency Food'))
+    freshtrakData = await getFTLocationData(agency.site_id, address.zip);
+  else
+    freshtrakData = null;
+  
 
   return {
     id: agency.site_id,
