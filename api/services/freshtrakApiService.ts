@@ -1,14 +1,14 @@
 import request from 'request-promise';
 import getLogger from '../utils/logger';
 import { FRESHTRAK_API_HOST } from '../utils/constants';
+import freshtrakResponseDto from '../models/freshtrakAPI/freshtrakResponseDto';
 
 const log = getLogger('freshtrakApiService');
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-async function getFreshTrakEvents(agencyId: any): Promise<any>{
-  console.log('in getFreshTrakEvents');
+  async function getFreshTrakEvents(agencyId: number): Promise<freshtrakResponseDto | null> {
   const opts = {
     headers: {
+      'Content-Type': 'application/json',
       'User-Agent': 'mofb-api',
     },
   };
@@ -21,6 +21,7 @@ async function getFreshTrakEvents(agencyId: any): Promise<any>{
     return JSON.parse(response);
   } catch (err) {
     log.debug(`Error from FreshTrak API: ${err}`);
+    return null;
   }
 }
 
