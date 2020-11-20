@@ -8,7 +8,7 @@ describe('freshtrakService', () => {
   describe('.getFTLocationData', () => {
     let mockGetFreshTrakEvents: SpyInstance;
 
-    beforeAll(() => {
+    beforeEach(() => {
       mockGetFreshTrakEvents = jest
       .spyOn(freshtrakApiService, 'getFreshTrakEvents')
       .mockResolvedValue(
@@ -29,18 +29,8 @@ describe('freshtrakService', () => {
         });
     });
 
-    afterAll(() => {
+    afterEach(() => {
       mockGetFreshTrakEvents.mockRestore();
-    });
-
-    it("doesn't call the freshtrakAPIService when the site_id doesn't map to a FT agencyId", async () => {
-      const site_id = '-9999';
-      const zip = '43123';
-      const agencyId = 6
-
-      await getFTLocationData(site_id, zip);
-      // order of this test matters, must be before any successful tests
-      expect(freshtrakApiService.getFreshTrakEvents).toHaveBeenCalledTimes(0);
     });
 
     it('calls the freshtrakAPIService when the site_id maps to a FT agencyId', async () => {
@@ -53,6 +43,14 @@ describe('freshtrakService', () => {
       expect(freshtrakApiService.getFreshTrakEvents).toHaveBeenCalledWith(agencyId);
     });
 
+    it("doesn't call the freshtrakAPIService when the site_id doesn't map to a FT agencyId", async () => {
+      const site_id = '-9999';
+      const zip = '43123';
+      const agencyId = 6
+
+      await getFTLocationData(site_id, zip);
+      expect(freshtrakApiService.getFreshTrakEvents).toHaveBeenCalledTimes(0);
+    });
 
     it('returns FreshTrak data', async () => {
       const site_id = '4863';

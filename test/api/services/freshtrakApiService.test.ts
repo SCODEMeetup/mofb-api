@@ -7,8 +7,9 @@ jest.mock('request-promise');
 
 describe('freshtrakApiService', () => {
   describe('.getFreshTrakEvents', () => {
-    it('gets a freshtrak agency resource and returns a response object', async () => {
-      const get = jest.spyOn(request, 'get').mockResolvedValue(
+    let get = jest.spyOn(request, 'get')
+    beforeEach(() => {
+      get.mockResolvedValue(
         {
             agency: 
             {
@@ -24,16 +25,22 @@ describe('freshtrakApiService', () => {
                 ],
             },
         });
+    });
 
+    afterEach(() => {
+      get.mockRestore();
+    });
+
+    it('gets a freshtrak agency resource and returns a response object', async () => {
       const agencyId = 6
       const url = `${FRESHTRAK_API_HOST}/api/agencies/${agencyId}`;
-      const response: freshtrakResponseDto | null = await getFreshTrakEvents(agencyId);
+      const response = await getFreshTrakEvents(agencyId);
 
       expect(get).toHaveBeenCalledWith(url);
-      if (response)
+      if (response) {
         expect(response.agency.name).toEqual('Mid-Ohio Foodbank - Kroger Community Pantry');
-      
-      get.mockRestore();
+        expect(response.agency.events[0].name).toEqual('Drive Thru');
+      }
     });
   });
 });
