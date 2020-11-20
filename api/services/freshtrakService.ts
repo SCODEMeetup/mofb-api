@@ -36,7 +36,8 @@ async function getFTLocationData(site_id: string, zip: string): Promise<freshtra
   
   if(freshTrakAgencyID) {
     agencyURL = FRESHTRAK_AGENCY_URL + freshTrakAgencyID;
-    const response: freshtrakResponseDto | null = await getFreshTrakEvents(freshTrakAgencyID);
+    //const response: freshtrakResponseDto | null = await getFreshTrakEvents(freshTrakAgencyID);
+    const response = await getFreshTrakEvents(freshTrakAgencyID);
     if(response)  {
       agencyName = response.agency.name;
       events = response.agency.events;
