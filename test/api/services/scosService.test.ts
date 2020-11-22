@@ -18,7 +18,10 @@ describe('scosService', () => {
       const sqlQuery = 'SELECT * from my_fancy_table';
       const url = `${SCOS_HOST}/api/v1/query?_format=json`;
 
-      const response = await makeSCOSRequest(sqlQuery);
+      const response = await makeSCOSRequest<{
+        body: string;
+        headers: { 'Content-Type': string };
+      }>(sqlQuery);
 
       expect(post).toHaveBeenCalledWith(url, {
         body: sqlQuery,

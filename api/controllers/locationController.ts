@@ -1,4 +1,4 @@
-import { Path, GET, QueryParam } from 'typescript-rest';
+import { GET, Path, QueryParam } from 'typescript-rest';
 import { Tags } from 'typescript-rest-swagger';
 import { getLocations } from '../services/locationService';
 import LocationDto from '../models/dto/locationDto';
