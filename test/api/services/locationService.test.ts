@@ -12,7 +12,7 @@ describe('locationService', () => {
       mockMakeSCOSRequest = jest
         .spyOn(SCOSService, 'makeSCOSRequest')
         .mockResolvedValue([
-          /* eslint-disable @typescript-eslint/camelcase */
+          /* eslint-disable camelcase */
           {
             site_id: '123',
             site_info: {
@@ -45,10 +45,10 @@ describe('locationService', () => {
               ],
             },
             taxonomy: {
-              sub_category: "Emergency Food"
+              sub_category: 'Emergency Food',
             },
           },
-          /* eslint-enable @typescript-eslint/camelcase */
+          /* eslint-enable camelcase */
         ]);
     });
 

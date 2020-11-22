@@ -1,6 +1,6 @@
-import freshtrakEventDto from './freshtrakEventDto';
+import FreshtrakEventDto from './freshtrakEventDto';
 
-export default interface freshtrakAgencyDto {
+export default interface FreshtrakAgencyDto {
   name: string;
-  events: freshtrakEventDto[];
+  events: FreshtrakEventDto[];
 }

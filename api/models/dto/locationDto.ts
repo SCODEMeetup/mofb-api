@@ -1,3 +1,5 @@
+import freshtrakLocationDto from '../freshtrakAPI/freshtrakLocationDto';
+
 export default interface LocationDto {
   id: string;
   provider_id: string;
@@ -10,5 +12,5 @@ export default interface LocationDto {
   hours: string;
   lat: string;
   long: string;
-  freshTrakData: object;
+  freshtrakData: freshtrakLocationDto | null;
 }

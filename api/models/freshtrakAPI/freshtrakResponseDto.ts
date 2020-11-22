@@ -1,5 +1,5 @@
-import freshtrakAgencyDto from './freshtrakAgencyDto';
+import FreshtrakAgencyDto from './freshtrakAgencyDto';
 
-export default interface freshtrakResponseDto {
-  agency: freshtrakAgencyDto;
+export default interface FreshtrakResponseDto {
+  agency: FreshtrakAgencyDto;
 }

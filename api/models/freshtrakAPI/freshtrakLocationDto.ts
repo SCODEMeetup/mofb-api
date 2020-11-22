@@ -1,10 +1,8 @@
-import freshtrakResponseDto from "./freshtrakResponseDto";
-import freshtrakEventDto from "./freshtrakEventDto";
+import FreshtrakEventDto from './freshtrakEventDto';
 
-export default interface freshtrakLocationDto {
-
+export default interface FreshtrakLocationDto {
   zipURL: string;
   agencyURL: string;
   agencyName: string;
-  events: freshtrakEventDto[] | null;
+  events: FreshtrakEventDto[] | null;
 }
