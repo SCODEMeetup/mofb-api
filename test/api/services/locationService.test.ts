@@ -12,7 +12,7 @@ describe('locationService', () => {
       mockMakeSCOSRequest = jest
         .spyOn(SCOSService, 'makeSCOSRequest')
         .mockResolvedValue([
-          /* eslint-disable @typescript-eslint/camelcase */
+          /* eslint-disable camelcase */
           {
             site_id: '123',
             site_info: {
@@ -45,7 +45,7 @@ describe('locationService', () => {
               ],
             },
           },
-          /* eslint-enable @typescript-eslint/camelcase */
+          /* eslint-enable camelcase */
         ]);
     });
 

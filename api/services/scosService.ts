@@ -4,8 +4,9 @@ import { SCOS_HOST } from '../utils/constants';
 
 const log = getLogger('scosService');
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-async function makeSCOSRequest(body: any): Promise<any> {
+async function makeSCOSRequest<T = Record<string, unknown>>(
+  body: Record<string, unknown> | string
+): Promise<T> {
   const opts = {
     body,
     headers: {

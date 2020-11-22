@@ -1,5 +1,7 @@
 import ScosSiteInfoDto from './scosSiteInfoDto';
+import { ScosTaxonomyDto } from './scosTaxonomyDto';
 
+/* eslint-disable camelcase */
 export default interface ScosAgencyDto {
   provider_id: string;
   provider_name: string;
@@ -8,3 +10,4 @@ export default interface ScosAgencyDto {
   site_info: ScosSiteInfoDto;
   taxonomy: ScosTaxonomyDto;
 }
+/* eslint-enable camelcase */
