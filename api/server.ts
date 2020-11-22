@@ -24,7 +24,9 @@ import {
 } from './middleware/errorHandlers';
 /* eslint-enable import/first */
 
-const handleException = (e: Error | {} | null | undefined): void => {
+const handleException = (
+  e: Error | Record<string, unknown> | null | undefined
+): void => {
   log.error(e);
   process.exit(1);
 };

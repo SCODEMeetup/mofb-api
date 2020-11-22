@@ -71,7 +71,7 @@ async function getLocations(
     )
   LIMIT ${limit}`;
 
-  const response: ScosAgencyDto[] = await makeSCOSRequest(query);
+  const response = await makeSCOSRequest<ScosAgencyDto[]>(query);
 
   const mapped = response.map(mapToLocationDto).filter(notEmpty);
   log.debug(`Returning ${mapped.length} locations`);
