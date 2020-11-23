@@ -1,6 +1,6 @@
 {
   "extends": "../tsconfig",
   "baseUrl": ".",
-  "include": ["**/*.ts", "./api/utils/constants.ts"],
+  "include": ["**/*.ts"],
   "exclude": ["node_modules"]
 }
