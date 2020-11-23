@@ -30,7 +30,7 @@ describe('freshtrakService', () => {
       mockGetFreshTrakEvents.mockRestore();
     });
 
-    it('calls the freshtrakAPIService when the site_id maps to a FT agencyId', async () => {
+    it('calls the freshtrakAPIService when the siteId maps to a FT agencyId', async () => {
       const siteId = '4863';
       const zip = '43123';
       const agencyId = 6;
@@ -42,7 +42,7 @@ describe('freshtrakService', () => {
       );
     });
 
-    it("doesn't call the freshtrakAPIService when the site_id doesn't map to a FT agencyId", async () => {
+    it("doesn't call the freshtrakAPIService when the siteId doesn't map to a FT agencyId", async () => {
       const siteId = '-9999';
       const zip = '43123';
 

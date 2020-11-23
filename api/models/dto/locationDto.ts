@@ -1,8 +1,8 @@
 import freshtrakLocationDto from '../freshtrakAPI/freshtrakLocationDto';
 
 export default interface LocationDto {
-  /* eslint-disable camelcase */
   id: string;
+  // eslint-disable-next-line camelcase
   provider_id: string;
   address1: string;
   address2: string;
@@ -14,5 +14,4 @@ export default interface LocationDto {
   lat: string;
   long: string;
   freshtrakData: freshtrakLocationDto | null;
-  /* eslint-enable camelcase */
 }

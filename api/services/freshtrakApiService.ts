@@ -5,9 +5,9 @@ import freshtrakResponseDto from '../models/freshtrakAPI/freshtrakResponseDto';
 
 const log = getLogger('freshtrakApiService');
 
-async function getFreshTrakEvents(
+const getFreshTrakEvents = async (
   agencyId: number
-): Promise<freshtrakResponseDto | null> {
+): Promise<freshtrakResponseDto | null> => {
   const opts = {
     headers: {
       'Content-Type': 'application/json',
@@ -24,6 +24,6 @@ async function getFreshTrakEvents(
     log.debug(`Error from FreshTrak API: ${err}`);
     return null;
   }
-}
+};
 
 export { getFreshTrakEvents };
