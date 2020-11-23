@@ -14,5 +14,5 @@ export default interface LocationDto {
   lat: string;
   long: string;
   freshtrakData: freshtrakLocationDto | null;
-  /* eslint-disable camelcase */
+  /* eslint-enable camelcase */
 }
