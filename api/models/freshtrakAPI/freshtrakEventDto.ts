@@ -1,5 +1,7 @@
 export default interface freshtrakEventDto {
-    name: string;
-    exception_note: string;
-    event_details: string;
-  }
+  name: string;
+  // eslint-disable-next-line camelcase
+  exception_note: string;
+  // eslint-disable-next-line camelcase
+  event_details: string;
+}

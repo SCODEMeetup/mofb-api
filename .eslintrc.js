@@ -37,7 +37,6 @@ module.exports = {
     {
       files: ['**/test/**/*.test.[jt]s?(x)'],
       rules: {
-        '@typescript-eslint/no-explicit-any': 0,
         '@typescript-eslint/explicit-function-return-type': 0,
         '@typescript-eslint/no-object-literal-type-assertion': 0,
         'import/no-extraneous-dependencies': [

@@ -1,8 +1,7 @@
 import { uniq } from 'lodash';
 import { makeSCOSRequest } from './scosService';
 import getLogger from '../utils/logger';
-import { AGENCIES_TABLE, CATEGORIES_TABLE }
-  from '../utils/constants';
+import { AGENCIES_TABLE, CATEGORIES_TABLE } from '../utils/constants';
 import LocationDto from '../models/dto/locationDto';
 import ScosAgencyDto from '../models/scosApi/scosAgencyDto';
 import { notEmpty } from '../utils/typeGuards';
@@ -11,7 +10,9 @@ import freshtrakLocationDto from '../models/freshtrakAPI/freshtrakLocationDto';
 
 const log = getLogger('locationService');
 
-async function mapToLocationDto(agency: ScosAgencyDto): Promise<LocationDto | null> {
+async function mapToLocationDto(
+  agency: ScosAgencyDto
+): Promise<LocationDto | null> {
   // "Site" is an array of 1 element
   const [site] = agency.site_info.site;
 
@@ -37,12 +38,10 @@ async function mapToLocationDto(agency: ScosAgencyDto): Promise<LocationDto | nu
   const handicapAccessFlag = 'N';
 
   // retrieve FreshTrak data if sub_category is 'Emergency Food'
-  var freshtrakData: freshtrakLocationDto | null;
-  if(agency.taxonomy.sub_category.includes('Emergency Food'))
-    freshtrakData = await getFTLocationData(agency.site_id, address.zip);
-  else
-    freshtrakData = null;
-  
+  let freshTrakData: freshtrakLocationDto | null;
+  if (agency.taxonomy.sub_category.includes('Emergency Food'))
+    freshTrakData = await getFTLocationData(agency.site_id, address.zip);
+  else freshTrakData = null;
 
   return {
     id: agency.site_id,
@@ -56,7 +55,7 @@ async function mapToLocationDto(agency: ScosAgencyDto): Promise<LocationDto | nu
     hours,
     lat: `${site.latitude}`,
     long: `${site.longitude}`,
-    freshtrakData,
+    freshTrakData,
   };
 }
 

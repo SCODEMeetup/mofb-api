@@ -5,13 +5,9 @@ import freshtrakResponseDto from '../models/freshtrakAPI/freshtrakResponseDto';
 
 const log = getLogger('freshtrakApiService');
 
-  async function getFreshTrakEvents(agencyId: number): Promise<freshtrakResponseDto | null> {
-  const opts = {
-    headers: {
-      'Content-Type': 'application/json',
-      'User-Agent': 'mofb-api',
-    },
-  };
+const getFreshTrakEvents = async (
+  agencyId: number
+): Promise<freshtrakResponseDto | null> => {
   const url = `${FRESHTRAK_API_HOST}/api/agencies/${agencyId}`;
 
   log.debug(`Making GET request to ${url}`);
@@ -23,6 +19,6 @@ const log = getLogger('freshtrakApiService');
     log.debug(`Error from FreshTrak API: ${err}`);
     return null;
   }
-}
+};
 
 export { getFreshTrakEvents };
