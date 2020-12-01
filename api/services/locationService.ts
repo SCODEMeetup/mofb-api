@@ -5,10 +5,14 @@ import { AGENCIES_TABLE, CATEGORIES_TABLE } from '../utils/constants';
 import LocationDto from '../models/dto/locationDto';
 import ScosAgencyDto from '../models/scosApi/scosAgencyDto';
 import { notEmpty } from '../utils/typeGuards';
+import { getFTLocationData } from './freshtrakService';
+import freshtrakLocationDto from '../models/freshtrakAPI/freshtrakLocationDto';
 
 const log = getLogger('locationService');
 
-function mapToLocationDto(agency: ScosAgencyDto): LocationDto | null {
+async function mapToLocationDto(
+  agency: ScosAgencyDto
+): Promise<LocationDto | null> {
   // "Site" is an array of 1 element
   const [site] = agency.site_info.site;
 
@@ -33,8 +37,14 @@ function mapToLocationDto(agency: ScosAgencyDto): LocationDto | null {
   // TODO: find out how we can determine if locations have handicap access
   const handicapAccessFlag = 'N';
 
+  let freshtrakData: freshtrakLocationDto | null;
+  if (agency.taxonomy.sub_category.includes('Emergency Food'))
+    freshtrakData = await getFTLocationData(agency.site_id, address.zip);
+  else freshtrakData = null;
+
   return {
     id: agency.site_id,
+    provider_id: agency.provider_id,
     address1,
     address2,
     zipCode: address.zip,
@@ -44,6 +54,7 @@ function mapToLocationDto(agency: ScosAgencyDto): LocationDto | null {
     hours,
     lat: `${site.latitude}`,
     long: `${site.longitude}`,
+    freshtrakData,
   };
 }
 
@@ -72,10 +83,12 @@ async function getLocations(
   LIMIT ${limit}`;
 
   const response = await makeSCOSRequest<ScosAgencyDto[]>(query);
+  const promises = response.map(mapToLocationDto);
+  const mapped = await Promise.all(promises);
+  const filtered = mapped.filter(notEmpty);
 
-  const mapped = response.map(mapToLocationDto).filter(notEmpty);
-  log.debug(`Returning ${mapped.length} locations`);
-  return mapped;
+  log.debug(`Returning ${filtered.length} locations`);
+  return filtered;
 }
 
 export { getLocations };

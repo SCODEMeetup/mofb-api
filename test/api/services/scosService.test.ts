@@ -4,7 +4,7 @@ import { SCOS_HOST } from '../../../api/utils/constants';
 
 jest.mock('request-promise', () => {
   return {
-    post: (uri: string, options: any): Promise<any> => {
+    post: (uri: string, options: Record<string, unknown>): Promise<string> => {
       return Promise.resolve(JSON.stringify(options));
     },
   };

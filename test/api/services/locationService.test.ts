@@ -44,6 +44,9 @@ describe('locationService', () => {
                 },
               ],
             },
+            taxonomy: {
+              sub_category: 'Emergency Food',
+            },
           },
           /* eslint-enable camelcase */
         ]);
