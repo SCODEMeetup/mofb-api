@@ -7,8 +7,23 @@ import ScosAgencyDto from '../models/scosApi/scosAgencyDto';
 import { notEmpty } from '../utils/typeGuards';
 import { getFTLocationData } from './freshtrakService';
 import freshtrakLocationDto from '../models/freshtrakAPI/freshtrakLocationDto';
+import ScosSiteDto from '../models/scosApi/scosSiteDto';
 
 const log = getLogger('locationService');
+
+function locationFix(agency: ScosAgencyDto, site: ScosSiteDto) {
+  // allows location fixes for incorrect 'hands on' data
+  const fixedLoc = {
+    latitude: site.latitude,
+    longitude: site.longitude,
+  };
+  // location fix for Reeb Center - 14137 is duplicate of 14346
+  if (agency.site_id === '14137') {
+    fixedLoc.latitude = 39.92491231;
+    fixedLoc.longitude = -82.98897764;
+  }
+  return fixedLoc;
+}
 
 async function mapToLocationDto(
   agency: ScosAgencyDto
@@ -42,6 +57,8 @@ async function mapToLocationDto(
     freshtrakData = await getFTLocationData(agency.site_id, address.zip);
   else freshtrakData = null;
 
+  const fixedLoc = locationFix(agency, site);
+
   return {
     id: agency.site_id,
     provider_id: agency.provider_id,
@@ -52,8 +69,8 @@ async function mapToLocationDto(
     phones,
     handicapAccessFlag,
     hours,
-    lat: `${site.latitude}`,
-    long: `${site.longitude}`,
+    lat: `${fixedLoc.latitude}`,
+    long: `${fixedLoc.longitude}`,
     freshtrakData,
   };
 }

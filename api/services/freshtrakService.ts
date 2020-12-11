@@ -27,6 +27,9 @@ async function getFTLocationData(
   freshTrakAgencies.set(5294, 849);
   freshTrakAgencies.set(11479, 502);
   freshTrakAgencies.set(10948, 606);
+  freshTrakAgencies.set(14137, 3536);
+  freshTrakAgencies.set(13978, 744);
+  freshTrakAgencies.set(13919, 691);
 
   const freshTrakAgencyID = freshTrakAgencies.get(parseInt(siteId, 10));
 
