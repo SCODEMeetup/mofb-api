@@ -17,6 +17,8 @@ before_install:
   - npm ci
   - docker build -t mofb-api .
 
+install: skip
+
 script:
   - npm run tsc
   - npm run lint
