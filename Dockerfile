@@ -9,7 +9,6 @@ COPY ./package-lock.json .
 COPY ./swagger.config.json .
 COPY ./tsconfig.json .
 
-RUN npm install
 RUN npm run build
 RUN npx tsc
 
