@@ -14,7 +14,6 @@ async function getFTLocationData(
   freshTrakAgencies.set(5013, 106);
   freshTrakAgencies.set(11481, 803);
   freshTrakAgencies.set(13452, 200);
-  freshTrakAgencies.set(4205, 532);
   freshTrakAgencies.set(4863, 6);
   freshTrakAgencies.set(13796, 80);
   freshTrakAgencies.set(4985, 848);
@@ -24,7 +23,6 @@ async function getFTLocationData(
   freshTrakAgencies.set(13742, 549);
   freshTrakAgencies.set(6003, 3537);
   freshTrakAgencies.set(13549, 508);
-  freshTrakAgencies.set(5294, 849);
   freshTrakAgencies.set(11479, 502);
   freshTrakAgencies.set(10948, 606);
   freshTrakAgencies.set(14137, 3536);
