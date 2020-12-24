@@ -14,7 +14,10 @@ notifications:
     - henderson.molly4@gmail.com
 
 before_install:
+  - npm ci
   - docker build -t mofb-api .
+
+install: skip
 
 script:
   - npm run tsc
